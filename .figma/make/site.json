@@ -1,0 +1,10 @@
+{
+  "description": "Explore DANSA events, artists, and gallery, and find information about collaboration and contact. Responsive pages keep event details and ticketing clearly marked as TBA.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

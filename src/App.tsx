@@ -1,6 +1,17 @@
-import { FormEvent, useEffect, useState } from "react"
+import {
+  createContext,
+  FormEvent,
+  useContext,
+  useEffect,
+  useState,
+} from "react"
 
 const A = "/assets/"
+type Language = "en" | "de"
+const LanguageContext = createContext<{
+  language: Language
+  setLanguage: (language: Language) => void
+}>({ language: "en", setLanguage: () => undefined })
 
 type Artist = {
   slug: string
@@ -18,7 +29,7 @@ const artists: Artist[] = [
     role: "DJ",
     handle: "@larriloca",
     instagram: "https://www.instagram.com/larriloca/",
-    image: "6a5f9.png",
+    image: "larry-new.webp",
   },
   {
     slug: "julius",
@@ -70,15 +81,17 @@ function Link({
   to,
   children,
   className = "",
+  ...props
 }: {
   to: string
   children: React.ReactNode
   className?: string
-}) {
+} & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">) {
   return (
     <a
       href={to}
       className={className}
+      {...props}
       onClick={(e) => {
         e.preventDefault()
         go(to)
@@ -89,7 +102,21 @@ function Link({
   )
 }
 
+function Equalizer({ large = false }: { large?: boolean }) {
+  return (
+    <span
+      className={`equalizer ${large ? "equalizer-large" : ""}`}
+      aria-hidden="true"
+    >
+      {[0, 1, 2, 3, 4].map((bar) => (
+        <i key={bar} />
+      ))}
+    </span>
+  )
+}
+
 function Header() {
+  const { language, setLanguage } = useContext(LanguageContext)
   const [open, setOpen] = useState(false)
   const [path, setPath] = useState(location.pathname)
   useEffect(() => {
@@ -100,16 +127,27 @@ function Header() {
     addEventListener("popstate", handleNavigation)
     return () => removeEventListener("popstate", handleNavigation)
   }, [])
-  const nav = [
-    ["Events", "/events"],
-    ["The Lineup", "/lineup"],
-    ["Gallery", "/gallery"],
-    ["About", "/about"],
-  ]
+  const nav =
+    language === "de"
+      ? [
+          ["Start", "/"],
+          ["Events", "/events"],
+          ["Line-up", "/lineup"],
+          ["Galerie", "/gallery"],
+          ["Über uns", "/about"],
+        ]
+      : [
+          ["Home", "/"],
+          ["Events", "/events"],
+          ["The Lineup", "/lineup"],
+          ["Gallery", "/gallery"],
+          ["About", "/about"],
+        ]
   return (
     <header className="header">
-      <Link to="/" className="logo">
+      <Link to="/" className="logo" aria-label="DANSA home">
         DANSA
+        <Equalizer />
       </Link>
       <button
         className="menu"
@@ -128,8 +166,25 @@ function Header() {
             {label}
           </Link>
         ))}
+        <div className="language-switch" aria-label="Language">
+          <button
+            className={language === "en" ? "active" : ""}
+            onClick={() => setLanguage("en")}
+            aria-pressed={language === "en"}
+          >
+            EN
+          </button>
+          <span>/</span>
+          <button
+            className={language === "de" ? "active" : ""}
+            onClick={() => setLanguage("de")}
+            aria-pressed={language === "de"}
+          >
+            DE
+          </button>
+        </div>
         <Link to="/contact" className="button light">
-          Come through <span>↗</span>
+          {language === "de" ? "Kontakt" : "Come through"} <span>↗</span>
         </Link>
       </nav>
     </header>
@@ -137,13 +192,22 @@ function Header() {
 }
 
 function Footer() {
+  const { language } = useContext(LanguageContext)
   return (
     <footer>
       <div className="footer-top">
         <div>
-          <p className="eyebrow">Get in touch</p>
-          <Link to="/contact">Contact DANSA ↗</Link>
-          <p>Independent in spirit. Connected by music. Hosted by DANSA.</p>
+          <p className="eyebrow">
+            {language === "de" ? "Kontakt" : "Get in touch"}
+          </p>
+          <Link to="/contact">
+            {language === "de" ? "DANSA kontaktieren" : "Contact DANSA"} ↗
+          </Link>
+          <p>
+            {language === "de"
+              ? "Unabhängig im Geist. Durch Musik verbunden. Von DANSA veranstaltet."
+              : "Independent in spirit. Connected by music. Hosted by DANSA."}
+          </p>
         </div>
         <div>
           <p className="eyebrow">Explore</p>
@@ -199,7 +263,10 @@ function Home() {
   return (
     <Shell>
       <section className="hero">
-        <div className="hero-word">DANSA</div>
+        <div className="hero-title-row">
+          <div className="hero-word">DANSA</div>
+          <Equalizer large />
+        </div>
         <div className="hero-grid">
           <img src={A + "b41fd.png"} alt="Crowd dancing together" />
           <div>
@@ -237,7 +304,11 @@ function Home() {
         </div>
       </section>
       <section className="split">
-        <img src={A + "e62c1.png"} alt="Friends together in the city" />
+        <img
+          className="dansa-people-photo"
+          src={A + "dansa-two-people.webp"}
+          alt="Two people enjoying an evening together"
+        />
         <div>
           <p className="eyebrow blue">This is DANSA</p>
           <h2>
@@ -621,6 +692,7 @@ function Gallery() {
 }
 
 function About() {
+  const { language } = useContext(LanguageContext)
   return (
     <Shell>
       <section className="about-hero">
@@ -658,6 +730,40 @@ function About() {
           <Link to="/events" className="text-link">
             Explore our events ↗
           </Link>
+        </div>
+      </section>
+      <section className="organizer-story">
+        <div className="organizer-copy">
+          <p className="eyebrow blue">
+            {language === "de"
+              ? "Die Menschen hinter DANSA"
+              : "The people behind DANSA"}
+          </p>
+          <h2>
+            {language === "de"
+              ? "In Berlin zu Hause. International verbunden."
+              : "At home in Berlin. Connected internationally."}
+          </h2>
+        </div>
+        <div className="organizer-copy">
+          <p className="lead">
+            {language === "de"
+              ? "DANSA wird von den fünf DJs, Performern und Organisatoren im Line-up gestaltet. Sie entwickeln gemeinsam die Musik, die Atmosphäre und die Veranstaltungen."
+              : "DANSA is shaped by the five DJs, performers and organizers in the lineup. Together, they develop the music, atmosphere and events."}
+          </p>
+          <p>
+            {language === "de"
+              ? "Die Geschichte beginnt mit einer einfachen Idee: Menschen durch Musik zusammenzubringen und eigene Räume für echte Begegnungen zu schaffen. Berlin ist unser Hauptsitz und kreativer Ausgangspunkt – DANSA denkt jedoch über eine Stadt hinaus und baut Verbindungen zu anderen Städten, Ländern und internationalen Communities auf."
+              : "The story starts with a simple idea: bring people together through music and create our own spaces for real connection. Berlin is our headquarters and creative starting point, but DANSA looks beyond one city—building relationships with other cities, countries and international communities."}
+          </p>
+        </div>
+        <div className="organizer-faces">
+          {artists.map((artist) => (
+            <Link to={`/artists/${artist.slug}`} key={artist.slug}>
+              <img src={A + artist.image} alt={artist.name} />
+              <span>{artist.name}</span>
+            </Link>
+          ))}
         </div>
       </section>
       <section className="dark ethos">
@@ -1066,20 +1172,33 @@ function NotFound() {
 
 export default function App() {
   const [path, setPath] = useState(location.pathname)
+  const [language, setLanguage] = useState<Language>(
+    () => localStorage.getItem("dansa-language") as Language || "en",
+  )
   useEffect(() => {
     const update = () => setPath(location.pathname)
     addEventListener("popstate", update)
     return () => removeEventListener("popstate", update)
   }, [])
+  useEffect(() => {
+    localStorage.setItem("dansa-language", language)
+    document.documentElement.lang = language
+  }, [language])
   const artist = artists.find((a) => path === `/artists/${a.slug}`)
-  if (artist) return <ArtistPage artist={artist} />
-  if (path === "/") return <Home />
-  if (path === "/events") return <Events />
-  if (path === "/events/the-late-connection") return <EventDetail />
-  if (path === "/lineup") return <Lineup />
-  if (path === "/gallery") return <Gallery />
-  if (path === "/about") return <About />
-  if (path === "/work-with-us") return <ContactPage collaborate />
-  if (path === "/contact") return <ContactPage />
-  return <NotFound />
+  let page: React.ReactNode
+  if (artist) page = <ArtistPage artist={artist} />
+  else if (path === "/") page = <Home />
+  else if (path === "/events") page = <Events />
+  else if (path === "/events/the-late-connection") page = <EventDetail />
+  else if (path === "/lineup") page = <Lineup />
+  else if (path === "/gallery") page = <Gallery />
+  else if (path === "/about") page = <About />
+  else if (path === "/work-with-us") page = <ContactPage collaborate />
+  else if (path === "/contact") page = <ContactPage />
+  else page = <NotFound />
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage }}>
+      {page}
+    </LanguageContext.Provider>
+  )
 }

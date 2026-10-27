@@ -79,9 +79,7 @@ main > section:nth-child(3) { animation-delay:.1s; }
 .block { display:block; margin-top:1rem; }
 .split { display:grid; grid-template-columns:1fr 1fr; gap:5vw; align-items:center; }
 .split > img { width:100%; max-height:580px; object-fit:cover; }
-.dansa-people-photo { object-position:center 60%; }
-.hero-grid .urban-hero-photo { object-position:center 42%; }
-.about-photo .urban-about-photo { object-position:center 64%; }
+.dansa-people-photo { object-position:center 46%; }
 .split p { max-width:43rem; line-height:1.7; }
 .dark { background:var(--ink); color:var(--cream); }
 .statement .rules { display:grid; grid-template-columns:repeat(3,1fr); margin-top:3rem; border-top:1px solid #555; }
@@ -133,7 +131,7 @@ dt { font:700 .7rem 'Inter:Bold'; text-transform:uppercase; } dd { margin:0; }
 .gallery-tabs > * { padding:1rem 0; }.gallery-tabs b { color:var(--blue); border-bottom:3px solid var(--blue); }
 .gallery { columns:2; column-gap:1.5rem; }
 .gallery figure { break-inside:avoid; margin:0 0 2rem; }
-.gallery img { width:100%; height:auto; object-fit:cover; display:block; transition:transform .55s ease,filter .55s ease; }
+.gallery img { width:100%; max-height:560px; object-fit:cover; display:block; transition:transform .55s ease,filter .55s ease; }
 .gallery figure { overflow:hidden; }
 .gallery figure figcaption { background:var(--cream); position:relative; z-index:1; padding-top:.8rem; }
 .gallery figure:hover img { transform:scale(1.018); filter:saturate(1.08) contrast(1.02); }
@@ -214,7 +212,7 @@ footer { padding:4rem 4vw 1rem; background:var(--ink); color:var(--cream); }
   .artist-profile > img { max-width:460px; }
   .mini-lineup { grid-template-columns:repeat(2,1fr); }
   .gallery { columns:1; }
-  .gallery img { height:auto; }
+  .gallery img { max-height:430px; }
   .gallery-film,.about-statement,.about-formats,.work-intro,.artist-directory { grid-template-columns:1fr; }
   .organizer-story { grid-template-columns:1fr; }
   .organizer-faces { grid-column:auto; grid-template-columns:repeat(2,1fr); }

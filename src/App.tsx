@@ -268,7 +268,7 @@ function Home() {
           <Equalizer large />
         </div>
         <div className="hero-grid">
-          <img src={A + "b41fd.png"} alt="Crowd dancing together" />
+          <img className="urban-hero-photo" src={A + "urban-dj-circle.jpg"} alt="Friends gathered around the DJ booth" fetchPriority="high" />
           <div>
             <h1>
               Good music.
@@ -306,8 +306,8 @@ function Home() {
       <section className="split">
         <img
           className="dansa-people-photo"
-          src={A + "dansa-two-people.webp"}
-          alt="Two people enjoying an evening together"
+          src={A + "urban-night-friends.jpg"}
+          alt="Two friends enjoying a night out together"
         />
         <div>
           <p className="eyebrow blue">This is DANSA</p>
@@ -417,7 +417,7 @@ function EventDetail() {
         <p>All event details remain unconfirmed.</p>
       </section>
       <section className="event-feature">
-        <img src={A + "47fec.png"} alt="DJ booth and dancefloor" />
+        <img src={A + "urban-supper-club.jpg"} alt="A crowd surrounding the DJ booth in a lively club" />
         <aside className="ticket">
           <p className="eyebrow blue">Tickets</p>
           <h2>Tickets not yet released</h2>
@@ -616,14 +616,62 @@ function PageHero({
 
 function Gallery() {
   const images = [
-    ["803c5.png", "Out in the city"],
-    ["911fb.png", "Lost in the right place"],
-    ["b482f.png", "In the details"],
-    ["8fc69.png", "A little longer together"],
-    ["78e18.png", "The room, the rhythm"],
-    ["e4088.png", "One more conversation"],
-    ["49fa8.png", "Less scrolling. More feeling."],
-  ]
+    [
+        "urban-dj-circle.jpg",
+        "Around the booth",
+        "Friends gathered around a DJ in a crowded club"
+    ],
+    [
+        "urban-city-crew.jpg",
+        "City is our playground",
+        "Three friends in colorful streetwear on a city sidewalk"
+    ],
+    [
+        "urban-club-moments.jpg",
+        "Find your rhythm",
+        "Friends dancing under blue and green club lights"
+    ],
+    [
+        "urban-summer-crew.jpg",
+        "Same crew. New energy.",
+        "Friends gathered above the camera under a blue sky"
+    ],
+    [
+        "urban-party-monochrome.jpg",
+        "After dark, all together",
+        "Black and white photograph of a packed dancefloor"
+    ],
+    [
+        "urban-jersey-night.jpg",
+        "Move how you feel",
+        "Partygoers dancing in colorful sports jerseys"
+    ],
+    [
+        "urban-supper-club.jpg",
+        "The room comes alive",
+        "A lively crowd dancing beneath a neon sign"
+    ],
+    [
+        "urban-street-style.jpg",
+        "From the street to the floor",
+        "Two friends in denim beside a graffiti-covered wall"
+    ],
+    [
+        "urban-after-hours.jpg",
+        "One more track",
+        "Two friends wearing sunglasses on a dancefloor"
+    ],
+    [
+        "urban-night-friends.jpg",
+        "Good people. Late nights.",
+        "Two friends posing at an outdoor night party"
+    ],
+    [
+        "urban-dancefloor.jpg",
+        "Lost in the music",
+        "Friends raising their hands on a packed dancefloor"
+    ]
+]
   return (
     <Shell>
       <PageHero
@@ -653,9 +701,9 @@ function Gallery() {
           <span>Video</span>
         </div>
         <div className="gallery">
-          {images.map(([image, caption]) => (
+          {images.map(([image, caption, alt]) => (
             <figure key={image}>
-              <img src={A + image} alt="" />
+              <img src={A + image} alt={alt} loading="lazy" decoding="async" />
               <figcaption>{caption}</figcaption>
             </figure>
           ))}
@@ -709,7 +757,7 @@ function About() {
         </p>
       </section>
       <section className="about-photo">
-        <img src={A + "0af90.png"} alt="Friends walking through the city" />
+        <img className="urban-about-photo" src={A + "urban-city-crew.jpg"} alt="Friends bringing their own style to the city streets" />
         <p className="eyebrow blue">The city is a feeling / mood photography</p>
       </section>
       <section className="about-statement">
@@ -797,7 +845,7 @@ function About() {
       </section>
       <section className="about-formats">
         <div>
-          <img src={A + "911fb.png"} alt="" />
+          <img src={A + "urban-summer-crew.jpg"} alt="Friends coming together in colorful streetwear" loading="lazy" />
           <p className="eyebrow blue">A mood for the moment</p>
         </div>
         <div>
@@ -899,7 +947,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
       {collaborate ? (
         <>
           <section className="work-intro">
-            <img src={A + "e9707.png"} alt="DJ booth and dancefloor" />
+            <img src={A + "urban-jersey-night.jpg"} alt="Friends dancing together in sports jerseys" loading="lazy" />
             <div>
               <p className="eyebrow blue">Independent by nature</p>
               <h2>Your idea. Our shared energy.</h2>

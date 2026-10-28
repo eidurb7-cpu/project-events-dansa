@@ -314,6 +314,28 @@ const german: Record<string, string> = {
   "That page is not part of the DANSA site.":
     "Diese Seite gehört nicht zur DANSA-Website.",
   "Back home": "Zur Startseite",
+  Stories: "Geschichten",
+  "From the DANSA journal": "Aus dem DANSA-Journal",
+  "Different roles. Shared rhythm.":
+    "Verschiedene Rollen. Gemeinsamer Rhythmus.",
+  "Meet the creative disciplines behind the line-up: selecting records, live performance and movement. These editorial introductions explore the roles that bring DANSA together.":
+    "Lerne die kreativen Disziplinen hinter dem Line-up kennen: Musikauswahl, Live-Performance und Bewegung. Diese redaktionellen Einführungen erkunden die Rollen, die DANSA zusammenbringen.",
+  "Read the stories": "Geschichten lesen",
+  "Read story": "Geschichte lesen",
+  "All stories": "Alle Geschichten",
+  "Live & movement": "Live & Bewegung",
+  "Artist stories": "Geschichten über die Artists",
+  "About the creative discipline": "Über die kreative Disziplin",
+  "An editorial introduction based on this artist’s role in the DANSA line-up.":
+    "Eine redaktionelle Einführung auf Grundlage der Rolle dieses Artists im DANSA-Line-up.",
+  "Explore the artist’s world.": "Entdecke die Welt des Artists.",
+  "For music, releases and first-hand updates, follow the artist’s own channel.":
+    "Musik, Veröffentlichungen und Neuigkeiten aus erster Hand findest du auf dem eigenen Kanal des Artists.",
+  "Artist profile": "Künstlerprofil",
+  "More stories": "Weitere Geschichten",
+  "Back to stories": "Zurück zu den Geschichten",
+  "Filter stories": "Geschichten filtern",
+  DJs: "DJs",
 }
 
 export function useTranslation() {

@@ -1,5 +1,6 @@
 import { LanguageContext, useTranslation, type Language } from "./i18n"
 import { FormEvent, useContext, useEffect, useState } from "react"
+import { artistStories, type ArtistStory } from "./stories"
 
 const A = "/assets/"
 
@@ -278,6 +279,7 @@ function Footer() {
           <Link to="/events">Events</Link>
           <Link to="/lineup">{t("The Lineup")}</Link>
           <Link to="/gallery">{t("Gallery")}</Link>
+          <Link to="/stories">{t("Stories")}</Link>
         </div>
         <div>
           <p className="eyebrow">Dansa</p>
@@ -425,6 +427,7 @@ function Home() {
           ))}
         </div>
       </section>
+      <StoriesPreview />
       <Cta />
     </Shell>
   )
@@ -615,6 +618,7 @@ function Lineup() {
           ))}
         </div>
       </section>
+      <StoriesPreview />
       <Cta />
     </Shell>
   )
@@ -659,6 +663,7 @@ function ArtistPage({ artist }: { artist: Artist }) {
           <small>{t("Direct artist contact via their own Instagram.")}</small>
         </div>
       </section>
+      <ArtistStoryPreview artist={artist} />
       <section className="lavender follow">
         <p className="eyebrow blue">{t("Direct from the artist")}</p>
         <h2>
@@ -694,13 +699,210 @@ function ArtistPage({ artist }: { artist: Artist }) {
   )
 }
 
+function StoryCards({ stories }: { stories: ArtistStory[] }) {
+  const { language } = useContext(LanguageContext)
+  const t = useTranslation()
+  return (
+    <div className="story-grid">
+      {stories.map((story) => {
+        const artist = artists.find((person) => person.slug === story.artist)
+        if (!artist) return null
+        return (
+          <article className="story-card" key={story.artist}>
+            <Link to={`/stories/${story.artist}`} className="story-image">
+              <img src={A + artist.image} alt={artist.name} loading="lazy" />
+            </Link>
+            <p className="eyebrow blue">
+              {artist.name} / {t(artist.role)}
+            </p>
+            <h3>
+              <Link to={`/stories/${story.artist}`}>
+                {story.title[language]}
+              </Link>
+            </h3>
+            <p>{story.intro[language]}</p>
+            <Link to={`/stories/${story.artist}`} className="text-link">
+              {t("Read story")} ↗
+            </Link>
+          </article>
+        )
+      })}
+    </div>
+  )
+}
+
+function StoriesPreview() {
+  const t = useTranslation()
+  return (
+    <section className="lavender">
+      <div className="section-head">
+        <div>
+          <p className="eyebrow blue">{t("From the DANSA journal")}</p>
+          <h2>{t("Different roles. Shared rhythm.")}</h2>
+        </div>
+        <Link to="/stories" className="text-link">
+          {t("All stories")} ↗
+        </Link>
+      </div>
+      <StoryCards
+        stories={[artistStories[0], artistStories[2], artistStories[3]]}
+      />
+    </section>
+  )
+}
+
+function ArtistStoryPreview({ artist }: { artist: Artist }) {
+  const { language } = useContext(LanguageContext)
+  const t = useTranslation()
+  const story = artistStories.find((item) => item.artist === artist.slug)
+  if (!story) return null
+  return (
+    <section className="dark artist-story-preview">
+      <div>
+        <p className="eyebrow">{t("About the creative discipline")}</p>
+        <h2>{story.title[language]}</h2>
+      </div>
+      <div>
+        <p className="lead">{story.intro[language]}</p>
+        <p>{story.sections[0].text[language]}</p>
+        <Link to={`/stories/${artist.slug}`} className="text-link light-link">
+          {t("Read story")} ↗
+        </Link>
+      </div>
+    </section>
+  )
+}
+
+function Stories() {
+  const t = useTranslation()
+  const [filter, setFilter] = useState<"all" | "dj" | "performance">("all")
+  const stories =
+    filter === "all"
+      ? artistStories
+      : artistStories.filter((story) => story.category === filter)
+  return (
+    <Shell>
+      <PageHero
+        className="stories-hero"
+        eyebrow={t("From the DANSA journal")}
+        title={t("Different roles. Shared rhythm.")}
+        text={t(
+          "Meet the creative disciplines behind the line-up: selecting records, live performance and movement. These editorial introductions explore the roles that bring DANSA together.",
+        )}
+      />
+      <section>
+        <div
+          className="story-filters"
+          role="group"
+          aria-label={t("Filter stories")}
+        >
+          {([
+            ["all", "All stories"],
+            ["dj", "DJs"],
+            ["performance", "Live & movement"],
+          ] as const).map(([value, label]) => (
+            <button
+              type="button"
+              key={value}
+              aria-pressed={filter === value}
+              onClick={() => setFilter(value)}
+            >
+              {t(label)}
+            </button>
+          ))}
+        </div>
+        <StoryCards stories={stories} />
+      </section>
+      <Cta />
+    </Shell>
+  )
+}
+
+function StoryPage({ story }: { story: ArtistStory }) {
+  const { language } = useContext(LanguageContext)
+  const t = useTranslation()
+  const artist = artists.find((person) => person.slug === story.artist)
+  if (!artist) return <NotFound />
+  return (
+    <Shell>
+      <section className="story-hero">
+        <div>
+          <Link to="/stories" className="eyebrow blue">
+            ← {t("Back to stories")}
+          </Link>
+          <p className="eyebrow blue">
+            {artist.name} / {t(artist.role)}
+          </p>
+          <h1>{story.title[language]}</h1>
+          <p className="lead">{story.intro[language]}</p>
+        </div>
+        <img src={A + artist.image} alt={artist.name} fetchPriority="high" />
+      </section>
+      <section className="story-body">
+        <aside>
+          <p className="eyebrow blue">{t("Artist stories")}</p>
+          <p>
+            {t(
+              "An editorial introduction based on this artist’s role in the DANSA line-up.",
+            )}
+          </p>
+          <Link to={`/artists/${artist.slug}`} className="text-link">
+            {t("Artist profile")} ↗
+          </Link>
+        </aside>
+        <article>
+          {story.sections.map((part, index) => (
+            <div className="story-chapter" key={index}>
+              <p className="eyebrow blue">0{index + 1}</p>
+              <h2>{part.title[language]}</h2>
+              <p>{part.text[language]}</p>
+            </div>
+          ))}
+          <div className="story-artist-link lavender">
+            <p className="eyebrow blue">{t("Direct from the artist")}</p>
+            <h3>{t("Explore the artist’s world.")}</h3>
+            <p>
+              {t(
+                "For music, releases and first-hand updates, follow the artist’s own channel.",
+              )}
+            </p>
+            <a
+              href={artist.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="text-link"
+            >
+              {artist.handle} ↗
+            </a>
+          </div>
+        </article>
+      </section>
+      <section className="dark">
+        <div className="section-head">
+          <h2>{t("More stories")}</h2>
+          <Link to="/stories" className="text-link light-link">
+            {t("All stories")} ↗
+          </Link>
+        </div>
+        <StoryCards
+          stories={artistStories
+            .filter((item) => item.artist !== story.artist)
+            .slice(0, 3)}
+        />
+      </section>
+    </Shell>
+  )
+}
+
 function PageHero({
+  className = "",
   eyebrow,
 
   title,
 
   text,
 }: {
+  className?: string
   eyebrow: string
 
   title: React.ReactNode
@@ -708,7 +910,7 @@ function PageHero({
   text: string
 }) {
   return (
-    <section className="page-hero">
+    <section className={`page-hero ${className}`}>
       <p className="eyebrow blue">{eyebrow}</p>
       <h1>{title}</h1>
       <p>{text}</p>
@@ -1399,15 +1601,13 @@ function NotFound() {
 export default function App() {
   const [path, setPath] = useState(location.pathname)
 
-  const [language, setLanguage] = useState<Language>(
-    () => {
-      try {
-        return localStorage.getItem("dansa-language") === "de" ? "de" : "en"
-      } catch {
-        return "en"
-      }
-    },
-  )
+  const [language, setLanguage] = useState<Language>(() => {
+    try {
+      return localStorage.getItem("dansa-language") === "de" ? "de" : "en"
+    } catch {
+      return "en"
+    }
+  })
 
   useEffect(() => {
     const update = () => setPath(location.pathname)
@@ -1428,10 +1628,13 @@ export default function App() {
   }, [language])
 
   const artist = artists.find((a) => path === `/artists/${a.slug}`)
+  const story = artistStories.find((item) => path === `/stories/${item.artist}`)
 
   let page: React.ReactNode
 
   if (artist) page = <ArtistPage artist={artist} />
+  else if (story) page = <StoryPage story={story} />
+  else if (path === "/stories") page = <Stories />
   else if (path === "/") page = <Home />
   else if (path === "/events") page = <Events />
   else if (path === "/events/the-late-connection") page = <EventDetail />

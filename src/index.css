@@ -204,6 +204,18 @@ footer { padding:4rem 4vw 1rem; background:var(--ink); color:var(--cream); }
 .story-chapter h2 { font-size:clamp(1.8rem,3vw,3rem); margin-bottom:1.5rem; }
 .story-chapter > p:last-child { font-size:1.1rem; line-height:1.85; }
 .story-artist-link { padding:2rem; }
+.story-releases { margin-bottom:3rem; }
+.story-releases h2 { font-size:clamp(1.8rem,3vw,3rem); margin-bottom:1rem; }
+.story-releases > p,.story-sources > p { line-height:1.7; margin-bottom:1.5rem; }
+.story-releases li { border-top:1px solid #d4d2c9; }
+.story-releases li:last-child { border-bottom:1px solid #d4d2c9; }
+.story-releases a { display:grid; grid-template-columns:3rem minmax(0,1fr) auto; gap:1rem; align-items:center; padding:1.25rem 0; }
+.story-releases a:hover,.story-releases a:focus-visible { color:var(--blue); }
+.story-releases a > span:first-child { font-size:.75rem; color:var(--blue); }
+.story-sources { padding:1.5rem 0; border-top:1px solid #d4d2c9; margin-bottom:2rem; }
+.story-sources h3 { margin-bottom:1rem; }
+.story-sources li { margin-bottom:.85rem; font-size:.8rem; line-height:1.6; }
+.story-sources a { text-decoration:underline; text-underline-offset:3px; overflow-wrap:anywhere; }
 .story-artist-link h3,.story-artist-link > p { margin-bottom:1.2rem; line-height:1.6; }
 @media (max-width:1000px) and (min-width:761px) { .story-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media (max-width:760px) {

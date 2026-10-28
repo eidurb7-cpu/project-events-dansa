@@ -626,6 +626,10 @@ function Lineup() {
 
 function ArtistPage({ artist }: { artist: Artist }) {
   const t = useTranslation()
+  const { language } = useContext(LanguageContext)
+  const biography = artistStories.find(
+    (story) => story.artist === artist.slug && story.kind === "biography",
+  )
 
   return (
     <Shell>
@@ -643,10 +647,12 @@ function ArtistPage({ artist }: { artist: Artist }) {
           <p className="eyebrow blue">{t("In the DANSA lineup")}</p>
           <h2>{artist.name}</h2>
           <p>
-            {t("{name} is {role} and a member of the DANSA lineup.", {
-              name: artist.name,
-              role: t(artist.role),
-            })}
+            {biography
+              ? biography.intro[language]
+              : t("{name} is {role} and a member of the DANSA lineup.", {
+                  name: artist.name,
+                  role: t(artist.role),
+                })}
           </p>
           <hr />
           <p className="eyebrow blue">
@@ -759,7 +765,13 @@ function ArtistStoryPreview({ artist }: { artist: Artist }) {
   return (
     <section className="dark artist-story-preview">
       <div>
-        <p className="eyebrow">{t("About the creative discipline")}</p>
+        <p className="eyebrow">
+          {t(
+            story.kind === "biography"
+              ? "Artist history"
+              : "About the creative discipline",
+          )}
+        </p>
         <h2>{story.title[language]}</h2>
       </div>
       <div>
@@ -843,7 +855,9 @@ function StoryPage({ story }: { story: ArtistStory }) {
           <p className="eyebrow blue">{t("Artist stories")}</p>
           <p>
             {t(
-              "An editorial introduction based on this artist’s role in the DANSA line-up.",
+              story.kind === "biography"
+                ? "A career story drawn from published artist profiles and music release records. Sources are linked below."
+                : "An editorial introduction based on this artist’s role in the DANSA line-up.",
             )}
           </p>
           <Link to={`/artists/${artist.slug}`} className="text-link">
@@ -858,6 +872,42 @@ function StoryPage({ story }: { story: ArtistStory }) {
               <p>{part.text[language]}</p>
             </div>
           ))}
+          {story.releases && (
+            <div className="story-releases">
+              <h2>{t("Selected releases")}</h2>
+              <p>{t("Explore the music behind the story.")}</p>
+              <ul>
+                {story.releases.map((release) => (
+                  <li key={release.title}>
+                    <a href={release.href} target="_blank" rel="noreferrer">
+                      <span>{release.year}</span>
+                      <strong>{release.title}</strong>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {story.sources && (
+            <div className="story-sources">
+              <h3>{t("Sources")}</h3>
+              <p>
+                {t(
+                  "Release dates and credits follow the linked platform records.",
+                )}
+              </p>
+              <ul>
+                {story.sources.map((source) => (
+                  <li key={source.href}>
+                    <a href={source.href} target="_blank" rel="noreferrer">
+                      {source.label} ↗
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="story-artist-link lavender">
             <p className="eyebrow blue">{t("Direct from the artist")}</p>
             <h3>{t("Explore the artist’s world.")}</h3>

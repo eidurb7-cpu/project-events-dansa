@@ -336,6 +336,15 @@ const german: Record<string, string> = {
   "Back to stories": "Zurück zu den Geschichten",
   "Filter stories": "Geschichten filtern",
   DJs: "DJs",
+  "Artist history": "Künstlergeschichte",
+  "A career story drawn from published artist profiles and music release records. Sources are linked below.":
+    "Eine Geschichte seines musikalischen Wegs anhand veröffentlichter Künstlerprofile und Musikveröffentlichungen. Die Quellen sind unten verlinkt.",
+  "Selected releases": "Ausgewählte Veröffentlichungen",
+  "Explore the music behind the story.":
+    "Entdecke die Musik hinter der Geschichte.",
+  Sources: "Quellen",
+  "Release dates and credits follow the linked platform records.":
+    "Veröffentlichungsdaten und Credits entsprechen den verlinkten Plattformangaben.",
 }
 
 export function useTranslation() {

@@ -6,6 +6,16 @@ export type LocalizedCopy = {
 export type ArtistStory = {
   artist: string
   category: "dj" | "performance"
+  kind?: "biography"
+  sources?: {
+    label: string
+    href: string
+  }[]
+  releases?: {
+    title: string
+    year: string
+    href: string
+  }[]
   title: LocalizedCopy
   intro: LocalizedCopy
   sections: {
@@ -14,8 +24,8 @@ export type ArtistStory = {
   }[]
 }
 
-// Editorial introductions based on the roles listed in the DANSA line-up.
-// These describe the creative disciplines, rather than unverified biographies.
+// Role-based editorials remain separate from researched biographies.
+// Biography entries include public sources and selected release links.
 export const artistStories: ArtistStory[] = [
   {
     artist: "larry",
@@ -122,35 +132,72 @@ export const artistStories: ArtistStory[] = [
   {
     artist: "ice-boy",
     category: "performance",
+    kind: "biography",
     title: {
-      en: "The presence of a live performer.",
-      de: "Die Präsenz eines Live-Performers.",
+      en: "Ice Boy Africa: a story in songs.",
+      de: "Ice Boy Africa: eine Geschichte in Songs.",
     },
     intro: {
-      en: "Ice Boy is a music artist and performer in the DANSA line-up. His role brings live performance into a collective that also includes DJs, musicians and dancers.",
-      de: "Ice Boy ist Musiker und Performer im DANSA-Line-up. Seine Rolle bringt Live-Performance in ein Kollektiv, zu dem auch DJs, Musiker und Tänzer gehören.",
+      en: "Ice Boy Africa is a Tanzanian singer, rapper and content creator, known online as @iceboyafrica. His recorded catalogue offers a concrete way into his story: songs released across several years, collaborations and an ongoing presence on music platforms.",
+      de: "Ice Boy Africa ist ein tansanischer Sänger, Rapper und Content Creator, online bekannt als @iceboyafrica. Sein veröffentlichter Katalog eröffnet einen konkreten Zugang zu seiner Geschichte: Songs aus mehreren Jahren, Kooperationen und seine Präsenz auf Musikplattformen.",
     },
     sections: [
       {
         title: {
-          en: "A person at the centre of the sound.",
-          de: "Ein Mensch im Mittelpunkt des Sounds.",
+          en: "A public musical trail since 2019.",
+          de: "Eine öffentliche musikalische Spur seit 2019.",
         },
         text: {
-          en: "Live performance changes the relationship between music and a room. Attention can settle on a gesture, a pause or the way an artist holds a moment. The audience becomes part of that exchange through listening and response. That human presence is one reason live music belongs in the conversation about a good night.",
-          de: "Live-Performance verändert die Beziehung zwischen Musik und Raum. Eine Geste, eine Pause oder die Art, wie ein Artist einen Moment trägt, kann die Aufmerksamkeit bündeln. Durch Zuhören und Reaktion wird das Publikum Teil dieses Austauschs. Diese menschliche Präsenz ist ein Grund, warum Livemusik zu einer guten Nacht gehört.",
+          en: "Ice Boy’s Audiomack profile identifies him as an artist and songwriter, with a membership date of January 2019. It lists projects including Good Days EP, A17 AFRO EP and 3SUM EP. This is a documented part of his online music history, rather than a claim about when his career began.",
+          de: "Ice Boys Audiomack-Profil beschreibt ihn als Artist und Songwriter und nennt Januar 2019 als Beitrittsdatum. Dort stehen Projekte wie Good Days EP, A17 AFRO EP und 3SUM EP. Das dokumentiert einen Teil seiner musikalischen Online-Geschichte, ohne den Beginn seiner Karriere festzulegen.",
         },
       },
       {
         title: {
-          en: "Keep the artist’s own voice close.",
-          de: "Bleib nah an der eigenen Stimme des Artists.",
+          en: "From Paradise City to Kilimanjaro.",
+          de: "Von Paradise City bis Kilimanjaro.",
         },
         text: {
-          en: "A role in a line-up is only an introduction. Ice Boy’s own channel is the direct place to explore the music and updates he shares. For DANSA, including a performer alongside selectors opens up possibilities for different kinds of musical encounters; individual event formats will be announced when confirmed.",
-          de: "Eine Rolle im Line-up ist erst der Anfang. Ice Boys eigener Kanal ist der direkte Ort, um seine Musik und Neuigkeiten zu entdecken. Für DANSA eröffnet ein Performer neben DJs verschiedene Möglichkeiten musikalischer Begegnungen. Die Formate einzelner Events werden nach ihrer Bestätigung bekannt gegeben.",
+          en: "Apple Music dates Paradise City to 2022 and Sisi to 2023. Baby and Kilimanjaro follow in 2024; Kilimanjaro’s song page specifies 1 November. These releases provide milestones for exploring his catalogue in sequence.",
+          de: "Apple Music datiert Paradise City auf 2022 und Sisi auf 2023. Baby und Kilimanjaro folgen 2024; die Songseite von Kilimanjaro nennt den 1. November. Diese Veröffentlichungen bieten Stationen, um seinen Katalog der Reihe nach zu entdecken.",
         },
       },
+      {
+        title: {
+          en: "2025: songs with other voices.",
+          de: "2025: Songs mit anderen Stimmen.",
+        },
+        text: {
+          en: "Thamani features Baraka Da Prince and is dated 7 March 2025 on Ice Boy’s Audiomack upload, which credits Goodluck Gozbert as producer. Apple Music also lists Up featuring Bill nass, dated 25 April 2025. These credits put named collaborators alongside Ice Boy in his release history.",
+          de: "Thamani entstand mit Baraka Da Prince und trägt auf Ice Boys Audiomack-Upload das Datum 7. März 2025. Als Produzent wird Goodluck Gozbert genannt. Apple Music führt außerdem Up mit Bill nass vom 25. April 2025. Diese Credits zeigen konkrete Mitwirkende in Ice Boys Veröffentlichungsgeschichte.",
+        },
+      },
+      {
+        title: {
+          en: "Stress, and the music beyond it.",
+          de: "Stress und die Musik darüber hinaus.",
+        },
+        text: {
+          en: "Stress is listed on Apple Music with an 11 April 2025 release date. Alongside the earlier singles and collaborations, it is another entry point into Ice Boy’s work. Listen through the selected releases below, or follow his own channel for first-hand updates.",
+          de: "Stress wird bei Apple Music mit dem Veröffentlichungsdatum 11. April 2025 geführt. Neben den früheren Singles und Kooperationen ist der Song ein weiterer Zugang zu Ice Boys Arbeit. Entdecke die ausgewählten Veröffentlichungen unten oder folge seinem eigenen Kanal für Neuigkeiten aus erster Hand.",
+        },
+      },
+    ],
+    sources: [
+      { label: "Mtikiso Media — Ice Boy Africa biography", href: "https://mtikisomedia.com/artist/ice-boy/" },
+      { label: "Audiomack — Ice Boy artist profile and projects", href: "https://audiomack.com/imani-chaula" },
+      { label: "Apple Music — Ice Boy singles and release years", href: "https://music.apple.com/us/artist/ice-boy/1638588258" },
+      { label: "Apple Music — Kilimanjaro, 1 November 2024", href: "https://music.apple.com/tz/song/1776381067" },
+      { label: "Audiomack — Thamani, credits and release date", href: "https://audiomack.com/imani-chaula/song/thamani" },
+      { label: "Apple Music — Up (feat. Bill nass), 25 April 2025", href: "https://music.apple.com/tz/song/1809055251" },
+    ],
+    releases: [
+      { title: "Paradise City", year: "2022", href: "https://music.apple.com/us/album/paradise-city-single/1638588348" },
+      { title: "Sisi", year: "2023", href: "https://music.apple.com/us/album/sisi-single/1715784970" },
+      { title: "Kilimanjaro", year: "2024", href: "https://music.apple.com/tz/song/1776381067" },
+      { title: "Thamani (feat. Baraka Da Prince)", year: "2025", href: "https://audiomack.com/imani-chaula/song/thamani" },
+      { title: "Stress", year: "2025", href: "https://music.apple.com/us/album/stress-single/1806309107" },
+      { title: "Up (feat. Bill nass)", year: "2025", href: "https://music.apple.com/tz/song/1809055251" },
     ],
   },
   {

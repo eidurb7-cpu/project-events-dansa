@@ -1,6 +1,8 @@
 import { LanguageContext, useTranslation, type Language } from "./i18n"
 import { FormEvent, useContext, useEffect, useState } from "react"
 import { artistStories, type ArtistStory } from "./stories"
+import { ArtistFeature } from "./ArtistFeature"
+import { usePageMetadata } from "./usePageMetadata"
 
 const A = "/assets/"
 
@@ -626,10 +628,16 @@ function Lineup() {
 
 function ArtistPage({ artist }: { artist: Artist }) {
   const t = useTranslation()
-  const { language } = useContext(LanguageContext)
   const biography = artistStories.find(
     (story) => story.artist === artist.slug && story.kind === "biography",
   )
+  if (biography)
+    return (
+      <Shell>
+        <ArtistFeature artist={artist} story={biography} />
+        <StoriesPreview exclude={artist.slug} />
+      </Shell>
+    )
 
   return (
     <Shell>
@@ -647,12 +655,10 @@ function ArtistPage({ artist }: { artist: Artist }) {
           <p className="eyebrow blue">{t("In the DANSA lineup")}</p>
           <h2>{artist.name}</h2>
           <p>
-            {biography
-              ? biography.intro[language]
-              : t("{name} is {role} and a member of the DANSA lineup.", {
-                  name: artist.name,
-                  role: t(artist.role),
-                })}
+            {t("{name} is {role} and a member of the DANSA lineup.", {
+              name: artist.name,
+              role: t(artist.role),
+            })}
           </p>
           <hr />
           <p className="eyebrow blue">
@@ -737,10 +743,10 @@ function StoryCards({ stories }: { stories: ArtistStory[] }) {
   )
 }
 
-function StoriesPreview() {
+function StoriesPreview({ exclude }: { exclude?: string } = {}) {
   const t = useTranslation()
   return (
-    <section className="lavender">
+    <section className="lavender stories-preview">
       <div className="section-head">
         <div>
           <p className="eyebrow blue">{t("From the DANSA journal")}</p>
@@ -751,7 +757,15 @@ function StoriesPreview() {
         </Link>
       </div>
       <StoryCards
-        stories={[artistStories[0], artistStories[2], artistStories[3]]}
+        stories={[
+          artistStories[0],
+          artistStories[2],
+          artistStories[3],
+          artistStories[1],
+          artistStories[4],
+        ]
+          .filter((story) => story.artist !== exclude)
+          .slice(0, 3)}
       />
     </section>
   )
@@ -833,6 +847,7 @@ function Stories() {
 function StoryPage({ story }: { story: ArtistStory }) {
   const { language } = useContext(LanguageContext)
   const t = useTranslation()
+  usePageMetadata(`${story.title[language]} | DANSA`, story.intro[language])
   const artist = artists.find((person) => person.slug === story.artist)
   if (!artist) return <NotFound />
   return (
@@ -863,17 +878,32 @@ function StoryPage({ story }: { story: ArtistStory }) {
           <Link to={`/artists/${artist.slug}`} className="text-link">
             {t("Artist profile")} ↗
           </Link>
+          <nav className="story-contents" aria-label={t("On this page")}>
+            {story.sections.map((part, index) => (
+              <a key={index} href={`#chapter-${index + 1}`}>
+                0{index + 1} / {part.title[language]}
+              </a>
+            ))}
+            {story.releases && (
+              <a href="#selected-releases">{t("Selected releases")}</a>
+            )}
+            {story.sources && <a href="#story-sources">{t("Sources")}</a>}
+          </nav>
         </aside>
         <article>
           {story.sections.map((part, index) => (
-            <div className="story-chapter" key={index}>
+            <div
+              className="story-chapter"
+              id={`chapter-${index + 1}`}
+              key={index}
+            >
               <p className="eyebrow blue">0{index + 1}</p>
               <h2>{part.title[language]}</h2>
               <p>{part.text[language]}</p>
             </div>
           ))}
           {story.releases && (
-            <div className="story-releases">
+            <div className="story-releases" id="selected-releases">
               <h2>{t("Selected releases")}</h2>
               <p>{t("Explore the music behind the story.")}</p>
               <ul>
@@ -890,7 +920,7 @@ function StoryPage({ story }: { story: ArtistStory }) {
             </div>
           )}
           {story.sources && (
-            <div className="story-sources">
+            <div className="story-sources" id="story-sources">
               <h3>{t("Sources")}</h3>
               <p>
                 {t(

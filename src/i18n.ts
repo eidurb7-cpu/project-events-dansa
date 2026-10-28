@@ -336,6 +336,57 @@ const german: Record<string, string> = {
   "Back to stories": "Zurück zu den Geschichten",
   "Filter stories": "Geschichten filtern",
   DJs: "DJs",
+  "Singer. Rapper. Songwriter.": "Sänger. Rapper. Songwriter.",
+  "Meet the Tanzanian artist behind Paradise City, Kilimanjaro and Thamani. Explore his music, collaborators and the story so far.":
+    "Lerne den tansanischen Artist hinter Paradise City, Kilimanjaro und Thamani kennen. Entdecke seine Musik, Kooperationen und seinen bisherigen Weg.",
+  "Listen to the music": "Musik entdecken",
+  "Read his story": "Seine Geschichte",
+  Tanzania: "Tansania",
+  Origin: "Herkunft",
+  Disciplines: "Disziplinen",
+  "Vocals & songwriting": "Gesang & Songwriting",
+  "In the line-up": "Im Line-up",
+  "Start with these three": "Drei Songs zum Einstieg",
+  "Solo single": "Solo-Single",
+  "With Baraka Da Prince": "Mit Baraka Da Prince",
+  "With Bill nass": "Mit Bill nass",
+  "Listen on": "Anhören auf",
+  "A brief history": "Ein kurzer Rückblick",
+  "Audiomack profile": "Audiomack-Profil",
+  "A public profile since January 2019.":
+    "Ein öffentliches Profil seit Januar 2019.",
+  "A single in the recorded catalogue.":
+    "Eine Single im veröffentlichten Katalog.",
+  "With Chino Kidd and Dj ALLY B.": "Mit Chino Kidd und Dj ALLY B.",
+  "Released on 1 November 2024.": "Veröffentlicht am 1. November 2024.",
+  Collaborations: "Kooperationen",
+  "Thamani with Baraka Da Prince. Up with Bill nass.":
+    "Thamani mit Baraka Da Prince. Up mit Bill nass.",
+  "View release or profile": "Veröffentlichung oder Profil ansehen",
+  "On this artist page": "Auf dieser Künstlerseite",
+  "On this page": "Auf dieser Seite",
+  "The story": "Die Geschichte",
+  Timeline: "Zeitstrahl",
+  Credits: "Mitwirkende",
+  "A Tanzanian voice, told through the music.":
+    "Eine Stimme aus Tansania, erzählt durch Musik.",
+  "Ice Boy Africa is a singer, rapper and content creator from Tanzania. His Audiomack profile identifies him as an artist and songwriter, with projects including Good Days EP, A17 AFRO EP and 3SUM EP.":
+    "Ice Boy Africa ist Sänger, Rapper und Content Creator aus Tansania. Sein Audiomack-Profil beschreibt ihn als Artist und Songwriter. Zu den dort aufgeführten Projekten zählen Good Days EP, A17 AFRO EP und 3SUM EP.",
+  "The singles offer a route through the years: Paradise City in 2022, Sisi in 2023, then Baby and Kilimanjaro in 2024. In 2025, releases include Stress and collaborations with Baraka Da Prince and Bill nass.":
+    "Die Singles führen durch die Jahre: Paradise City 2022, Sisi 2023, dann Baby und Kilimanjaro 2024. Zu den Veröffentlichungen 2025 gehören Stress und Kooperationen mit Baraka Da Prince und Bill nass.",
+  "Read the full artist story": "Die ganze Künstlergeschichte lesen",
+  "Collaborations & credits": "Kooperationen & Mitwirkende",
+  "The people behind the releases.":
+    "Die Menschen hinter den Veröffentlichungen.",
+  "Featured artist": "Gastartist",
+  Producer: "Produzent",
+  "Follow Ice Boy Africa": "Folge Ice Boy Africa",
+  "Listen, connect and keep up with the artist.":
+    "Musik hören, Kontakt aufnehmen und Neuigkeiten entdecken.",
+  "Artist enquiries": "Künstleranfragen",
+  "Artist enquiries go directly to Ice Boy via Instagram.":
+    "Künstleranfragen gehen über Instagram direkt an Ice Boy.",
+  "Sources & release credits": "Quellen & Credits der Veröffentlichungen",
   "Artist history": "Künstlergeschichte",
   "A career story drawn from published artist profiles and music release records. Sources are linked below.":
     "Eine Geschichte seines musikalischen Wegs anhand veröffentlichter Künstlerprofile und Musikveröffentlichungen. Die Quellen sind unten verlinkt.",

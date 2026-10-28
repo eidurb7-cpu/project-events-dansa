@@ -89,6 +89,7 @@ export const faqs = {
 }
 
 export const pageTranslations: Record<string, string> = {
+  "Skip to content": "Zum Inhalt springen",
   "Outdoor concepts with space to connect.":
     "Outdoor-Konzepte mit Raum für Begegnungen.",
   "DJ-led ideas for a shared dancefloor.":

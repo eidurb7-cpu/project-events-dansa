@@ -1,3 +1,4 @@
+import { SiteImage } from "./SiteImage"
 import { useContext } from "react"
 import { LanguageContext, useTranslation } from "./i18n"
 import type { ArtistStory } from "./stories"
@@ -57,7 +58,7 @@ export function ArtistOverview({
           </div>
         </div>
         <figure className="feature-portrait">
-          <img
+          <SiteImage
             src={`/assets/${artist.image}`}
             alt={artist.name}
             fetchPriority="high"

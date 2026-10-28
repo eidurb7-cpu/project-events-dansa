@@ -1,3 +1,6 @@
+import { usePageFilter } from "./usePageFilter"
+import { SiteImage } from "./SiteImage"
+import { useSiteNavigation, NAVIGATION_EVENT } from "./useSiteNavigation"
 import { events, type EventConcept } from "./pageContent"
 import {
   DiscoverRoutes,
@@ -8,7 +11,14 @@ import {
 import { GalleryViewer } from "./GalleryViewer"
 import { ArtistOverview } from "./ArtistOverview"
 import { LanguageContext, useTranslation, type Language } from "./i18n"
-import { FormEvent, useContext, useEffect, useState } from "react"
+import {
+  Fragment,
+  FormEvent,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import { artistStories, type ArtistStory } from "./stories"
 import { ArtistFeature } from "./ArtistFeature"
 import { usePageMetadata } from "./usePageMetadata"
@@ -101,14 +111,6 @@ const artists: Artist[] = [
   },
 ]
 
-function go(path: string) {
-  history.pushState({}, "", path)
-
-  window.dispatchEvent(new PopStateEvent("popstate"))
-
-  window.scrollTo({ top: 0, behavior: "smooth" })
-}
-
 function Link({
   to,
 
@@ -125,16 +127,7 @@ function Link({
   className?: string
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">) {
   return (
-    <a
-      href={to}
-      className={className}
-      {...props}
-      onClick={(e) => {
-        e.preventDefault()
-
-        go(to)
-      }}
-    >
+    <a href={to} className={className} {...props}>
       {children}
     </a>
   )
@@ -159,6 +152,55 @@ function Header() {
   const { language, setLanguage } = useContext(LanguageContext)
 
   const [open, setOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (!open) return
+    const overflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    const background = [
+      ...document.querySelectorAll<HTMLElement>("main, footer"),
+    ]
+    const inertStates = background.map((element) => element.inert)
+    background.forEach((element) => {
+      element.inert = true
+    })
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false)
+        menuButton.current?.focus()
+      }
+      if (event.key === "Tab") {
+        const controls = [
+          ...document.querySelectorAll<HTMLElement>(
+            ".header a[href], .header button:not([disabled])",
+          ),
+        ].filter((element) => element.getClientRects().length > 0)
+        const first = controls[0]
+        const last = controls[controls.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last?.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first?.focus()
+        }
+      }
+    }
+    const media = matchMedia("(min-width: 981px)")
+    const closeOnResize = () => {
+      if (media.matches) setOpen(false)
+    }
+    window.addEventListener("keydown", closeOnEscape)
+    media.addEventListener("change", closeOnResize)
+    return () => {
+      document.body.style.overflow = overflow
+      background.forEach((element, index) => {
+        element.inert = inertStates[index]
+      })
+      window.removeEventListener("keydown", closeOnEscape)
+      media.removeEventListener("change", closeOnResize)
+    }
+  }, [open])
 
   const [path, setPath] = useState(location.pathname)
 
@@ -170,8 +212,12 @@ function Header() {
     }
 
     addEventListener("popstate", handleNavigation)
+    addEventListener(NAVIGATION_EVENT, handleNavigation)
 
-    return () => removeEventListener("popstate", handleNavigation)
+    return () => {
+      removeEventListener("popstate", handleNavigation)
+      removeEventListener(NAVIGATION_EVENT, handleNavigation)
+    }
   }, [])
 
   const nav = [
@@ -190,6 +236,10 @@ function Header() {
         <Equalizer />
       </Link>
       <button
+        ref={menuButton}
+        type="button"
+        aria-expanded={open}
+        aria-controls="primary-navigation"
         className="menu"
         onClick={() => setOpen(!open)}
         aria-label={t("Toggle menu")}
@@ -197,6 +247,7 @@ function Header() {
         {open ? t("CLOSE") : t("MENU")}
       </button>
       <nav
+        id="primary-navigation"
         className={open ? "nav open" : "nav"}
         aria-label={t("Main navigation")}
       >
@@ -204,7 +255,14 @@ function Header() {
           <Link
             key={destination}
             to={destination}
-            className={`navlink ${path === destination ? "active" : ""}`}
+            className={`navlink ${
+              path === destination ||
+              (destination !== "/" && path.startsWith(destination + "/")) ||
+              (destination === "/lineup" && path.startsWith("/artists/"))
+                ? "active"
+                : ""
+            }`}
+            aria-current={path === destination ? "page" : undefined}
           >
             {label}
           </Link>
@@ -287,10 +345,16 @@ function Footer() {
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
+  const t = useTranslation()
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        {t("Skip to content")}
+      </a>
       <Header />
-      <main>{children}</main>
+      <main id="main-content" tabIndex={-1}>
+        {children}
+      </main>
       <Footer />
     </>
   )
@@ -302,7 +366,11 @@ function EventCard({ event }: { event: EventConcept }) {
   return (
     <article className="card">
       <Link to={`/events/${event.slug}`}>
-        <img src={A + event.image} alt={event.title} />
+        <SiteImage
+          src={A + event.image}
+          alt={event.title}
+          sizes="(max-width: 760px) 100vw, 33vw"
+        />
       </Link>
       <p className="eyebrow blue">
         {t("Concept preview")} / {t(event.format)}
@@ -333,7 +401,11 @@ function Home() {
           <Equalizer large />
         </div>
         <div className="hero-grid">
-          <img src={A + "b41fd.png"} alt={t("Crowd dancing together")} />
+          <SiteImage
+            src={A + "b41fd.png"}
+            alt={t("Crowd dancing together")}
+            fetchPriority="high"
+          />
           <div>
             <h1>
               {t("Good music.")}
@@ -371,7 +443,7 @@ function Home() {
         </div>
       </section>
       <section className="split">
-        <img
+        <SiteImage
           className="dansa-people-photo"
           src={A + "dansa-two-people.webp"}
           alt={t("Two people enjoying an evening together")}
@@ -427,7 +499,7 @@ function Home() {
             {t("Browse the journal")} ↗
           </Link>
         </div>
-        <img src={A + "fa084.png"} alt={t("Hands selecting a record")} />
+        <SiteImage src={A + "fa084.png"} alt={t("Hands selecting a record")} />
       </section>
       <section>
         <p className="eyebrow blue">{t("Meet the team")}</p>
@@ -446,7 +518,10 @@ function Home() {
 
 function Events() {
   const t = useTranslation()
-  const [filter, setFilter] = useState("all")
+  const [filter, setFilter] = usePageFilter(
+    ["all", "open-air", "after-dark", "slow-sunday"] as const,
+    "all",
+  )
   const visible =
     filter === "all"
       ? events
@@ -500,7 +575,7 @@ function Events() {
               type="button"
               key={value}
               aria-pressed={filter === value}
-              onClick={() => setFilter(value)}
+              onClick={() => setFilter(value as typeof filter)}
             >
               {t(label)}
             </button>
@@ -541,7 +616,7 @@ function EventDetail({ event }: { event: EventConcept }) {
         <p>{t("All event details remain unconfirmed.")}</p>
       </section>
       <section className="event-feature">
-        <img src={A + event.image} alt={event.title} />
+        <SiteImage src={A + event.image} alt={event.title} />
         <aside className="ticket">
           <p className="eyebrow blue">Tickets</p>
           <h2>{t("Tickets not yet released")}</h2>
@@ -623,7 +698,11 @@ function ArtistTile({ artist }: { artist: Artist }) {
   return (
     <article className="artist-tile">
       <Link to={"/artists/" + artist.slug}>
-        <img src={A + artist.image} alt={artist.name} />
+        <SiteImage
+          src={A + artist.image}
+          alt={artist.name}
+          sizes="(max-width: 760px) 100vw, 33vw"
+        />
       </Link>
       <h3>{artist.name}</h3>
       <p>{t(artist.role)}</p>
@@ -644,7 +723,10 @@ function ArtistTile({ artist }: { artist: Artist }) {
 
 function Lineup() {
   const t = useTranslation()
-  const [filter, setFilter] = useState("all")
+  const [filter, setFilter] = usePageFilter(
+    ["all", "dj", "movement"] as const,
+    "all",
+  )
   const visible = artists.filter(
     (artist) =>
       filter === "all" ||
@@ -686,7 +768,7 @@ function Lineup() {
               type="button"
               key={value}
               aria-pressed={filter === value}
-              onClick={() => setFilter(value)}
+              onClick={() => setFilter(value as typeof filter)}
             >
               {t(label)}
             </button>
@@ -729,7 +811,11 @@ function StoryCards({ stories }: { stories: ArtistStory[] }) {
         return (
           <article className="story-card" key={story.artist}>
             <Link to={`/stories/${story.artist}`} className="story-image">
-              <img src={A + artist.image} alt={artist.name} loading="lazy" />
+              <SiteImage
+                src={A + artist.image}
+                alt={artist.name}
+                loading="lazy"
+              />
             </Link>
             <p className="eyebrow blue">
               {artist.name} / {t(artist.role)}
@@ -808,7 +894,14 @@ function ArtistStoryPreview({ artist }: { artist: Artist }) {
 
 function Stories() {
   const t = useTranslation()
-  const [filter, setFilter] = useState<"all" | "dj" | "performance">("all")
+  usePageMetadata(
+    `${t("Stories")} | DANSA`,
+    t("Different roles. Shared rhythm."),
+  )
+  const [filter, setFilter] = usePageFilter(
+    ["all", "dj", "performance"] as const,
+    "all",
+  )
   const stories =
     filter === "all"
       ? artistStories
@@ -838,7 +931,7 @@ function Stories() {
               type="button"
               key={value}
               aria-pressed={filter === value}
-              onClick={() => setFilter(value)}
+              onClick={() => setFilter(value as typeof filter)}
             >
               {t(label)}
             </button>
@@ -870,7 +963,11 @@ function StoryPage({ story }: { story: ArtistStory }) {
           <h1>{story.title[language]}</h1>
           <p className="lead">{story.intro[language]}</p>
         </div>
-        <img src={A + artist.image} alt={artist.name} fetchPriority="high" />
+        <SiteImage
+          src={A + artist.image}
+          alt={artist.name}
+          fetchPriority="high"
+        />
       </section>
       <section className="story-body">
         <aside>
@@ -1096,7 +1193,7 @@ function About() {
         </p>
       </section>
       <section className="about-photo">
-        <img
+        <SiteImage
           src={A + "0af90.png"}
           alt={t("Friends walking through the city")}
         />
@@ -1153,7 +1250,7 @@ function About() {
         <div className="organizer-faces">
           {artists.map((artist) => (
             <Link to={`/artists/${artist.slug}`} key={artist.slug}>
-              <img src={A + artist.image} alt={artist.name} />
+              <SiteImage src={A + artist.image} alt={artist.name} />
               <span>{artist.name}</span>
             </Link>
           ))}
@@ -1204,7 +1301,7 @@ function About() {
       </section>
       <section className="about-formats">
         <div>
-          <img src={A + "911fb.png"} alt="" />
+          <SiteImage src={A + "911fb.png"} alt="" />
           <p className="eyebrow blue">{t("A mood for the moment")}</p>
         </div>
         <div>
@@ -1247,7 +1344,7 @@ function About() {
         <h2>{t("Meet the lineup.")}</h2>
         {artists.map((a) => (
           <Link to={"/artists/" + a.slug} className="about-person" key={a.slug}>
-            <img src={A + a.image} alt="" />
+            <SiteImage src={A + a.image} alt="" />
             <span>
               <b>{a.name}</b>
               <small>{t(a.role)}</small>
@@ -1292,6 +1389,12 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
   const [sent, setSent] = useState(false)
   const [draft, setDraft] = useState("")
   const [copied, setCopied] = useState(false)
+  const draftHeading = useRef<HTMLHeadingElement>(null)
+  const nameField = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    if (sent) draftHeading.current?.focus()
+    else if (draft) nameField.current?.focus()
+  }, [sent, draft])
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -1370,7 +1473,10 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
       {collaborate ? (
         <>
           <section className="work-intro">
-            <img src={A + "e9707.png"} alt={t("DJ booth and dancefloor")} />
+            <SiteImage
+              src={A + "e9707.png"}
+              alt={t("DJ booth and dancefloor")}
+            />
             <div>
               <p className="eyebrow blue">{t("Independent by nature")}</p>
               <h2>{t("Your idea. Our shared energy.")}</h2>
@@ -1519,7 +1625,9 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
           </p>
           {sent ? (
             <div className="form-note">
-              <h3>{t("Your enquiry draft is ready.")}</h3>
+              <h3 ref={draftHeading} tabIndex={-1}>
+                {t("Your enquiry draft is ready.")}
+              </h3>
               <p>
                 {t(
                   "Copy your draft and use a direct contact channel. Nothing has been sent.",
@@ -1558,6 +1666,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
                   {t("Name *")}
                   <input
                     name="name"
+                    ref={nameField}
                     defaultValue={formValues.name}
                     placeholder={t("Your name")}
                     required
@@ -1725,6 +1834,10 @@ function Cta() {
 
 function NotFound() {
   const t = useTranslation()
+  usePageMetadata(
+    `${t("Page not found")} | DANSA`,
+    t("That page is not part of the DANSA site."),
+  )
 
   return (
     <Shell>
@@ -1743,7 +1856,7 @@ function NotFound() {
 }
 
 export default function App() {
-  const [path, setPath] = useState(location.pathname)
+  const path = useSiteNavigation()
 
   const [language, setLanguage] = useState<Language>(() => {
     try {
@@ -1752,14 +1865,6 @@ export default function App() {
       return "en"
     }
   })
-
-  useEffect(() => {
-    const update = () => setPath(location.pathname)
-
-    addEventListener("popstate", update)
-
-    return () => removeEventListener("popstate", update)
-  }, [])
 
   useEffect(() => {
     try {
@@ -1792,7 +1897,7 @@ export default function App() {
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
-      {page}
+      <Fragment key={path}>{page}</Fragment>
     </LanguageContext.Provider>
   )
 }

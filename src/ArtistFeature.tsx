@@ -1,3 +1,4 @@
+import { SiteImage } from "./SiteImage"
 import { useTranslation } from "./i18n"
 import type { ArtistStory } from "./stories"
 import { usePageMetadata } from "./usePageMetadata"
@@ -140,7 +141,7 @@ export function ArtistFeature({
           </div>
         </div>
         <figure className="feature-portrait">
-          <img
+          <SiteImage
             src={`/assets/${artist.image}`}
             alt="Ice Boy Africa"
             fetchPriority="high"

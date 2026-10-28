@@ -1,3 +1,5 @@
+import { usePageFilter } from "./usePageFilter"
+import { SiteImage } from "./SiteImage"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "./i18n"
 
@@ -25,7 +27,10 @@ const photos = [
 
 export function GalleryViewer() {
   const t = useTranslation()
-  const [filter, setFilter] = useState("all")
+  const [filter, setFilter] = usePageFilter(
+    ["all", "nightlife", "city", "details"] as const,
+    "all",
+  )
   const [selected, setSelected] = useState<string | null>(null)
   const dialog = useRef<HTMLDialogElement>(null)
   const visible =
@@ -69,7 +74,7 @@ export function GalleryViewer() {
             aria-pressed={filter === value}
             onClick={() => {
               setSelected(null)
-              setFilter(value)
+              setFilter(value as typeof filter)
             }}
           >
             {t(label)}
@@ -88,7 +93,7 @@ export function GalleryViewer() {
               aria-label={`${t("Open photo")}: ${t(photo.caption)}`}
               onClick={() => setSelected(photo.image)}
             >
-              <img
+              <SiteImage
                 src={`/assets/${photo.image}`}
                 alt={t(photo.caption)}
                 loading="lazy"
@@ -126,7 +131,12 @@ export function GalleryViewer() {
         </button>
         {active && (
           <figure>
-            <img src={`/assets/${active.image}`} alt={t(active.caption)} />
+            <SiteImage
+              src={`/assets/${active.image}`}
+              alt={t(active.caption)}
+              loading="eager"
+              sizes="94vw"
+            />
             <figcaption>
               {t(active.caption)}{" "}
               <span>

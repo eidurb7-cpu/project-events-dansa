@@ -34,7 +34,7 @@
   50% { height:100%; opacity:1; }
   100% { height:48%; opacity:.82; }
 }
-.nav { display:flex; align-items:center; gap:2.2rem; }
+.nav { display:flex; align-items:center; gap:clamp(.8rem,1.6vw,2.2rem); }
 .language-switch { display:flex; align-items:center; gap:.3rem; font:700 .65rem 'Inter:Bold'; color:rgba(255,255,255,.6); }
 .language-switch button { padding:.35rem .2rem; color:inherit; cursor:pointer; }
 .language-switch button.active { color:white; text-decoration:underline; text-underline-offset:4px; }
@@ -84,6 +84,10 @@ main > section:nth-child(3) { animation-delay:.1s; }
 .dark { background:var(--ink); color:var(--cream); }
 .statement .rules { display:grid; grid-template-columns:repeat(3,1fr); margin-top:3rem; border-top:1px solid #555; }
 .rules b { padding:1.7rem 0; border-bottom:1px solid #555; text-transform:uppercase; font-size:1.4rem; }
+.rules > a { display:block; padding:1.7rem 1rem 1.7rem 0; border-bottom:1px solid #555; }
+.rules h3 { font-size:1.4rem; margin-bottom:1rem; }
+.rules p { font-size:.85rem; line-height:1.7; max-width:20rem; margin-bottom:1.5rem; }
+.rules a:hover { color:var(--lav); }
 .blue-block,.cta { background:var(--blue); color:white; display:grid; grid-template-columns:1fr 1fr; gap:5vw; align-items:center; }
 .blue-block img { width:100%; height:360px; object-fit:cover; }
 .artist-strip,.lineup-grid { display:grid; gap:1.2rem; margin-top:2.5rem; }
@@ -177,6 +181,80 @@ footer { padding:4rem 4vw 1rem; background:var(--ink); color:var(--cream); }
 .footer-logo { display:block; font:900 clamp(5rem,18vw,17rem)/.9 'Inter:Black'; letter-spacing:-.075em; margin-top:4rem; }
 .copyright { display:flex; justify-content:space-between; border-top:1px solid #444; padding-top:1rem; font-size:.55rem; }
 
+.site-discover { border-bottom:1px solid #d4d2c9; padding-top:3rem; padding-bottom:3rem; }
+.site-discover h2 { font-size:clamp(1.8rem,3.3vw,3.2rem); margin-bottom:2.5rem; max-width:900px; }
+.site-discover > div,.site-process ol,.enquiry-guide > div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2.5rem; }
+.site-discover > div > a { border-top:1px solid #aaa; padding-top:1.25rem; }
+.site-discover .eyebrow { display:flex; justify-content:space-between; }
+.site-discover h3 { font-size:clamp(1.3rem,2vw,2rem); margin-bottom:1rem; }
+.site-discover p,.site-process p,.enquiry-guide article > p:last-child { line-height:1.7; margin:0; }
+.site-discover a:hover h3 { color:var(--blue); }
+.site-filters { display:flex; flex-wrap:wrap; gap:.7rem; margin:0 0 2.5rem; }
+.site-filters button { padding:.8rem 1rem; border:1px solid var(--blue); color:var(--blue); font:700 .7rem 'Inter:Bold'; cursor:pointer; }
+.site-filters button[aria-pressed="true"] { background:var(--blue); color:white; }
+.site-filters button:focus-visible,.gallery-filters button:focus-visible { outline:2px solid var(--blue); outline-offset:4px; }
+.site-faq { display:grid; grid-template-columns:1fr 1.2fr; gap:7vw; border-top:1px solid #d4d2c9; }
+.site-faq h2 { font-size:clamp(2rem,3.5vw,3.5rem); max-width:600px; }
+.site-faq details { border-top:1px solid #aaa; }
+.site-faq details:last-child { border-bottom:1px solid #aaa; }
+.site-faq summary { padding:1.5rem 0; cursor:pointer; font:700 .9rem/1.5 'Inter:Bold'; }
+.site-faq details p { line-height:1.8; padding:0 0 1.5rem; margin:0; }
+.site-process h2,.enquiry-guide h2 { margin-bottom:3rem; font-size:clamp(2rem,4vw,4rem); }
+.site-process li { border-top:1px solid #777; padding-top:1.25rem; }
+.site-process li > span { display:block; font:900 clamp(2rem,4vw,4rem) 'Inter:Black'; margin-bottom:1.5rem; color:var(--lav); }
+.site-process h3,.enquiry-guide h3 { font-size:1.4rem; line-height:1.1; margin-bottom:1rem; }
+.enquiry-guide { padding-top:3rem; padding-bottom:3rem; }
+.enquiry-guide article { border-top:1px solid #aaa; padding-top:1.2rem; }
+.event-highlights h2 { margin-bottom:2.5rem; }
+.event-highlights > div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem; }
+.event-highlights > div > p { border-top:1px solid #777; padding-top:1.2rem; font-size:1.2rem; }
+.event-highlights span { display:block; font:700 .65rem 'Inter:Bold'; color:var(--lav); margin-bottom:1.5rem; }
+.artist-overview .feature-intro h1 { font-size:clamp(3rem,6.7vw,6.5rem); overflow-wrap:anywhere; }
+.artist-overview .feature-intro > a { display:inline-block; margin-bottom:2rem; }
+.artist-overview .feature-portrait img[src$="larry-new.webp"] { object-position:center 18%; }
+.artist-overview-story { display:grid; grid-template-columns:1fr 1.3fr; gap:7vw; }
+.artist-overview-story p { line-height:1.8; margin-bottom:1.5rem; }
+.artist-overview-contact { align-self:center; }
+.artist-overview-contact > a { font:900 clamp(1.3rem,2.3vw,2.5rem) 'Inter:Black'; overflow-wrap:anywhere; text-decoration:underline; text-underline-offset:6px; }
+.artist-overview-contact p { font-size:.8rem; margin:1.5rem 0 0; }
+.gallery-filters { flex-wrap:wrap; gap:1rem 2rem; }
+.gallery-filters button { font:700 .7rem 'Inter:Bold'; text-transform:uppercase; padding:1rem 0; cursor:pointer; }
+.gallery-filters button[aria-pressed="true"] { border-bottom:3px solid var(--blue); color:var(--blue); }
+.gallery-count { font-size:.7rem; margin-bottom:1.5rem; color:#686963; }
+.gallery-open { display:block; width:100%; cursor:zoom-in; position:relative; }
+.gallery-open > span { position:absolute; bottom:1rem; right:1rem; background:var(--cream); color:var(--blue); width:36px; height:36px; display:grid; place-items:center; }
+.gallery-open:focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
+.gallery-dialog { width:min(1100px,94vw); max-height:94dvh; padding:3.5rem 1.5rem 1.5rem; border:0; margin:auto; color:var(--cream); background:var(--ink); }
+.gallery-dialog::backdrop { background:rgba(0,0,0,.88); }
+.gallery-dialog figure { margin:0; }
+.gallery-dialog figure img { width:100%; max-height:65dvh; object-fit:contain; }
+.gallery-dialog figcaption { display:flex; justify-content:space-between; gap:1rem; font-size:.8rem; padding:1rem 0; }
+.gallery-close { position:absolute; top:.5rem; right:.5rem; width:44px; height:44px; font-size:1.3rem; cursor:pointer; }
+.gallery-dialog-controls { display:flex; justify-content:space-between; gap:1rem; border-top:1px solid #777; padding-top:1rem; }
+.gallery-dialog-controls button { width:64px; height:44px; border:1px solid var(--cream); cursor:pointer; }
+.gallery-story-link { background:var(--blue); padding:2rem; display:flex; flex-direction:column; justify-content:center; }
+.gallery-story-link h2 { font-size:clamp(1.8rem,3.2vw,3rem); margin-bottom:2rem; }
+.form-note > p { line-height:1.7; }
+.form-note textarea { margin-bottom:1rem; background:var(--cream); font-size:.9rem; line-height:1.6; }
+.form-note .button { margin:0 .75rem 1rem 0; }
+@media (max-width:760px) {
+  .site-discover > div,.site-process ol,.enquiry-guide > div,.site-faq,.event-highlights > div,.artist-overview-story { grid-template-columns:minmax(0,1fr); }
+  .site-faq { gap:2.5rem; }
+  .statement .rules { grid-template-columns:minmax(0,1fr); }
+  .site-faq h2,.artist-overview-story h2 { overflow-wrap:anywhere; }
+  .site-filters { gap:.5rem; }
+  .site-filters button { font-size:.65rem; padding:.7rem .8rem; }
+  .section-head { flex-direction:column; align-items:flex-start; }
+  .gallery-dialog { padding-right:1rem; padding-left:1rem; }
+  .gallery-dialog figure img { max-height:60dvh; }
+  .artist-overview .feature-intro h1 { font-size:clamp(3rem,13vw,5rem); }
+  .page-hero h1,.page-title h1,.page-hero.stories-hero h1 { font-size:clamp(2.1rem,9.5vw,3rem); overflow-wrap:anywhere; }
+  .opportunity { grid-template-columns:40px minmax(0,1fr); }
+  .opportunity > * { min-width:0; }
+  .opportunity h3 { font-size:1.5rem; overflow-wrap:anywhere; }
+  .form-wrap > div { min-width:0; }
+  select { max-width:100%; }
+}
 .feature-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); padding:0; }
 .feature-intro { padding:clamp(2rem,4vw,4.5rem) 4vw; align-self:center; }
 .feature-intro h1 { font-size:clamp(4rem,8.4vw,8rem); letter-spacing:-.065em; line-height:.88; margin:0 0 1.25rem; }

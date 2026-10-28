@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react"
+import { pageTranslations } from "./pageContent"
 
 export type Language = "en" | "de"
 export const LanguageContext = createContext<{
@@ -7,6 +8,7 @@ export const LanguageContext = createContext<{
 }>({ language: "en", setLanguage: () => undefined })
 
 const german: Record<string, string> = {
+  ...pageTranslations,
   Home: "Start",
   "The Lineup": "Das Line-up",
   Gallery: "Galerie",

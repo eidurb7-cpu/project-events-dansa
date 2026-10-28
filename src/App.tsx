@@ -1,3 +1,12 @@
+import { events, type EventConcept } from "./pageContent"
+import {
+  DiscoverRoutes,
+  FAQBlock,
+  HowItWorks,
+  EnquiryGuide,
+} from "./PageSections"
+import { GalleryViewer } from "./GalleryViewer"
+import { ArtistOverview } from "./ArtistOverview"
 import { LanguageContext, useTranslation, type Language } from "./i18n"
 import { FormEvent, useContext, useEffect, useState } from "react"
 import { artistStories, type ArtistStory } from "./stories"
@@ -92,14 +101,6 @@ const artists: Artist[] = [
   },
 ]
 
-const events = [
-  { title: "Open Air, Open Hearts", image: "ba6fb.png" },
-
-  { title: "The Late Connection", image: "821cb.png" },
-
-  { title: "Sunday, No Rush", image: "e5851.png" },
-]
-
 function go(path: string) {
   history.pushState({}, "", path)
 
@@ -173,30 +174,14 @@ function Header() {
     return () => removeEventListener("popstate", handleNavigation)
   }, [])
 
-  const nav =
-    language === "de"
-      ? [
-          ["Start", "/"],
-
-          ["Events", "/events"],
-
-          ["Line-up", "/lineup"],
-
-          ["Galerie", "/gallery"],
-
-          ["Über uns", "/about"],
-        ]
-      : [
-          [t("Home"), "/"],
-
-          ["Events", "/events"],
-
-          [t("The Lineup"), "/lineup"],
-
-          [t("Gallery"), "/gallery"],
-
-          [t("About"), "/about"],
-        ]
+  const nav = [
+    [t("Home"), "/"],
+    ["Events", "/events"],
+    [t("The Lineup"), "/lineup"],
+    [t("Gallery"), "/gallery"],
+    [t("Stories"), "/stories"],
+    [t("About"), "/about"],
+  ]
 
   return (
     <header className="header">
@@ -311,18 +296,20 @@ function Shell({ children }: { children: React.ReactNode }) {
   )
 }
 
-function EventCard({ event }: { event: typeof events[number] }) {
+function EventCard({ event }: { event: EventConcept }) {
   const t = useTranslation()
 
   return (
     <article className="card">
-      <Link to="/events/the-late-connection">
-        <img src={A + event.image} alt="" />
+      <Link to={`/events/${event.slug}`}>
+        <img src={A + event.image} alt={event.title} />
       </Link>
-      <p className="eyebrow blue">{t("Event details · TBA")}</p>
+      <p className="eyebrow blue">
+        {t("Concept preview")} / {t(event.format)}
+      </p>
       <h3>{event.title}</h3>
-      <p>{t("Date, time and location to be announced.")}</p>
-      <Link to="/events/the-late-connection" className="text-link">
+      <p>{t(event.description)}</p>
+      <Link to={`/events/${event.slug}`} className="text-link">
         {t("View event ↗")}
       </Link>
     </article>
@@ -331,6 +318,12 @@ function EventCard({ event }: { event: typeof events[number] }) {
 
 function Home() {
   const t = useTranslation()
+  usePageMetadata(
+    "DANSA | Music, culture & togetherness",
+    t(
+      "DANSA brings people together through sound, movement and shared energy.",
+    ),
+  )
 
   return (
     <Shell>
@@ -360,11 +353,12 @@ function Home() {
           </div>
         </div>
       </section>
+      <DiscoverRoutes />
       <section>
         <div className="section-head">
           <div>
             <p className="eyebrow blue">{t("Upcoming parties")}</p>
-            <h2>{t("What’s happenings")}</h2>
+            <h2>{t("Event concepts")}</h2>
           </div>
           <Link to="/events" className="text-link">
             {t("All events ↗")}
@@ -403,9 +397,21 @@ function Home() {
         <p className="eyebrow">{t("Our principles")}</p>
         <h2>{t("Our kind of good.")}</h2>
         <div className="rules">
-          <b>{t("Open air")}</b>
-          <b>{t("After dark")}</b>
-          <b>{t("The lineup")}</b>
+          <Link to="/events/open-air-open-hearts">
+            <h3>{t("Open air")}</h3>
+            <p>{t("Outdoor concepts with space to connect.")}</p>
+            <span aria-hidden="true">↗</span>
+          </Link>
+          <Link to="/events/the-late-connection">
+            <h3>{t("After dark")}</h3>
+            <p>{t("DJ-led ideas for a shared dancefloor.")}</p>
+            <span aria-hidden="true">↗</span>
+          </Link>
+          <Link to="/lineup">
+            <h3>{t("The lineup")}</h3>
+            <p>{t("Meet the DJs, musicians and dancers.")}</p>
+            <span aria-hidden="true">↗</span>
+          </Link>
         </div>
       </section>
       <section className="blue-block">
@@ -417,6 +423,9 @@ function Home() {
             {t("selects.")}
           </h2>
           <p>{t("A collection of sounds and stories that keep us moving.")}</p>
+          <Link to="/stories" className="text-link light-link">
+            {t("Browse the journal")} ↗
+          </Link>
         </div>
         <img src={A + "fa084.png"} alt={t("Hands selecting a record")} />
       </section>
@@ -437,6 +446,15 @@ function Home() {
 
 function Events() {
   const t = useTranslation()
+  const [filter, setFilter] = useState("all")
+  const visible =
+    filter === "all"
+      ? events
+      : events.filter((event) => event.category === filter)
+  usePageMetadata(
+    `${t("Events")} | DANSA`,
+    t("Explore the event concepts and check what is confirmed."),
+  )
 
   return (
     <Shell>
@@ -464,11 +482,32 @@ function Events() {
       </section>
       <section>
         <div className="section-head">
-          <h2>{t("Upcoming")}</h2>
+          <h2>{t("Event concepts")}</h2>
           <span className="pill">{t("All details TBA")}</span>
         </div>
+        <div
+          className="site-filters"
+          role="group"
+          aria-label={t("All formats")}
+        >
+          {[
+            ["all", "All formats"],
+            ["open-air", "Open air"],
+            ["after-dark", "After dark"],
+            ["slow-sunday", "Slow Sundays"],
+          ].map(([value, label]) => (
+            <button
+              type="button"
+              key={value}
+              aria-pressed={filter === value}
+              onClick={() => setFilter(value)}
+            >
+              {t(label)}
+            </button>
+          ))}
+        </div>
         <div className="cards">
-          {events.map((e) => (
+          {visible.map((e) => (
             <EventCard key={e.title} event={e} />
           ))}
         </div>
@@ -484,23 +523,25 @@ function Events() {
           </p>
         </div>
       </section>
+      <FAQBlock kind="events" />
       <Cta />
     </Shell>
   )
 }
 
-function EventDetail() {
+function EventDetail({ event }: { event: EventConcept }) {
   const t = useTranslation()
+  usePageMetadata(`${event.title} | DANSA`, t(event.description))
 
   return (
     <Shell>
       <section className="hero page-title">
         <p className="eyebrow">{t("DANSA presents")}</p>
-        <h1>The Late Connection</h1>
+        <h1>{event.title}</h1>
         <p>{t("All event details remain unconfirmed.")}</p>
       </section>
       <section className="event-feature">
-        <img src={A + "47fec.png"} alt={t("DJ booth and dancefloor")} />
+        <img src={A + event.image} alt={event.title} />
         <aside className="ticket">
           <p className="eyebrow blue">Tickets</p>
           <h2>{t("Tickets not yet released")}</h2>
@@ -515,10 +556,8 @@ function EventDetail() {
       <section className="details-grid">
         <div>
           <p className="eyebrow blue">{t("The idea")}</p>
-          <h2>{t("One room. A late connection.")}</h2>
-          <p>
-            {t("A gathering shaped by good music and the people in the room.")}
-          </p>
+          <h2>{t(event.heading)}</h2>
+          <p>{t(event.description)}</p>
         </div>
         <dl>
           <div>
@@ -549,12 +588,25 @@ function EventDetail() {
           </p>
         </div>
       </section>
+      <section className="event-highlights dark">
+        <p className="eyebrow">{t("The feeling")}</p>
+        <h2>{t(event.format)}</h2>
+        <div>
+          {event.highlights.map((item, index) => (
+            <p key={item}>
+              <span>0{index + 1}</span>
+              {t(item)}
+            </p>
+          ))}
+        </div>
+      </section>
+      <FAQBlock kind="events" />
       <section className="lavender">
         <h2>{t("Other good ideas.")}</h2>
         <div className="cards">
           {events
 
-            .filter((e) => e.title !== "The Late Connection")
+            .filter((e) => e.slug !== event.slug)
 
             .map((e) => (
               <EventCard key={e.title} event={e} />
@@ -592,7 +644,18 @@ function ArtistTile({ artist }: { artist: Artist }) {
 
 function Lineup() {
   const t = useTranslation()
-
+  const [filter, setFilter] = useState("all")
+  const visible = artists.filter(
+    (artist) =>
+      filter === "all" ||
+      (filter === "dj"
+        ? artist.role.startsWith("DJ")
+        : /Dancer|Performer|Musician/.test(artist.role)),
+  )
+  usePageMetadata(
+    t("The lineup") + " | DANSA",
+    t("Follow the people shaping the sound."),
+  )
   return (
     <Shell>
       <PageHero
@@ -602,21 +665,36 @@ function Lineup() {
           "DJs. Performing artists. One independent spirit. Meet the five people in the DANSA lineup.",
         )}
       />
-      <section>
-        <p className="eyebrow blue">{t("DJs in the DANSA family")}</p>
-        <h2>{t("The DJs.")}</h2>
-        <div className="lineup-grid three">
-          {artists.slice(0, 3).map((a) => (
-            <ArtistTile artist={a} key={a.slug} />
+      <section className="lineup-directory">
+        <div className="section-head">
+          <h2>{t("People behind the rhythm.")}</h2>
+          <p role="status">
+            {visible.length} / {artists.length} {t("artists shown")}
+          </p>
+        </div>
+        <div
+          className="site-filters"
+          role="group"
+          aria-label={t("Filter the line-up")}
+        >
+          {[
+            ["all", "Everyone"],
+            ["dj", "DJs"],
+            ["movement", "Movement & live"],
+          ].map(([value, label]) => (
+            <button
+              type="button"
+              key={value}
+              aria-pressed={filter === value}
+              onClick={() => setFilter(value)}
+            >
+              {t(label)}
+            </button>
           ))}
         </div>
-      </section>
-      <section className="rule-top">
-        <p className="eyebrow blue">{t("DJ / live in the moment")}</p>
-        <h2>{t("The performers.")}</h2>
-        <div className="lineup-grid two">
-          {artists.slice(3).map((a) => (
-            <ArtistTile artist={a} key={a.slug} />
+        <div className="lineup-grid three">
+          {visible.map((artist) => (
+            <ArtistTile artist={artist} key={artist.slug} />
           ))}
         </div>
       </section>
@@ -627,86 +705,15 @@ function Lineup() {
 }
 
 function ArtistPage({ artist }: { artist: Artist }) {
-  const t = useTranslation()
-  const biography = artistStories.find(
-    (story) => story.artist === artist.slug && story.kind === "biography",
-  )
-  if (biography)
-    return (
-      <Shell>
-        <ArtistFeature artist={artist} story={biography} />
-        <StoriesPreview exclude={artist.slug} />
-      </Shell>
-    )
-
+  const story = artistStories.find((item) => item.artist === artist.slug)
   return (
     <Shell>
-      <section className="hero page-title">
-        <Link to="/lineup" className="eyebrow">
-          {t("← Back to the lineup")}
-        </Link>
-        <p className="eyebrow">{t("DANSA / Artist profile")}</p>
-        <h1>{artist.name}</h1>
-        <p>{t(artist.role)}</p>
-      </section>
-      <section className="artist-profile">
-        <img src={A + artist.image} alt={artist.name} />
-        <div>
-          <p className="eyebrow blue">{t("In the DANSA lineup")}</p>
-          <h2>{artist.name}</h2>
-          <p>
-            {t("{name} is {role} and a member of the DANSA lineup.", {
-              name: artist.name,
-              role: t(artist.role),
-            })}
-          </p>
-          <hr />
-          <p className="eyebrow blue">
-            {t("Connect with")} {artist.name}
-          </p>
-          <a
-            href={artist.instagram}
-            target="_blank"
-            rel="noreferrer"
-            className="instagram"
-          >
-            {artist.handle} ↗
-          </a>
-          <small>{t("Direct artist contact via their own Instagram.")}</small>
-        </div>
-      </section>
-      <ArtistStoryPreview artist={artist} />
-      <section className="lavender follow">
-        <p className="eyebrow blue">{t("Direct from the artist")}</p>
-        <h2>
-          {t("Follow")} {artist.name}.
-        </h2>
-        <a href={artist.instagram} target="_blank" rel="noreferrer">
-          {t("Follow")} {artist.handle} {t("on Instagram.")}
-        </a>
-      </section>
-      <section>
-        <p className="eyebrow blue">{t("More from the lineup")}</p>
-        <h2>{t("Meet the others.")}</h2>
-        <div className="mini-lineup">
-          {artists
-
-            .filter((a) => a.slug !== artist.slug)
-
-            .map((a) => (
-              <div key={a.slug}>
-                <h3>{a.name}</h3>
-                <p>{t(a.role)}</p>
-                <a href={a.instagram} target="_blank" rel="noreferrer">
-                  {a.handle} ↗
-                </a>
-                <Link to={"/artists/" + a.slug} className="text-link block">
-                  {t("View profile ↗")}
-                </Link>
-              </div>
-            ))}
-        </div>
-      </section>
+      {story?.kind === "biography" ? (
+        <ArtistFeature artist={artist} story={story} />
+      ) : (
+        <ArtistOverview artist={artist} story={story} />
+      )}
+      <StoriesPreview exclude={artist.slug} />
     </Shell>
   )
 }
@@ -1000,22 +1007,7 @@ function PageHero({
 
 function Gallery() {
   const t = useTranslation()
-
-  const images = [
-    ["803c5.png", t("Out in the city")],
-
-    ["911fb.png", t("Lost in the right place")],
-
-    ["b482f.png", t("In the details")],
-
-    ["8fc69.png", t("A little longer together")],
-
-    ["78e18.png", t("The room, the rhythm")],
-
-    ["e4088.png", t("One more conversation")],
-
-    ["49fa8.png", t("Less scrolling. More feeling.")],
-  ]
+  usePageMetadata(t("Gallery") + " | DANSA", t("The feeling in pictures"))
 
   return (
     <Shell>
@@ -1043,19 +1035,7 @@ function Gallery() {
             )}
           </span>
         </div>
-        <div className="gallery-tabs">
-          <b>{t("All")}</b>
-          <span>{t("Photos")}</span>
-          <span>Video</span>
-        </div>
-        <div className="gallery">
-          {images.map(([image, caption]) => (
-            <figure key={image}>
-              <img src={A + image} alt="" />
-              <figcaption>{caption}</figcaption>
-            </figure>
-          ))}
-        </div>
+        <GalleryViewer />
       </section>
       <section className="dark gallery-film">
         <div>
@@ -1067,10 +1047,12 @@ function Gallery() {
             )}
           </p>
         </div>
-        <div className="video-placeholder">
-          <p className="eyebrow">{t("DANSA / Future recap")}</p>
-          <h2>{t("Play it back.")}</h2>
-          <p>{t("Video recap coming after the night")}</p>
+        <div className="gallery-story-link">
+          <p className="eyebrow">{t("Beyond the frame.")}</p>
+          <h2>{t("Read the stories behind the line-up.")}</h2>
+          <Link to="/stories" className="text-link light-link">
+            {t("Read artist stories")} ↗
+          </Link>
         </div>
       </section>
       <section className="gallery-cta">
@@ -1091,6 +1073,10 @@ function Gallery() {
 
 function About() {
   const t = useTranslation()
+  usePageMetadata(
+    t("About DANSA") + " | DANSA",
+    t("Independent spirit. Shared energy."),
+  )
 
   const { language } = useContext(LanguageContext)
 
@@ -1273,6 +1259,8 @@ function About() {
           {t("View the full lineup ↗")}
         </Link>
       </section>
+      <HowItWorks />
+      <FAQBlock kind="about" />
       <section className="gallery-cta">
         <p className="eyebrow">{t("Come through. Or create with us.")}</p>
         <h2>{t("Let’s share the energy.")}</h2>
@@ -1296,13 +1284,54 @@ function About() {
 
 function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
   const t = useTranslation()
+  usePageMetadata(
+    `${t(collaborate ? "Work With Us" : "Contact")} | DANSA`,
+    t("Good conversations start here"),
+  )
 
   const [sent, setSent] = useState(false)
+  const [draft, setDraft] = useState("")
+  const [copied, setCopied] = useState(false)
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    organization: "",
+    type: "",
+    message: "",
+  })
 
-  const submit = (e: FormEvent) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    const values = new FormData(e.currentTarget)
+    setFormValues({
+      name: String(values.get("name") ?? ""),
+      email: String(values.get("email") ?? ""),
+      organization: String(values.get("organization") ?? ""),
+      type: String(values.get("type") ?? ""),
+      message: String(values.get("message") ?? ""),
+    })
+    setDraft(
+      [
+        `${t("Name *")}: ${values.get("name")}`,
+        `${t("Email *")}: ${values.get("email")}`,
+        ...(values.get("organization")
+          ? [`${t("Organization")}: ${values.get("organization")}`]
+          : []),
+        `${t("Inquiry type *")}: ${t(String(values.get("type")))}`,
+        "",
+        String(values.get("message")),
+      ].join("\n"),
+    )
+    setCopied(false)
     setSent(true)
+  }
+  const copyDraft = async () => {
+    try {
+      await navigator.clipboard.writeText(draft)
+      setCopied(true)
+    } catch {
+      setCopied(false)
+    }
   }
 
   return (
@@ -1449,6 +1478,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
           </div>
         </section>
       )}
+      <EnquiryGuide />
       <section className="form-wrap" id="inquiry">
         <div>
           <p className="eyebrow blue">
@@ -1489,10 +1519,35 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
           </p>
           {sent ? (
             <div className="form-note">
-              <h3>{t("Form checked.")}</h3>
+              <h3>{t("Your enquiry draft is ready.")}</h3>
               <p>
                 {t(
-                  "Your entries are valid, but nothing was transmitted or stored. Connect a form service or backend before launch.",
+                  "Copy your draft and use a direct contact channel. Nothing has been sent.",
+                )}
+              </p>
+              <textarea
+                readOnly
+                aria-label={t("Enquiry draft")}
+                value={draft}
+                rows={9}
+              />
+              <button
+                className="button blue-button"
+                type="button"
+                onClick={copyDraft}
+              >
+                {t(copied ? "Copied" : "Copy enquiry")}
+              </button>
+              <button
+                className="button feature-outline"
+                type="button"
+                onClick={() => setSent(false)}
+              >
+                {t("Edit draft")}
+              </button>
+              <p className="fine">
+                {t(
+                  "Select and copy the draft manually if clipboard access is unavailable.",
                 )}
               </p>
             </div>
@@ -1501,12 +1556,18 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
               <div className="field-pair">
                 <label>
                   {t("Name *")}
-                  <input name="name" placeholder={t("Your name")} required />
+                  <input
+                    name="name"
+                    defaultValue={formValues.name}
+                    placeholder={t("Your name")}
+                    required
+                  />
                 </label>
                 <label>
                   {t("Email *")}
                   <input
                     name="email"
+                    defaultValue={formValues.email}
                     type="email"
                     placeholder={t("Your email address")}
                     required
@@ -1518,13 +1579,14 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
                   {t("Organization")}
                   <input
                     name="organization"
+                    defaultValue={formValues.organization}
                     placeholder={t("Venue, project or organization (optional)")}
                   />
                 </label>
               )}
               <label>
                 {collaborate ? t("Collaboration type *") : t("Inquiry type *")}
-                <select name="type" required>
+                <select name="type" defaultValue={formValues.type} required>
                   <option value="">
                     {t("Select")}{" "}
                     {collaborate
@@ -1547,6 +1609,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
                 {t("Message *")}
                 <textarea
                   name="message"
+                  defaultValue={formValues.message}
                   rows={6}
                   placeholder={
                     collaborate
@@ -1561,16 +1624,16 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
               <label className="consent">
                 <input type="checkbox" required />{" "}
                 {t(
-                  "I consent to my details being used to respond to this inquiry. *",
+                  "I understand that this creates a local draft and does not send my enquiry. *",
                 )}
               </label>
               <button className="button blue-button" type="submit">
-                {collaborate
-                  ? t("Send collaboration inquiry ↗")
-                  : t("Send inquiry ↗")}
+                {t("Prepare enquiry")} ↗
               </button>
               <p className="fine">
-                {t("Submissions are not sent or stored yet.")}
+                {t(
+                  "This form prepares a draft. It does not send or store your message.",
+                )}
               </p>
             </form>
           )}
@@ -1605,6 +1668,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
           </div>
         </section>
       )}
+      <FAQBlock kind="contact" />
       <section className="lavender route-cta">
         <p className="eyebrow blue">
           {collaborate
@@ -1707,6 +1771,7 @@ export default function App() {
     document.documentElement.lang = language
   }, [language])
 
+  const event = events.find((item) => path === `/events/${item.slug}`)
   const artist = artists.find((a) => path === `/artists/${a.slug}`)
   const story = artistStories.find((item) => path === `/stories/${item.artist}`)
 
@@ -1717,7 +1782,7 @@ export default function App() {
   else if (path === "/stories") page = <Stories />
   else if (path === "/") page = <Home />
   else if (path === "/events") page = <Events />
-  else if (path === "/events/the-late-connection") page = <EventDetail />
+  else if (event) page = <EventDetail event={event} />
   else if (path === "/lineup") page = <Lineup />
   else if (path === "/gallery") page = <Gallery />
   else if (path === "/about") page = <About />

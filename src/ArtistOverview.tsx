@@ -3,6 +3,7 @@ import { useContext } from "react"
 import { LanguageContext, useTranslation } from "./i18n"
 import type { ArtistStory } from "./stories"
 import { usePageMetadata } from "./usePageMetadata"
+import { ArtistPortfolio } from "./ArtistPortfolio"
 
 type Artist = {
   slug: string
@@ -11,6 +12,7 @@ type Artist = {
   instagram: string
   handle: string
   image: string
+  bookingEmail?: string
 }
 
 export function ArtistOverview({
@@ -24,7 +26,9 @@ export function ArtistOverview({
   const { language } = useContext(LanguageContext)
   usePageMetadata(
     `${artist.name} | DANSA`,
-    `${artist.name} / ${t(artist.role)} / DANSA`,
+    story?.kind === "artist-site"
+      ? story.intro[language]
+      : `${artist.name} / ${t(artist.role)} / DANSA`,
   )
   return (
     <>
@@ -36,16 +40,25 @@ export function ArtistOverview({
           <h1>{artist.name}</h1>
           <p className="feature-subtitle">{t(artist.role)}</p>
           <p className="feature-deck">
-            {story ? story.title[language] : t("People behind the rhythm.")}
+            {story?.kind === "artist-site"
+              ? story.intro[language]
+              : story
+                ? story.title[language]
+                : t("People behind the rhythm.")}
           </p>
           <div className="feature-actions">
             <a
-              href={artist.instagram}
-              target="_blank"
-              rel="noreferrer"
+              href={
+                artist.bookingEmail
+                  ? `mailto:${artist.bookingEmail}`
+                  : artist.instagram
+              }
+              target={artist.bookingEmail ? undefined : "_blank"}
+              rel={artist.bookingEmail ? undefined : "noreferrer"}
               className="button blue-button"
             >
-              {t("Direct contact")} ↗
+              {t(artist.bookingEmail ? "Booking enquiries" : "Direct contact")}{" "}
+              ↗
             </a>
             {story && (
               <a
@@ -69,10 +82,17 @@ export function ArtistOverview({
           </figcaption>
         </figure>
       </section>
+      {story?.kind === "artist-site" && <ArtistPortfolio story={story} />}
       <section className="artist-overview-story">
         <div>
-          <p className="eyebrow blue">{t("Explore the role")}</p>
-          <h2>{t("From the line-up to the story.")}</h2>
+          <p className="eyebrow blue">
+            {t(story?.kind ? "Artist history" : "Explore the role")}
+          </p>
+          <h2>
+            {story?.kind === "artist-site"
+              ? story.title[language]
+              : t("From the line-up to the story.")}
+          </h2>
         </div>
         <div>
           {story && (
@@ -101,6 +121,14 @@ export function ArtistOverview({
           <a href={artist.instagram} target="_blank" rel="noreferrer">
             {artist.handle} ↗
           </a>
+          {artist.bookingEmail && (
+            <a
+              className="artist-booking-email"
+              href={`mailto:${artist.bookingEmail}`}
+            >
+              {artist.bookingEmail} ↗
+            </a>
+          )}
           <p>{t("Direct artist contact via their own Instagram.")}</p>
         </div>
       </section>

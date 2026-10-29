@@ -89,6 +89,14 @@ export const faqs = {
 }
 
 export const pageTranslations: Record<string, string> = {
+  "Music styles": "Musikstile",
+  "Open format. A clear identity.": "Open Format. Eine klare Handschrift.",
+  "Listen on SoundCloud": "Auf SoundCloud anhören",
+  "From the artist’s event archive": "Aus dem Eventarchiv des Artists",
+  "View original flyer": "Originalflyer ansehen",
+  "Booking enquiries": "Buchungsanfragen",
+  "Sources for this artist profile and event archive.":
+    "Quellen für dieses Künstlerprofil und das Eventarchiv.",
   "Skip to content": "Zum Inhalt springen",
   "Outdoor concepts with space to connect.":
     "Outdoor-Konzepte mit Raum für Begegnungen.",

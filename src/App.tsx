@@ -1,5 +1,6 @@
 import { usePageFilter } from "./usePageFilter"
 import { SiteImage } from "./SiteImage"
+import { ArtistPortfolio } from "./ArtistPortfolio"
 import { useSiteNavigation, NAVIGATION_EVENT } from "./useSiteNavigation"
 import { events, type EventConcept } from "./pageContent"
 import {
@@ -37,6 +38,7 @@ type Artist = {
   instagram: string
 
   image: string
+  bookingEmail?: string
 }
 
 const artists: Artist[] = [
@@ -75,9 +77,10 @@ const artists: Artist[] = [
 
     role: "DJ & Dancer",
 
-    handle: "@eddythedeejay",
+    handle: "@eddy.the.deejay",
 
-    instagram: "https://www.instagram.com/eddythedeejay/",
+    instagram: "https://www.instagram.com/eddy.the.deejay/",
+    bookingEmail: "djeddybookings@gmail.com",
 
     image: "38559.png",
   },
@@ -973,11 +976,12 @@ function StoryPage({ story }: { story: ArtistStory }) {
         <aside>
           <p className="eyebrow blue">{t("Artist stories")}</p>
           <p>
-            {t(
-              story.kind === "biography"
-                ? "A career story drawn from published artist profiles and music release records. Sources are linked below."
-                : "An editorial introduction based on this artist’s role in the DANSA line-up.",
-            )}
+            {story.sourceNote?.[language] ??
+              t(
+                story.kind === "biography"
+                  ? "A career story drawn from published artist profiles and music release records. Sources are linked below."
+                  : "An editorial introduction based on this artist’s role in the DANSA line-up.",
+              )}
           </p>
           <Link to={`/artists/${artist.slug}`} className="text-link">
             {t("Artist profile")} ↗
@@ -989,7 +993,9 @@ function StoryPage({ story }: { story: ArtistStory }) {
               </a>
             ))}
             {story.releases && (
-              <a href="#selected-releases">{t("Selected releases")}</a>
+              <a href="#selected-releases">
+                {story.musicHeading?.[language] ?? t("Selected releases")}
+              </a>
             )}
             {story.sources && <a href="#story-sources">{t("Sources")}</a>}
           </nav>
@@ -1008,7 +1014,9 @@ function StoryPage({ story }: { story: ArtistStory }) {
           ))}
           {story.releases && (
             <div className="story-releases" id="selected-releases">
-              <h2>{t("Selected releases")}</h2>
+              <h2>
+                {story.musicHeading?.[language] ?? t("Selected releases")}
+              </h2>
               <p>{t("Explore the music behind the story.")}</p>
               <ul>
                 {story.releases.map((release) => (
@@ -1028,7 +1036,9 @@ function StoryPage({ story }: { story: ArtistStory }) {
               <h3>{t("Sources")}</h3>
               <p>
                 {t(
-                  "Release dates and credits follow the linked platform records.",
+                  story.kind === "artist-site"
+                    ? "Sources for this artist profile and event archive."
+                    : "Release dates and credits follow the linked platform records.",
                 )}
               </p>
               <ul>
@@ -1058,9 +1068,19 @@ function StoryPage({ story }: { story: ArtistStory }) {
             >
               {artist.handle} ↗
             </a>
+            {artist.bookingEmail && (
+              <p className="story-booking-link">
+                <a href={`mailto:${artist.bookingEmail}`} className="text-link">
+                  {t("Booking enquiries")}: {artist.bookingEmail} ↗
+                </a>
+              </p>
+            )}
           </div>
         </article>
       </section>
+      {story.kind === "artist-site" && (
+        <ArtistPortfolio story={story} showMixes={false} />
+      )}
       <section className="dark">
         <div className="section-head">
           <h2>{t("More stories")}</h2>

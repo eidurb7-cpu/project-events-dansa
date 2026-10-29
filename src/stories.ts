@@ -1,3 +1,4 @@
+import { djEddyStory } from "./djEddyStory"
 export type LocalizedCopy = {
   en: string
   de: string
@@ -6,7 +7,17 @@ export type LocalizedCopy = {
 export type ArtistStory = {
   artist: string
   category: "dj" | "performance"
-  kind?: "biography"
+  kind?: "biography" | "artist-site"
+  sourceNote?: LocalizedCopy
+  genres?: string[]
+  musicHeading?: LocalizedCopy
+  appearance?: {
+    title: string
+    date: string
+    venue: string
+    image: string
+    description: LocalizedCopy
+  }
   sources?: {
     label: string
     href: string
@@ -95,40 +106,7 @@ export const artistStories: ArtistStory[] = [
       },
     ],
   },
-  {
-    artist: "dj-eddy",
-    category: "dj",
-    title: {
-      en: "Where the decks meet the dancefloor.",
-      de: "Wo die Decks auf die Tanzfläche treffen.",
-    },
-    intro: {
-      en: "DJ Eddy is listed as both a DJ and a dancer. Those two roles offer a way into the relationship between the sound coming from the speakers and the movement it inspires.",
-      de: "DJ Eddy ist als DJ und Tänzer Teil des Line-ups. Diese beiden Rollen eröffnen einen Blick auf die Beziehung zwischen dem Sound aus den Lautsprechern und der Bewegung, die er auslöst.",
-    },
-    sections: [
-      {
-        title: {
-          en: "Rhythm has a physical side.",
-          de: "Rhythmus ist auch körperlich.",
-        },
-        text: {
-          en: "A beat can be counted, mixed and arranged. It can also be felt in a shoulder, a footstep or a room moving together. DJing and dance approach the same rhythm from different directions: one works with the musical sequence, the other gives that sequence a physical response.",
-          de: "Ein Beat lässt sich zählen, mixen und arrangieren. Er lässt sich aber auch in einer Schulter, einem Schritt oder einem gemeinsam tanzenden Raum spüren. DJing und Tanz nähern sich demselben Rhythmus aus verschiedenen Richtungen: Das eine arbeitet mit der musikalischen Abfolge, das andere antwortet darauf mit Bewegung.",
-        },
-      },
-      {
-        title: {
-          en: "More than one way to take part.",
-          de: "Mehr als eine Art, dabei zu sein.",
-        },
-        text: {
-          en: "Having dance alongside DJing in the DANSA line-up leaves space for both listening and movement. DJ Eddy’s two listed disciplines make that connection visible. A party can be a place to watch, to listen, to move and to find your own way into the moment.",
-          de: "Tanz und DJing gemeinsam im DANSA-Line-up geben sowohl dem Zuhören als auch der Bewegung Raum. DJ Eddys zwei Disziplinen machen diese Verbindung sichtbar. Eine Party kann ein Ort zum Zuschauen, Zuhören und Tanzen sein – und dafür, den eigenen Zugang zum Moment zu finden.",
-        },
-      },
-    ],
-  },
+  djEddyStory,
   {
     artist: "ice-boy",
     category: "performance",
@@ -184,20 +162,62 @@ export const artistStories: ArtistStory[] = [
       },
     ],
     sources: [
-      { label: "Mtikiso Media — Ice Boy Africa biography", href: "https://mtikisomedia.com/artist/ice-boy/" },
-      { label: "Audiomack — Ice Boy artist profile and projects", href: "https://audiomack.com/imani-chaula" },
-      { label: "Apple Music — Ice Boy singles and release years", href: "https://music.apple.com/us/artist/ice-boy/1638588258" },
-      { label: "Apple Music — Kilimanjaro, 1 November 2024", href: "https://music.apple.com/tz/song/1776381067" },
-      { label: "Audiomack — Thamani, credits and release date", href: "https://audiomack.com/imani-chaula/song/thamani" },
-      { label: "Apple Music — Up (feat. Bill nass), 25 April 2025", href: "https://music.apple.com/tz/song/1809055251" },
+      {
+        label: "Mtikiso Media — Ice Boy Africa biography",
+        href: "https://mtikisomedia.com/artist/ice-boy/",
+      },
+      {
+        label: "Audiomack — Ice Boy artist profile and projects",
+        href: "https://audiomack.com/imani-chaula",
+      },
+      {
+        label: "Apple Music — Ice Boy singles and release years",
+        href: "https://music.apple.com/us/artist/ice-boy/1638588258",
+      },
+      {
+        label: "Apple Music — Kilimanjaro, 1 November 2024",
+        href: "https://music.apple.com/tz/song/1776381067",
+      },
+      {
+        label: "Audiomack — Thamani, credits and release date",
+        href: "https://audiomack.com/imani-chaula/song/thamani",
+      },
+      {
+        label: "Apple Music — Up (feat. Bill nass), 25 April 2025",
+        href: "https://music.apple.com/tz/song/1809055251",
+      },
     ],
     releases: [
-      { title: "Paradise City", year: "2022", href: "https://music.apple.com/us/album/paradise-city-single/1638588348" },
-      { title: "Sisi", year: "2023", href: "https://music.apple.com/us/album/sisi-single/1715784970" },
-      { title: "Kilimanjaro", year: "2024", href: "https://music.apple.com/tz/song/1776381067" },
-      { title: "Thamani (feat. Baraka Da Prince)", year: "2025", href: "https://audiomack.com/imani-chaula/song/thamani" },
-      { title: "Stress", year: "2025", href: "https://music.apple.com/us/album/stress-single/1806309107" },
-      { title: "Up (feat. Bill nass)", year: "2025", href: "https://music.apple.com/tz/song/1809055251" },
+      {
+        title: "Paradise City",
+        year: "2022",
+        href: "https://music.apple.com/us/album/paradise-city-single/1638588348",
+      },
+      {
+        title: "Sisi",
+        year: "2023",
+        href: "https://music.apple.com/us/album/sisi-single/1715784970",
+      },
+      {
+        title: "Kilimanjaro",
+        year: "2024",
+        href: "https://music.apple.com/tz/song/1776381067",
+      },
+      {
+        title: "Thamani (feat. Baraka Da Prince)",
+        year: "2025",
+        href: "https://audiomack.com/imani-chaula/song/thamani",
+      },
+      {
+        title: "Stress",
+        year: "2025",
+        href: "https://music.apple.com/us/album/stress-single/1806309107",
+      },
+      {
+        title: "Up (feat. Bill nass)",
+        year: "2025",
+        href: "https://music.apple.com/tz/song/1809055251",
+      },
     ],
   },
   {

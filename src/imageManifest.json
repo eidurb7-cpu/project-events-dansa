@@ -453,6 +453,21 @@
       }
     ]
   },
+  "/assets/dj-eddy-flex-samstag.png": {
+    "hash": "5adf97d32493a18cc1bf064890d269065858375fbb69e5412ec7fb02e5d4f14f",
+    "width": 735,
+    "height": 858,
+    "variants": [
+      {
+        "width": 480,
+        "src": "/assets/optimized/dj-eddy-flex-samstag-480-5adf97d324.webp"
+      },
+      {
+        "width": 735,
+        "src": "/assets/optimized/dj-eddy-flex-samstag-735-5adf97d324.webp"
+      }
+    ]
+  },
   "/assets/e4088.png": {
     "hash": "7d0073aeadb9cfa62cf562b11ad3a4e3f360d88af30f4fc3d5ca1d2a8bc2671b",
     "width": 523,

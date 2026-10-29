@@ -211,6 +211,26 @@ footer { padding:4rem 4vw 1rem; background:var(--ink); color:var(--cream); }
 .artist-overview-contact { align-self:center; }
 .artist-overview-contact > a { font:900 clamp(1.3rem,2.3vw,2.5rem) 'Inter:Black'; overflow-wrap:anywhere; text-decoration:underline; text-underline-offset:6px; }
 .artist-overview-contact p { font-size:.8rem; margin:1.5rem 0 0; }
+.artist-overview-contact .artist-booking-email { display:block; font:700 clamp(.85rem,1.6vw,1.4rem)/1.5 'Inter:Bold'; margin-top:1.25rem; }
+.story-booking-link { margin-top:1.5rem; overflow-wrap:anywhere; }
+.artist-genres h2 { font-size:clamp(2rem,4vw,4rem); max-width:850px; margin-bottom:2.5rem; }
+.artist-genres ul { display:flex; flex-wrap:wrap; gap:.8rem; }
+.artist-genres li { border:1px solid #777; padding:.85rem 1.2rem; font:700 .85rem 'Inter:Bold'; }
+.artist-mixes > div:last-child { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2rem; }
+.artist-mixes article { border-top:1px solid #aaa; padding:1.5rem 0; }
+.artist-mixes h3 { font-size:clamp(1.8rem,3vw,3rem); margin-bottom:2rem; }
+.artist-archive { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1fr); gap:6vw; background:var(--lav); align-items:center; }
+.artist-archive figure { margin:0; }
+.artist-archive img { width:100%; max-width:560px; height:auto; display:block; }
+.artist-archive h2 { margin-bottom:2rem; font-size:clamp(2rem,4vw,4rem); }
+.artist-archive time { display:block; font-weight:700; margin-bottom:1rem; }
+.artist-archive p { line-height:1.7; margin-bottom:1.5rem; }
+.artist-archive .text-link { display:inline-block; }
+@media (max-width:760px) {
+  .artist-archive,.artist-mixes > div:last-child { grid-template-columns:minmax(0,1fr); }
+  .artist-archive { gap:2.5rem; }
+  .artist-genres h2,.artist-overview-story h2 { overflow-wrap:anywhere; hyphens:auto; }
+}
 .gallery-filters { flex-wrap:wrap; gap:1rem 2rem; }
 .gallery-filters button { font:700 .7rem 'Inter:Bold'; text-transform:uppercase; padding:1rem 0; cursor:pointer; }
 .gallery-filters button[aria-pressed="true"] { border-bottom:3px solid var(--blue); color:var(--blue); }

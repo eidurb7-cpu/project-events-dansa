@@ -11,13 +11,15 @@ export type ArtistStory = {
   sourceNote?: LocalizedCopy
   genres?: string[]
   musicHeading?: LocalizedCopy
-  appearance?: {
+  appearances?: {
     title: string
     date: string
     venue: string
     image: string
     description: LocalizedCopy
-  }
+    alt: LocalizedCopy
+    hours?: string
+  }[]
   sources?: {
     label: string
     href: string

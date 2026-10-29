@@ -12,7 +12,6 @@ export function ArtistPortfolio({
 }) {
   const { language } = useContext(LanguageContext)
   const t = useTranslation()
-  const appearance = story.appearance
   return (
     <>
       {story.genres && (
@@ -52,12 +51,15 @@ export function ArtistPortfolio({
           </div>
         </section>
       )}
-      {appearance && (
-        <section className="artist-archive">
+      {story.appearances?.map((appearance) => (
+        <section
+          className="artist-archive"
+          key={`${appearance.date}-${appearance.image}`}
+        >
           <figure>
             <SiteImage
               src={`/assets/${appearance.image}`}
-              alt={`${appearance.title} / Eddy the DJ / DJ Swiper`}
+              alt={appearance.alt[language]}
               sizes="(max-width: 760px) 100vw, 40vw"
             />
           </figure>
@@ -74,6 +76,7 @@ export function ArtistPortfolio({
                 timeZone: "UTC",
               }).format(new Date(`${appearance.date}T12:00:00Z`))}
             </time>
+            {appearance.hours && <p>{appearance.hours}</p>}
             <p className="lead">{appearance.venue}</p>
             <p>{appearance.description[language]}</p>
             <a
@@ -86,7 +89,7 @@ export function ArtistPortfolio({
             </a>
           </div>
         </section>
-      )}
+      ))}
     </>
   )
 }

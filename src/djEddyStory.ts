@@ -63,16 +63,52 @@ export const djEddyStory: ArtistStory = {
       },
     },
   ],
-  appearance: {
-    title: "FLEX Samstag",
-    date: "2026-07-04",
-    venue: "Main Suites Hotel / Frankfurt am Main",
-    image: "dj-eddy-flex-samstag.png",
-    description: {
-      en: "Eddy the DJ / DJ Swiper. A reference from DJ Eddy’s own artist-site archive, not a DANSA event listing.",
-      de: "Eddy the DJ / DJ Swiper. Eine Referenz aus DJ Eddys eigenem Künstlerarchiv, keine DANSA-Eventankündigung.",
+  appearances: [
+    {
+      alt: {
+        en: "FLEX Samstag flyer featuring Eddy the DJ and DJ Swiper, 4 July 2026 in Frankfurt",
+        de: "FLEX-Samstag-Flyer mit Eddy the DJ und DJ Swiper am 4. Juli 2026 in Frankfurt",
+      },
+      title: "FLEX Samstag",
+      date: "2026-07-04",
+      venue: "Main Suites Hotel / Frankfurt am Main",
+      image: "dj-eddy-flex-samstag.png",
+      description: {
+        en: "Eddy the DJ / DJ Swiper. A reference from DJ Eddy’s own artist-site archive, not a DANSA event listing.",
+        de: "Eddy the DJ / DJ Swiper. Eine Referenz aus DJ Eddys eigenem Künstlerarchiv, keine DANSA-Eventankündigung.",
+      },
     },
-  },
+    {
+      title: "The Hottest Single Boat Party",
+      date: "2026-05-30",
+      venue: "Mississippi Queen / Donaustraße 40, 90451 Nürnberg",
+      image: "dj-eddy-single-boat-party-may-2026.png",
+      hours: "22:00–05:00",
+      alt: {
+        en: "The Hottest Single Boat Party flyer featuring DJ Eddy, Saturday 30 May at Mississippi Queen in Nuremberg",
+        de: "Flyer zu The Hottest Single Boat Party mit DJ Eddy, Samstag, 30. Mai, auf der Mississippi Queen in Nürnberg",
+      },
+      description: {
+        en: "The supplied flyer features DJ Eddy for the Single Boat Party at Mississippi Queen, with doors from 22:00 to 05:00 and a special ladies night. A past appearance from his artist archive.",
+        de: "Der bereitgestellte Flyer kündigt DJ Eddy für die Single Boat Party auf der Mississippi Queen an, mit Öffnungszeiten von 22:00 bis 05:00 Uhr und einer Special Ladies Night. Ein vergangener Auftritt aus seinem Künstlerarchiv.",
+      },
+    },
+    {
+      title: "The Hottest All Black Boat Party",
+      date: "2026-10-03",
+      venue: "Mississippi Queen / Donaustraße 40, 90451 Nürnberg",
+      image: "dj-eddy-all-black-boat-party-october-2026.png",
+      hours: "22:00",
+      alt: {
+        en: "The Hottest All Black Boat Party flyer featuring DJ Eddy, Saturday 3 October at Mississippi Queen in Nuremberg",
+        de: "Flyer zu The Hottest All Black Boat Party mit DJ Eddy, Samstag, 3. Oktober, auf der Mississippi Queen in Nürnberg",
+      },
+      description: {
+        en: "DJ Eddy is featured on the All Black Boat Party flyer for Mississippi Queen, with a 22:00 start. The original artwork is preserved here as a past appearance in his artist archive.",
+        de: "DJ Eddy ist auf dem Flyer zur All Black Boat Party auf der Mississippi Queen zu sehen. Beginn war laut Flyer um 22:00 Uhr. Das Originalmotiv dokumentiert hier einen vergangenen Auftritt in seinem Künstlerarchiv.",
+      },
+    },
+  ].sort((a, b) => b.date.localeCompare(a.date)),
   releases: [
     {
       title: "Afro Pulse Vol. 1",
@@ -86,6 +122,14 @@ export const djEddyStory: ArtistStory = {
     },
   ],
   sources: [
+    {
+      label: "Single Boat Party — supplied flyer",
+      href: "/assets/dj-eddy-single-boat-party-may-2026.png",
+    },
+    {
+      label: "All Black Boat Party — supplied flyer",
+      href: "/assets/dj-eddy-all-black-boat-party-october-2026.png",
+    },
     {
       label: "DJ Eddy — Instagram",
       href: "https://www.instagram.com/eddy.the.deejay/",

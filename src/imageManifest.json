@@ -453,6 +453,21 @@
       }
     ]
   },
+  "/assets/dj-eddy-all-black-boat-party-october-2026.png": {
+    "hash": "6510b63d3d451abcf174883af4b8f973ff9da2f942b98c77010fe55614b45e04",
+    "width": 750,
+    "height": 927,
+    "variants": [
+      {
+        "width": 480,
+        "src": "/assets/optimized/dj-eddy-all-black-boat-party-october-2026-480-6510b63d3d.webp"
+      },
+      {
+        "width": 750,
+        "src": "/assets/optimized/dj-eddy-all-black-boat-party-october-2026-750-6510b63d3d.webp"
+      }
+    ]
+  },
   "/assets/dj-eddy-flex-samstag.png": {
     "hash": "5adf97d32493a18cc1bf064890d269065858375fbb69e5412ec7fb02e5d4f14f",
     "width": 735,
@@ -465,6 +480,21 @@
       {
         "width": 735,
         "src": "/assets/optimized/dj-eddy-flex-samstag-735-5adf97d324.webp"
+      }
+    ]
+  },
+  "/assets/dj-eddy-single-boat-party-may-2026.png": {
+    "hash": "cae3e5384cb2fa68ae90409c76ae9b12077e4e90a761d66af74222aeee0a0e38",
+    "width": 663,
+    "height": 810,
+    "variants": [
+      {
+        "width": 480,
+        "src": "/assets/optimized/dj-eddy-single-boat-party-may-2026-480-cae3e5384c.webp"
+      },
+      {
+        "width": 663,
+        "src": "/assets/optimized/dj-eddy-single-boat-party-may-2026-663-cae3e5384c.webp"
       }
     ]
   },

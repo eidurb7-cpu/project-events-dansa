@@ -39,6 +39,7 @@ type Artist = {
 
   image: string
   bookingEmail?: string
+  soundcloud?: string
 }
 
 const artists: Artist[] = [
@@ -81,6 +82,7 @@ const artists: Artist[] = [
 
     instagram: "https://www.instagram.com/eddy.the.deejay/",
     bookingEmail: "djeddybookings@gmail.com",
+    soundcloud: "https://soundcloud.com/eddythedeejay",
 
     image: "38559.png",
   },
@@ -1072,6 +1074,18 @@ function StoryPage({ story }: { story: ArtistStory }) {
               <p className="story-booking-link">
                 <a href={`mailto:${artist.bookingEmail}`} className="text-link">
                   {t("Booking enquiries")}: {artist.bookingEmail} ↗
+                </a>
+              </p>
+            )}
+            {artist.soundcloud && (
+              <p className="story-booking-link">
+                <a
+                  href={artist.soundcloud}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-link"
+                >
+                  {t("Listen on SoundCloud")} ↗
                 </a>
               </p>
             )}

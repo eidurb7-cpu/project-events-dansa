@@ -91,8 +91,8 @@ export const djEddyStory: ArtistStory = {
       href: "https://www.instagram.com/eddy.the.deejay/",
     },
     {
-      label: "DJ Eddy — SoundCloud selection",
-      href: "https://soundcloud.com/eidur-byakuzana/dj-eddy-bass-piano-amapiano",
+      label: "DJ Eddy — SoundCloud profile",
+      href: "https://soundcloud.com/eddythedeejay",
     },
     {
       label: "FLEX Samstag — original artist-site flyer",

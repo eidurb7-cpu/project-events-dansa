@@ -13,6 +13,7 @@ type Artist = {
   handle: string
   image: string
   bookingEmail?: string
+  soundcloud?: string
 }
 
 export function ArtistOverview({
@@ -66,6 +67,16 @@ export function ArtistOverview({
                 className="button feature-outline"
               >
                 {t("Read story")} ↗
+              </a>
+            )}
+            {artist.soundcloud && (
+              <a
+                href={artist.soundcloud}
+                target="_blank"
+                rel="noreferrer"
+                className="button feature-outline"
+              >
+                SoundCloud ↗
               </a>
             )}
           </div>
@@ -127,6 +138,16 @@ export function ArtistOverview({
               href={`mailto:${artist.bookingEmail}`}
             >
               {artist.bookingEmail} ↗
+            </a>
+          )}
+          {artist.soundcloud && (
+            <a
+              href={artist.soundcloud}
+              target="_blank"
+              rel="noreferrer"
+              className="artist-booking-email"
+            >
+              SoundCloud ↗
             </a>
           )}
           <p>{t("Direct artist contact via their own Instagram.")}</p>

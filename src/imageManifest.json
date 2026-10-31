@@ -483,6 +483,21 @@
       }
     ]
   },
+  "/assets/dj-eddy-mirage-lounge-may-2026.png": {
+    "hash": "9aff021c25891e7cbdab6619cb238ec732177c2a190d1b57010a21e61321a65c",
+    "width": 672,
+    "height": 896,
+    "variants": [
+      {
+        "width": 480,
+        "src": "/assets/optimized/dj-eddy-mirage-lounge-may-2026-480-9aff021c25.webp"
+      },
+      {
+        "width": 672,
+        "src": "/assets/optimized/dj-eddy-mirage-lounge-may-2026-672-9aff021c25.webp"
+      }
+    ]
+  },
   "/assets/dj-eddy-single-boat-party-may-2026.png": {
     "hash": "cae3e5384cb2fa68ae90409c76ae9b12077e4e90a761d66af74222aeee0a0e38",
     "width": 663,

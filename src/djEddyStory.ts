@@ -65,6 +65,21 @@ export const djEddyStory: ArtistStory = {
   ],
   appearances: [
     {
+      title: "DJ Eddy at Mirage Lounge",
+      date: "2026-05-09",
+      venue: "Mirage Lounge",
+      image: "dj-eddy-mirage-lounge-may-2026.png",
+      hours: "21:00",
+      alt: {
+        en: "Gold Mirage Lounge flyer featuring DJ Eddy, Saturday 9 May from 21:00, with R&B, Hip-Hop, Latin and Dancehall",
+        de: "Goldener Mirage-Lounge-Flyer mit DJ Eddy, Samstag, 9. Mai, ab 21:00 Uhr, mit R&B, Hip-Hop, Latin und Dancehall",
+      },
+      description: {
+        en: "The Mirage Lounge flyer features DJ Eddy for Saturday 9 May, starting at 21:00, with R&B, Hip-Hop, Latin and Dancehall. The original gold artwork is preserved as a past appearance in his artist archive.",
+        de: "Der Mirage-Lounge-Flyer zeigt DJ Eddy für Samstag, den 9. Mai, ab 21:00 Uhr, mit R&B, Hip-Hop, Latin und Dancehall. Das goldene Originalmotiv dokumentiert einen vergangenen Auftritt in seinem Künstlerarchiv.",
+      },
+    },
+    {
       alt: {
         en: "FLEX Samstag flyer featuring Eddy the DJ and DJ Swiper, 4 July 2026 in Frankfurt",
         de: "FLEX-Samstag-Flyer mit Eddy the DJ und DJ Swiper am 4. Juli 2026 in Frankfurt",
@@ -122,6 +137,10 @@ export const djEddyStory: ArtistStory = {
     },
   ],
   sources: [
+    {
+      label: "Mirage Lounge - supplied flyer",
+      href: "/assets/dj-eddy-mirage-lounge-may-2026.png",
+    },
     {
       label: "Single Boat Party — supplied flyer",
       href: "/assets/dj-eddy-single-boat-party-may-2026.png",

@@ -493,3 +493,48 @@ main:focus,h1[tabindex="-1"]:focus { outline:none; }
 .header .button.light:hover,.hero .button.light:hover,.cta .button.light:hover,.gallery-cta .button.light:hover,.blue-block .button.light:hover,.feature-actions .blue-button:hover { background:#c2ed22; }
 .artist-genres li:nth-child(3n + 1) { background:var(--lime); border-color:var(--lime); color:var(--ink); }
 .feature-channels > a:hover { background:var(--lime); border-color:var(--lime); color:var(--ink); }
+
+.company-overview .lead { max-width:850px; line-height:1.7; }
+.company-pillars { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2.5rem; margin-top:3rem; }
+.company-pillars article { border-top:1px solid currentColor; padding-top:1.5rem; }
+.company-pillars h3 { line-height:1.2; margin-bottom:1rem; }
+.company-pillars p:not(.eyebrow) { line-height:1.8; }
+.company-links { display:flex; flex-wrap:wrap; align-items:center; gap:2rem; margin-top:2.5rem; }
+.legal-information { max-width:1200px; margin:auto; padding-top:0; }
+.legal-draft { background:var(--lav); border-left:4px solid var(--blue); padding:1.5rem; margin-bottom:3rem; line-height:1.8; }
+.legal-details { margin-top:2rem; }
+.legal-details > div { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; padding:1.2rem 0; border-bottom:1px solid #20211f30; line-height:1.6; }
+.legal-details dt { font-family:'Inter:Bold',sans-serif; }
+.legal-details dd { margin:0; color:#555; }
+.legal-context { max-width:760px; margin-top:3rem; line-height:1.8; }
+.gallery-highlights { padding-top:4.5rem; }
+.highlight-intro { max-width:340px; line-height:1.8; }
+.highlight-grid { display:grid; grid-template-columns:1fr 1.3fr 1fr; grid-template-rows:240px 240px; gap:1rem; margin-top:2.5rem; }
+.highlight-photo { position:relative; display:block; overflow:hidden; background:var(--ink); }
+.highlight-photo-1 { grid-row:span 2; }
+.highlight-photo-2 { grid-row:span 2; }
+.highlight-photo img { width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
+.highlight-photo-3 img { object-position:center 20%; }
+.highlight-photo-4 img { object-position:center 75%; }
+.highlight-photo:hover img { transform:scale(1.035); }
+.highlight-photo:focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
+.highlight-photo-index { position:absolute; left:1rem; bottom:1rem; color:white; background:#20211fbf; padding:.45rem .6rem; font:700 .6rem 'Inter:Bold',sans-serif; letter-spacing:.08em; }
+.highlight-bottom { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:1.5rem; }
+.highlight-bottom p { font-size:.75rem; line-height:1.6; max-width:25rem; }
+@media(max-width:900px) { .highlight-grid { grid-template-columns:1fr 1fr; grid-template-rows:300px 240px; } .highlight-photo-1,.highlight-photo-2 { grid-row:auto; } }
+@media(max-width:600px) { .gallery-highlights .section-head { display:block; } .highlight-intro { margin-top:1.2rem; } .highlight-grid { grid-template-rows:230px 180px; gap:.6rem; margin-top:1.5rem; } .highlight-bottom { align-items:flex-start; flex-direction:column; } .highlight-photo-index { left:.5rem; bottom:.5rem; font-size:.5rem; } }
+@media(max-width:760px) { .company-pillars { grid-template-columns:1fr; gap:1.5rem; } .legal-details > div { grid-template-columns:1fr; gap:.4rem; } }
+
+.contact-direct { display:flex; align-items:center; justify-content:space-between; gap:2rem; padding-top:2.5rem; padding-bottom:2.5rem; border-bottom:1px solid #20211f30; }
+.contact-email { display:inline-block; font-family:'Inter:Bold',sans-serif; font-size:clamp(1.05rem,2.5vw,2.2rem); letter-spacing:-.035em; overflow-wrap:anywhere; }
+.contact-direct .text-link { flex-shrink:0; }
+.footer-top .footer-email { font-size:clamp(.85rem,1.5vw,1.15rem); color:var(--lime); overflow-wrap:anywhere; }
+.form-destination { line-height:1.8; overflow-wrap:anywhere; }
+.form-destination a,.fine a { color:var(--blue); text-decoration:underline; text-underline-offset:3px; }
+.contact-fields { border:0; padding:0; margin:0; min-width:0; }
+.contact-honeypot { display:none; }
+.contact-result { margin-top:1.5rem; line-height:1.7; }
+.contact-result h3,.form-note h3 { line-height:1.2; }
+.contact-fields:disabled { opacity:.7; }
+.contact-fields .button:disabled { cursor:wait; transform:none; }
+@media(max-width:760px) { .contact-direct { flex-direction:column; align-items:flex-start; gap:1.5rem; } .copyright { flex-wrap:wrap; gap:1rem; } }

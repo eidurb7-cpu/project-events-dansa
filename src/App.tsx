@@ -1,27 +1,42 @@
+import { ContactForm } from "./ContactForm"
+import { CONTACT_EMAIL } from "./contactDetails"
+import { GalleryHighlights } from "./GalleryHighlights"
+
+import { CompanyOverview, Impressum } from "./CompanyInformation"
+
 import { usePageFilter } from "./usePageFilter"
+
 import { SiteImage } from "./SiteImage"
+
 import { ArtistPortfolio } from "./ArtistPortfolio"
+
 import { useSiteNavigation, NAVIGATION_EVENT } from "./useSiteNavigation"
-import { events, type EventConcept } from "./pageContent"
+
 import {
   DiscoverRoutes,
   FAQBlock,
   HowItWorks,
   EnquiryGuide,
 } from "./PageSections"
+
 import { GalleryViewer } from "./GalleryViewer"
+
 import { ArtistOverview } from "./ArtistOverview"
+
 import { LanguageContext, useTranslation, type Language } from "./i18n"
+
 import {
   Fragment,
-  FormEvent,
   useContext,
   useEffect,
   useRef,
   useState,
 } from "react"
+
 import { artistStories, type ArtistStory } from "./stories"
+
 import { ArtistFeature } from "./ArtistFeature"
+
 import { usePageMetadata } from "./usePageMetadata"
 
 const A = "/assets/"
@@ -32,6 +47,7 @@ type Artist = {
   name: string
 
   role: string
+
   teamRole: string
 
   handle: string
@@ -39,7 +55,9 @@ type Artist = {
   instagram: string
 
   image: string
+
   bookingEmail?: string
+
   soundcloud?: string
 }
 
@@ -50,6 +68,7 @@ const artists: Artist[] = [
     name: "Larry",
 
     role: "DJ",
+
     teamRole: "Event Organizer & Technical Production Lead",
 
     handle: "@larriloca",
@@ -65,6 +84,7 @@ const artists: Artist[] = [
     name: "Julius",
 
     role: "DJ",
+
     teamRole: "Event Organizer & Technical Production Lead",
 
     handle: "@julius_marcele",
@@ -80,12 +100,15 @@ const artists: Artist[] = [
     name: "DJ Eddy",
 
     role: "DJ & Dancer",
+
     teamRole: "Tech Development",
 
     handle: "@eddy.the.deejay",
 
     instagram: "https://www.instagram.com/eddy.the.deejay/",
+
     bookingEmail: "djeddybookings@gmail.com",
+
     soundcloud: "https://soundcloud.com/eddythedeejay",
 
     image: "38559.png",
@@ -97,6 +120,7 @@ const artists: Artist[] = [
     name: "Ice Boy",
 
     role: "Music Artist / Performer",
+
     teamRole: "Creative Direction",
 
     handle: "@iceboyafrica",
@@ -112,6 +136,7 @@ const artists: Artist[] = [
     name: "D Ukingo",
 
     role: "Musician & Dancer",
+
     teamRole: "Community & Culture",
 
     handle: "@d_ukingo",
@@ -163,52 +188,75 @@ function Header() {
   const { language, setLanguage } = useContext(LanguageContext)
 
   const [open, setOpen] = useState(false)
+
   const menuButton = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
     if (!open) return
+
     const overflow = document.body.style.overflow
+
     document.body.style.overflow = "hidden"
+
     const background = [
       ...document.querySelectorAll<HTMLElement>("main, footer"),
     ]
+
     const inertStates = background.map((element) => element.inert)
+
     background.forEach((element) => {
       element.inert = true
     })
+
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false)
+
         menuButton.current?.focus()
       }
+
       if (event.key === "Tab") {
         const controls = [
           ...document.querySelectorAll<HTMLElement>(
             ".header a[href], .header button:not([disabled])",
           ),
         ].filter((element) => element.getClientRects().length > 0)
+
         const first = controls[0]
+
         const last = controls[controls.length - 1]
+
         if (event.shiftKey && document.activeElement === first) {
           event.preventDefault()
+
           last?.focus()
         } else if (!event.shiftKey && document.activeElement === last) {
           event.preventDefault()
+
           first?.focus()
         }
       }
     }
+
     const media = matchMedia("(min-width: 981px)")
+
     const closeOnResize = () => {
       if (media.matches) setOpen(false)
     }
+
     window.addEventListener("keydown", closeOnEscape)
+
     media.addEventListener("change", closeOnResize)
+
     return () => {
       document.body.style.overflow = overflow
+
       background.forEach((element, index) => {
         element.inert = inertStates[index]
       })
+
       window.removeEventListener("keydown", closeOnEscape)
+
       media.removeEventListener("change", closeOnResize)
     }
   }, [open])
@@ -223,20 +271,25 @@ function Header() {
     }
 
     addEventListener("popstate", handleNavigation)
+
     addEventListener(NAVIGATION_EVENT, handleNavigation)
 
     return () => {
       removeEventListener("popstate", handleNavigation)
+
       removeEventListener(NAVIGATION_EVENT, handleNavigation)
     }
   }, [])
 
   const nav = [
     [t("Home"), "/"],
-    ["Events", "/events"],
+
     [t("The Team"), "/lineup"],
+
     [t("Gallery"), "/gallery"],
+
     [t("Stories"), "/stories"],
+
     [t("About"), "/about"],
   ]
 
@@ -322,6 +375,7 @@ function Footer() {
           <Link to="/contact">
             {language === "de" ? "DANSA kontaktieren" : t("Contact DANSA")} ↗
           </Link>
+          <a href={`mailto:${CONTACT_EMAIL}`} className="footer-email">{CONTACT_EMAIL}</a>
           <p>
             {language === "de"
               ? "Unabhängig im Geist. Durch Musik verbunden. Von DANSA veranstaltet."
@@ -332,7 +386,6 @@ function Footer() {
         </div>
         <div>
           <p className="eyebrow">{t("Explore")}</p>
-          <Link to="/events">Events</Link>
           <Link to="/lineup">{t("The Team")}</Link>
           <Link to="/gallery">{t("Gallery")}</Link>
           <Link to="/stories">{t("Stories")}</Link>
@@ -342,6 +395,7 @@ function Footer() {
           <Link to="/about">{t("About DANSA")}</Link>
           <Link to="/work-with-us">{t("Work With Us")}</Link>
           <Link to="/contact">{t("Contact")}</Link>
+          <Link to="/impressum">Impressum</Link>
         </div>
       </div>
       <Link to="/" className="footer-logo">
@@ -349,6 +403,7 @@ function Footer() {
       </Link>
       <div className="copyright">
         <span>© 2026 DANSA</span>
+        <Link to="/impressum">Impressum / {language === "de" ? "Anbieterinformationen" : "Legal notice"}</Link>
         <span>{t("MUSIC. CULTURE. TOGETHERNESS.")}</span>
       </div>
     </footer>
@@ -357,6 +412,7 @@ function Footer() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   const t = useTranslation()
+
   return (
     <>
       <a href="#main-content" className="skip-link">
@@ -371,34 +427,12 @@ function Shell({ children }: { children: React.ReactNode }) {
   )
 }
 
-function EventCard({ event }: { event: EventConcept }) {
-  const t = useTranslation()
-
-  return (
-    <article className="card">
-      <Link to={`/events/${event.slug}`}>
-        <SiteImage
-          src={A + event.image}
-          alt={event.title}
-          sizes="(max-width: 760px) 100vw, 33vw"
-        />
-      </Link>
-      <p className="eyebrow blue">
-        {t("Concept preview")} / {t(event.format)}
-      </p>
-      <h3>{event.title}</h3>
-      <p>{t(event.description)}</p>
-      <Link to={`/events/${event.slug}`} className="text-link">
-        {t("View event ↗")}
-      </Link>
-    </article>
-  )
-}
-
 function Home() {
   const t = useTranslation()
+
   usePageMetadata(
     "DANSA | Music, culture & togetherness",
+
     t(
       "DANSA brings people together through sound, movement and shared energy.",
     ),
@@ -430,29 +464,14 @@ function Home() {
                 "DANSA brings people together through sound, movement and shared energy.",
               )}
             </p>
-            <Link to="/events" className="button light">
-              {t("See what’s next ↗")}
+            <Link to="/gallery" className="button light">
+              {t("Explore the gallery ↗")}
             </Link>
           </div>
         </div>
       </section>
+      <GalleryHighlights />
       <DiscoverRoutes />
-      <section>
-        <div className="section-head">
-          <div>
-            <p className="eyebrow blue">{t("Upcoming parties")}</p>
-            <h2>{t("Event concepts")}</h2>
-          </div>
-          <Link to="/events" className="text-link">
-            {t("All events ↗")}
-          </Link>
-        </div>
-        <div className="cards">
-          {events.map((e) => (
-            <EventCard key={e.title} event={e} />
-          ))}
-        </div>
-      </section>
       <section className="split">
         <SiteImage
           className="dansa-people-photo"
@@ -480,12 +499,12 @@ function Home() {
         <p className="eyebrow">{t("Our principles")}</p>
         <h2>{t("Our kind of good.")}</h2>
         <div className="rules">
-          <Link to="/events/open-air-open-hearts">
+          <Link to="/gallery">
             <h3>{t("Open air")}</h3>
             <p>{t("Outdoor concepts with space to connect.")}</p>
             <span aria-hidden="true">↗</span>
           </Link>
-          <Link to="/events/the-late-connection">
+          <Link to="/gallery">
             <h3>{t("After dark")}</h3>
             <p>{t("DJ-led ideas for a shared dancefloor.")}</p>
             <span aria-hidden="true">↗</span>
@@ -527,182 +546,6 @@ function Home() {
   )
 }
 
-function Events() {
-  const t = useTranslation()
-  const [filter, setFilter] = usePageFilter(
-    ["all", "open-air", "after-dark", "slow-sunday"] as const,
-    "all",
-  )
-  const visible =
-    filter === "all"
-      ? events
-      : events.filter((event) => event.category === filter)
-  usePageMetadata(
-    `${t("Events")} | DANSA`,
-    t("Explore the event concepts and check what is confirmed."),
-  )
-
-  return (
-    <Shell>
-      <PageHero
-        eyebrow={t("Presenting parties, hosted by DANSA.")}
-        title={
-          <>
-            {t("Your next")}
-            <br />
-            {t("good plan.")}
-          </>
-        }
-        text={t(
-          "Open air. After dark. A room full of possibility. Explore the kinds of parties and music moments worth building.",
-        )}
-      />
-      <section className="lavender band">
-        <p className="eyebrow blue">{t("Next DANSA party")}</p>
-        <h2>{t("Good things are coming.")}</h2>
-        <p>
-          {t(
-            "Next-event announcement: TBA. Dates, venue and ticket availability will be shared when confirmed.",
-          )}
-        </p>
-      </section>
-      <section>
-        <div className="section-head">
-          <h2>{t("Event concepts")}</h2>
-          <span className="pill">{t("All details TBA")}</span>
-        </div>
-        <div
-          className="site-filters"
-          role="group"
-          aria-label={t("All formats")}
-        >
-          {[
-            ["all", "All formats"],
-            ["open-air", "Open air"],
-            ["after-dark", "After dark"],
-            ["slow-sunday", "Slow Sundays"],
-          ].map(([value, label]) => (
-            <button
-              type="button"
-              key={value}
-              aria-pressed={filter === value}
-              onClick={() => setFilter(value as typeof filter)}
-            >
-              {t(label)}
-            </button>
-          ))}
-        </div>
-        <div className="cards">
-          {visible.map((e) => (
-            <EventCard key={e.title} event={e} />
-          ))}
-        </div>
-      </section>
-      <section className="dark split-copy">
-        <h2>{t("The night goes on.")}</h2>
-        <div>
-          <p>{t("Our first real recaps belong here.")}</p>
-          <p>
-            {t(
-              "No past DANSA nights are documented here yet. Photos, films and memories will arrive after our events.",
-            )}
-          </p>
-        </div>
-      </section>
-      <FAQBlock kind="events" />
-      <Cta />
-    </Shell>
-  )
-}
-
-function EventDetail({ event }: { event: EventConcept }) {
-  const t = useTranslation()
-  usePageMetadata(`${event.title} | DANSA`, t(event.description))
-
-  return (
-    <Shell>
-      <section className="hero page-title">
-        <p className="eyebrow">{t("DANSA presents")}</p>
-        <h1>{event.title}</h1>
-        <p>{t("All event details remain unconfirmed.")}</p>
-      </section>
-      <section className="event-feature">
-        <SiteImage src={A + event.image} alt={event.title} />
-        <aside className="ticket">
-          <p className="eyebrow blue">Tickets</p>
-          <h2>{t("Tickets not yet released")}</h2>
-          <p>
-            {t(
-              "Ticket links will appear here after event details are confirmed.",
-            )}
-          </p>
-          <button disabled>{t("Not on sale")}</button>
-        </aside>
-      </section>
-      <section className="details-grid">
-        <div>
-          <p className="eyebrow blue">{t("The idea")}</p>
-          <h2>{t(event.heading)}</h2>
-          <p>{t(event.description)}</p>
-        </div>
-        <dl>
-          <div>
-            <dt>{t("Date")}</dt>
-            <dd>{t("TBA")}</dd>
-          </div>
-          <div>
-            <dt>{t("Time")}</dt>
-            <dd>{t("TBA")}</dd>
-          </div>
-          <div>
-            <dt>{t("Venue")}</dt>
-            <dd>{t("TBA")}</dd>
-          </div>
-        </dl>
-      </section>
-      <section className="dark details-grid">
-        <div>
-          <p className="eyebrow">{t("Location")}</p>
-          <h2>{t("Location to follow.")}</h2>
-        </div>
-        <div>
-          <h2>{t("A few good things to know.")}</h2>
-          <p>
-            {t(
-              "Entry, dress code, accessibility and ticket information will be added when confirmed.",
-            )}
-          </p>
-        </div>
-      </section>
-      <section className="event-highlights dark">
-        <p className="eyebrow">{t("The feeling")}</p>
-        <h2>{t(event.format)}</h2>
-        <div>
-          {event.highlights.map((item, index) => (
-            <p key={item}>
-              <span>0{index + 1}</span>
-              {t(item)}
-            </p>
-          ))}
-        </div>
-      </section>
-      <FAQBlock kind="events" />
-      <section className="lavender">
-        <h2>{t("Other good ideas.")}</h2>
-        <div className="cards">
-          {events
-
-            .filter((e) => e.slug !== event.slug)
-
-            .map((e) => (
-              <EventCard key={e.title} event={e} />
-            ))}
-        </div>
-      </section>
-    </Shell>
-  )
-}
-
 function ArtistTile({ artist }: { artist: Artist }) {
   const t = useTranslation()
 
@@ -735,10 +578,13 @@ function ArtistTile({ artist }: { artist: Artist }) {
 
 function Lineup() {
   const t = useTranslation()
+
   const [filter, setFilter] = usePageFilter(
     ["all", "production", "creative"] as const,
+
     "all",
   )
+
   const visible = artists.filter(
     (artist) =>
       filter === "all" ||
@@ -746,10 +592,13 @@ function Lineup() {
         ? ["larry", "julius", "dj-eddy"].includes(artist.slug)
         : ["ice-boy", "d-ukingo"].includes(artist.slug)),
   )
+
   usePageMetadata(
     t("The team") + " | DANSA",
+
     t("Meet the people building DANSA and bringing each event to life."),
   )
+
   return (
     <Shell>
       <PageHero
@@ -773,7 +622,9 @@ function Lineup() {
         >
           {[
             ["all", "Everyone"],
+
             ["production", "Organization & Production"],
+
             ["creative", "Creative & Community"],
           ].map(([value, label]) => (
             <button
@@ -800,6 +651,7 @@ function Lineup() {
 
 function ArtistPage({ artist }: { artist: Artist }) {
   const story = artistStories.find((item) => item.artist === artist.slug)
+
   return (
     <Shell>
       {story?.kind === "biography" ? (
@@ -814,12 +666,16 @@ function ArtistPage({ artist }: { artist: Artist }) {
 
 function StoryCards({ stories }: { stories: ArtistStory[] }) {
   const { language } = useContext(LanguageContext)
+
   const t = useTranslation()
+
   return (
     <div className="story-grid">
       {stories.map((story) => {
         const artist = artists.find((person) => person.slug === story.artist)
+
         if (!artist) return null
+
         return (
           <article className="story-card" key={story.artist}>
             <Link to={`/stories/${story.artist}`} className="story-image">
@@ -850,6 +706,7 @@ function StoryCards({ stories }: { stories: ArtistStory[] }) {
 
 function StoriesPreview({ exclude }: { exclude?: string } = {}) {
   const t = useTranslation()
+
   return (
     <section className="lavender stories-preview">
       <div className="section-head">
@@ -864,12 +721,18 @@ function StoriesPreview({ exclude }: { exclude?: string } = {}) {
       <StoryCards
         stories={[
           artistStories[0],
+
           artistStories[2],
+
           artistStories[3],
+
           artistStories[1],
+
           artistStories[4],
         ]
+
           .filter((story) => story.artist !== exclude)
+
           .slice(0, 3)}
       />
     </section>
@@ -878,9 +741,13 @@ function StoriesPreview({ exclude }: { exclude?: string } = {}) {
 
 function ArtistStoryPreview({ artist }: { artist: Artist }) {
   const { language } = useContext(LanguageContext)
+
   const t = useTranslation()
+
   const story = artistStories.find((item) => item.artist === artist.slug)
+
   if (!story) return null
+
   return (
     <section className="dark artist-story-preview">
       <div>
@@ -906,18 +773,24 @@ function ArtistStoryPreview({ artist }: { artist: Artist }) {
 
 function Stories() {
   const t = useTranslation()
+
   usePageMetadata(
     `${t("Stories")} | DANSA`,
+
     t("Different roles. Shared rhythm."),
   )
+
   const [filter, setFilter] = usePageFilter(
     ["all", "dj", "performance"] as const,
+
     "all",
   )
+
   const stories =
     filter === "all"
       ? artistStories
       : artistStories.filter((story) => story.category === filter)
+
   return (
     <Shell>
       <PageHero
@@ -936,7 +809,9 @@ function Stories() {
         >
           {([
             ["all", "All stories"],
+
             ["dj", "DJs"],
+
             ["performance", "Live & movement"],
           ] as const).map(([value, label]) => (
             <button
@@ -958,10 +833,15 @@ function Stories() {
 
 function StoryPage({ story }: { story: ArtistStory }) {
   const { language } = useContext(LanguageContext)
+
   const t = useTranslation()
+
   usePageMetadata(`${story.title[language]} | DANSA`, story.intro[language])
+
   const artist = artists.find((person) => person.slug === story.artist)
+
   if (!artist) return <NotFound />
+
   return (
     <Shell>
       <section className="story-hero">
@@ -1111,7 +991,9 @@ function StoryPage({ story }: { story: ArtistStory }) {
         </div>
         <StoryCards
           stories={artistStories
+
             .filter((item) => item.artist !== story.artist)
+
             .slice(0, 3)}
         />
       </section>
@@ -1121,6 +1003,7 @@ function StoryPage({ story }: { story: ArtistStory }) {
 
 function PageHero({
   className = "",
+
   eyebrow,
 
   title,
@@ -1128,6 +1011,7 @@ function PageHero({
   text,
 }: {
   className?: string
+
   eyebrow: string
 
   title: React.ReactNode
@@ -1145,6 +1029,7 @@ function PageHero({
 
 function Gallery() {
   const t = useTranslation()
+
   usePageMetadata(t("Gallery") + " | DANSA", t("The feeling in pictures"))
 
   return (
@@ -1187,7 +1072,7 @@ function Gallery() {
         </div>
         <div className="gallery-story-link">
           <p className="eyebrow">{t("Beyond the frame.")}</p>
-          <h2>{t("Read the stories behind the line-up.")}</h2>
+          <h2>{t("Read the stories behind the team.")}</h2>
           <Link to="/stories" className="text-link light-link">
             {t("Read artist stories")} ↗
           </Link>
@@ -1198,11 +1083,11 @@ function Gallery() {
         <h2>{t("Be in the next moment.")}</h2>
         <p>
           {t(
-            "Next DANSA party announcement soon. Until then, explore the event ideas.",
+            "Meet the people and creative minds behind DANSA.",
           )}
         </p>
-        <Link to="/events" className="button light">
-          {t("Explore events ↗")}
+        <Link to="/gallery" className="button light">
+          {t("Explore the gallery ↗")}
         </Link>
       </section>
     </Shell>
@@ -1211,8 +1096,10 @@ function Gallery() {
 
 function About() {
   const t = useTranslation()
+
   usePageMetadata(
     t("About DANSA") + " | DANSA",
+
     t("Independent spirit. Shared energy."),
   )
 
@@ -1258,11 +1145,12 @@ function About() {
               "From open-air sessions to late-night dancefloors and shared listening, the intention is simple: something independent, human and unmistakably DANSA.",
             )}
           </p>
-          <Link to="/events" className="text-link">
-            {t("Explore our events ↗")}
+          <Link to="/gallery" className="text-link">
+            {t("Explore the gallery ↗")}
           </Link>
         </div>
       </section>
+      <CompanyOverview />
       <section className="organizer-story">
         <div className="organizer-copy">
           <p className="eyebrow blue">
@@ -1388,7 +1276,11 @@ function About() {
             <SiteImage src={A + a.image} alt="" />
             <span>
               <b>{a.name}</b>
-              <small>{t(a.role)}<br />{t(a.teamRole)}</small>
+              <small>
+                {t(a.role)}
+                <br />
+                {t(a.teamRole)}
+              </small>
             </span>
             <i>↗</i>
           </Link>
@@ -1404,12 +1296,12 @@ function About() {
         <h2>{t("Let’s share the energy.")}</h2>
         <p>
           {t(
-            "Explore our event previews, or start a conversation about a future collaboration.",
+            "Explore our gallery, or start a conversation about a future collaboration.",
           )}
         </p>
         <div className="button-row">
-          <Link to="/events" className="button light">
-            {t("Explore events ↗")}
+          <Link to="/gallery" className="button light">
+            {t("Explore the gallery ↗")}
           </Link>
           <Link to="/work-with-us" className="button outline">
             {t("Work with us ↗")}
@@ -1422,61 +1314,12 @@ function About() {
 
 function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
   const t = useTranslation()
+
   usePageMetadata(
     `${t(collaborate ? "Work With Us" : "Contact")} | DANSA`,
+
     t("Good conversations start here"),
   )
-
-  const [sent, setSent] = useState(false)
-  const [draft, setDraft] = useState("")
-  const [copied, setCopied] = useState(false)
-  const draftHeading = useRef<HTMLHeadingElement>(null)
-  const nameField = useRef<HTMLInputElement>(null)
-  useEffect(() => {
-    if (sent) draftHeading.current?.focus()
-    else if (draft) nameField.current?.focus()
-  }, [sent, draft])
-  const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
-    organization: "",
-    type: "",
-    message: "",
-  })
-
-  const submit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const values = new FormData(e.currentTarget)
-    setFormValues({
-      name: String(values.get("name") ?? ""),
-      email: String(values.get("email") ?? ""),
-      organization: String(values.get("organization") ?? ""),
-      type: String(values.get("type") ?? ""),
-      message: String(values.get("message") ?? ""),
-    })
-    setDraft(
-      [
-        `${t("Name *")}: ${values.get("name")}`,
-        `${t("Email *")}: ${values.get("email")}`,
-        ...(values.get("organization")
-          ? [`${t("Organization")}: ${values.get("organization")}`]
-          : []),
-        `${t("Inquiry type *")}: ${t(String(values.get("type")))}`,
-        "",
-        String(values.get("message")),
-      ].join("\n"),
-    )
-    setCopied(false)
-    setSent(true)
-  }
-  const copyDraft = async () => {
-    try {
-      await navigator.clipboard.writeText(draft)
-      setCopied(true)
-    } catch {
-      setCopied(false)
-    }
-  }
 
   return (
     <Shell>
@@ -1487,7 +1330,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
             : t("Good conversations start here")}
         </p>
         <h1>
-          {collaborate ? (
+                {collaborate ? (
             <>
               {t("Make something")}
               <br />
@@ -1510,6 +1353,10 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
                 "A question about DANSA, an event idea or something you’d like us to know? You’re in the right place.",
               )}
         </p>
+      </section>
+      <section className="contact-direct" aria-label={t("Contact")}>
+        <div><p className="eyebrow blue">{t("Email DANSA")}</p><a className="contact-email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
+        <Link to="/impressum" className="text-link">Impressum / {t("Legal notice")} <span aria-hidden="true">↗</span></Link>
       </section>
       {collaborate ? (
         <>
@@ -1595,7 +1442,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
 
                 t("Questions about DANSA and the parties we host."),
 
-                t("Choose General in the inquiry form."),
+                t("Send us a message below, or email the team directly."),
               ],
 
               [
@@ -1603,17 +1450,15 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
 
                 t("A proposed event or artist-related inquiry."),
 
-                t("Choose Booking, or use an artist’s direct Instagram below."),
+                t("Choose Booking, or use an artist’s direct contact below."),
               ],
 
               [
-                t("Event support"),
+                t("Collaboration"),
 
-                t(
-                  "Questions about event details, access or ticket availability.",
-                ),
+                t("Ideas for venues, artists, promoters and brands."),
 
-                t("Confirmed information will be added to each event page."),
+                t("Tell us what you would like to build together."),
               ],
             ].map(([t, d, n]) => (
               <article key={t}>
@@ -1644,18 +1489,9 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
                   "You don’t need a finished proposal. A clear introduction is a good place to begin.",
                 )
               : t(
-                  "Include the subject of your inquiry and any relevant context. For an event question, mention the event preview you’re asking about.",
+                  "Include the subject of your enquiry and any relevant context so the team can respond.",
                 )}
           </p>
-          {!collaborate && (
-            <div className="event-note">
-              <b>{t("Next event")}</b>
-              <strong>{t("Announcement coming soon.")}</strong>
-              <span>
-                {t("No date, venue or ticket release is confirmed yet.")}
-              </span>
-            </div>
-          )}
         </div>
         <div>
           <h2>
@@ -1664,129 +1500,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
           <p>
             {t("Tell us what you have in mind. Fields marked * are required.")}
           </p>
-          {sent ? (
-            <div className="form-note">
-              <h3 ref={draftHeading} tabIndex={-1}>
-                {t("Your enquiry draft is ready.")}
-              </h3>
-              <p>
-                {t(
-                  "Copy your draft and use a direct contact channel. Nothing has been sent.",
-                )}
-              </p>
-              <textarea
-                readOnly
-                aria-label={t("Enquiry draft")}
-                value={draft}
-                rows={9}
-              />
-              <button
-                className="button blue-button"
-                type="button"
-                onClick={copyDraft}
-              >
-                {t(copied ? "Copied" : "Copy enquiry")}
-              </button>
-              <button
-                className="button feature-outline"
-                type="button"
-                onClick={() => setSent(false)}
-              >
-                {t("Edit draft")}
-              </button>
-              <p className="fine">
-                {t(
-                  "Select and copy the draft manually if clipboard access is unavailable.",
-                )}
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={submit}>
-              <div className="field-pair">
-                <label>
-                  {t("Name *")}
-                  <input
-                    name="name"
-                    ref={nameField}
-                    defaultValue={formValues.name}
-                    placeholder={t("Your name")}
-                    required
-                  />
-                </label>
-                <label>
-                  {t("Email *")}
-                  <input
-                    name="email"
-                    defaultValue={formValues.email}
-                    type="email"
-                    placeholder={t("Your email address")}
-                    required
-                  />
-                </label>
-              </div>
-              {collaborate && (
-                <label>
-                  {t("Organization")}
-                  <input
-                    name="organization"
-                    defaultValue={formValues.organization}
-                    placeholder={t("Venue, project or organization (optional)")}
-                  />
-                </label>
-              )}
-              <label>
-                {collaborate ? t("Collaboration type *") : t("Inquiry type *")}
-                <select name="type" defaultValue={formValues.type} required>
-                  <option value="">
-                    {t("Select")}{" "}
-                    {collaborate
-                      ? t("venue / promoter / artist / brand")
-                      : t("general / booking / event support")}
-                  </option>
-                  {(collaborate
-                    ? ["Venue", "Promoter", "Artist", "Brand"]
-                    : ["General", "Booking", "Event support"]
-                  )
-
-                    .map((x) => (
-                      <option key={x} value={x}>
-                        {t(x)}
-                      </option>
-                    ))}
-                </select>
-              </label>
-              <label>
-                {t("Message *")}
-                <textarea
-                  name="message"
-                  defaultValue={formValues.message}
-                  rows={6}
-                  placeholder={
-                    collaborate
-                      ? t(
-                          "Your idea, possible format and what you could bring.",
-                        )
-                      : t("What would you like to ask us?")
-                  }
-                  required
-                />
-              </label>
-              <label className="consent">
-                <input type="checkbox" required />{" "}
-                {t(
-                  "I understand that this creates a local draft and does not send my enquiry. *",
-                )}
-              </label>
-              <button className="button blue-button" type="submit">
-                {t("Prepare enquiry")} ↗
-              </button>
-              <p className="fine">
-                {t(
-                  "This form prepares a draft. It does not send or store your message.",
-                )}
-              </p>
-            </form>
-          )}
+          <ContactForm collaborate={collaborate} />
         </div>
       </section>
       {!collaborate && (
@@ -1862,11 +1576,11 @@ function Cta() {
       <div>
         <p>
           {t(
-            "Explore what DANSA is planning. Event times and ticket links will be announced only when confirmed.",
+            "Step into the visual world of DANSA. Music, movement and the people who bring it to life.",
           )}
         </p>
-        <Link to="/events" className="button light">
-          {t("Explore events ↗")}
+        <Link to="/gallery" className="button light">
+          {t("Explore the gallery ↗")}
         </Link>
       </div>
     </section>
@@ -1875,8 +1589,10 @@ function Cta() {
 
 function NotFound() {
   const t = useTranslation()
+
   usePageMetadata(
     `${t("Page not found")} | DANSA`,
+
     t("That page is not part of the DANSA site."),
   )
 
@@ -1917,8 +1633,8 @@ export default function App() {
     document.documentElement.lang = language
   }, [language])
 
-  const event = events.find((item) => path === `/events/${item.slug}`)
   const artist = artists.find((a) => path === `/artists/${a.slug}`)
+
   const story = artistStories.find((item) => path === `/stories/${item.artist}`)
 
   let page: React.ReactNode
@@ -1927,11 +1643,16 @@ export default function App() {
   else if (story) page = <StoryPage story={story} />
   else if (path === "/stories") page = <Stories />
   else if (path === "/") page = <Home />
-  else if (path === "/events") page = <Events />
-  else if (event) page = <EventDetail event={event} />
+  else if (path === "/events" || path.startsWith("/events/")) page = <Gallery />
   else if (path === "/lineup") page = <Lineup />
   else if (path === "/gallery") page = <Gallery />
   else if (path === "/about") page = <About />
+  else if (path === "/impressum")
+    page = (
+      <Shell>
+        <Impressum />
+      </Shell>
+    )
   else if (path === "/work-with-us") page = <ContactPage collaborate />
   else if (path === "/contact") page = <ContactPage />
   else page = <NotFound />

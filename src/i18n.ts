@@ -9,6 +9,35 @@ export const LanguageContext = createContext<{
 
 const german: Record<string, string> = {
   ...pageTranslations,
+  "Email DANSA": "DANSA per E-Mail kontaktieren",
+  "Legal notice": "Anbieterinformationen",
+  "Collaboration": "Zusammenarbeit",
+  "Send us a message below, or email the team directly.": "Schreibe uns unten oder sende dem Team direkt eine E-Mail.",
+  "Choose Booking, or use an artist’s direct contact below.": "Wähle Buchung oder nutze unten den direkten Kontakt zum Artist.",
+  "Ideas for venues, artists, promoters and brands.": "Ideen von Veranstaltungsorten, Artists, Promotern und Marken.",
+  "Tell us what you would like to build together.": "Erzähle uns, was du gemeinsam gestalten möchtest.",
+  "Include the subject of your enquiry and any relevant context so the team can respond.": "Nenne das Thema und relevante Details, damit unser Team antworten kann.",
+  "Yes. The contact and collaboration forms submit enquiries through FormSubmit for delivery to dansamusicworldwide@gmail.com. If the form is unavailable, email us directly.": "Ja. Kontakt- und Kooperationsanfragen werden über FormSubmit an dansamusicworldwide@gmail.com weitergeleitet. Sollte das Formular nicht verfügbar sein, sende uns direkt eine E-Mail.",
+
+  "Explore the gallery ↗": "Galerie entdecken ↗",
+
+  "Get to know DANSA": "DANSA kennenlernen",
+
+  "Our people, our purpose and the culture that brings us together.":
+    "Unser Team, unsere Idee und die Kultur, die uns verbindet.",
+
+  "Meet the people and creative minds behind DANSA.":
+    "Lerne die Menschen und kreativen Köpfe hinter DANSA kennen.",
+
+  "Explore our gallery, or start a conversation about a future collaboration.":
+    "Entdecke unsere Galerie oder sprich mit uns über eine zukünftige Zusammenarbeit.",
+
+  "Step into the visual world of DANSA. Music, movement and the people who bring it to life.":
+    "Tauche ein in die visuelle Welt von DANSA. Musik, Bewegung und die Menschen, die sie zum Leben erwecken.",
+
+  "Read the stories behind the team.": "Lies die Geschichten hinter dem Team.",
+
+
   "Event Organizer & Technical Production Lead": "Eventorganisation & Technische Produktionsleitung",
   "The Team": "Das Team",
   "The team": "Das Team",

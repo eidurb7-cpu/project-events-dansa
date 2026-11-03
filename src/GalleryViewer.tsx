@@ -1,9 +1,11 @@
+import { galleryPhotos } from "./galleryPhotos"
 import { usePageFilter } from "./usePageFilter"
 import { SiteImage } from "./SiteImage"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "./i18n"
 
 const photos = [
+  ...galleryPhotos,
   { image: "803c5.png", caption: "Out in the city", category: "city" },
   {
     image: "911fb.png",

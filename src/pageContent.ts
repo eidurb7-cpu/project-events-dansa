@@ -79,7 +79,7 @@ export const faqs = {
     ],
     [
       "Does this form send my message?",
-      "The form prepares a copyable enquiry draft. It does not send or store submissions. You can copy your draft and use an available direct contact channel.",
+      "Yes. The contact and collaboration forms submit enquiries through FormSubmit for delivery to dansamusicworldwide@gmail.com. If the form is unavailable, email us directly.",
     ],
     [
       "What should I include?",
@@ -151,7 +151,7 @@ export const pageTranslations: Record<string, string> = {
     "Jedes Künstlerprofil verlinkt das eigene Instagram-Profil. Nutze diesen Kanal für Fragen und Buchungsanfragen an den jeweiligen Artist.",
   "Does this form send my message?":
     "Wird meine Nachricht über dieses Formular gesendet?",
-  "The form prepares a copyable enquiry draft. It does not send or store submissions. You can copy your draft and use an available direct contact channel.":
+  "Yes. The contact and collaboration forms submit enquiries through FormSubmit for delivery to dansamusicworldwide@gmail.com. If the form is unavailable, email us directly.":
     "Das Formular erstellt einen kopierbaren Anfrageentwurf. Es sendet oder speichert keine Anfragen. Kopiere den Entwurf und nutze einen verfügbaren direkten Kontaktkanal.",
   "What should I include?": "Welche Angaben sind hilfreich?",
   "Tell us who you are, what your question or idea is, and which artist or event it concerns. For collaborations, add the proposed format and location if known.":

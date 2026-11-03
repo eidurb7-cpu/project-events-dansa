@@ -5,9 +5,9 @@ export function DiscoverRoutes() {
   const t = useTranslation()
   const routes = [
     [
-      "/events",
-      "Plan a night",
-      "Explore the event concepts and check what is confirmed.",
+      "/about",
+      "Get to know DANSA",
+      "Our people, our purpose and the culture that brings us together.",
     ],
     [
       "/lineup",

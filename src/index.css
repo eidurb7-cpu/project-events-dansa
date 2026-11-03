@@ -162,7 +162,7 @@ dt { font:700 .7rem 'Inter:Bold'; text-transform:uppercase; } dd { margin:0; }
 .artist-directory p { color:#c6c7c0; }.light-link { color:var(--cream); }.artist-contact { border-top:1px solid #454640; padding:1rem 0; display:flex; justify-content:space-between; }.artist-contact span b,.artist-contact span a { display:block; }.artist-contact small { color:#c6c7c0; text-transform:uppercase; }
 .form-wrap { display:grid; grid-template-columns:.8fr 1.2fr; gap:8vw; }
 form { display:grid; gap:1.3rem; }
-label { font:700 .66rem 'Inter:Bold'; text-transform:uppercase; }
+@layer base { label { font:700 .66rem 'Inter:Bold'; text-transform:uppercase; } }
 input,select,textarea { display:block; width:100%; margin-top:.6rem; padding:1rem; background:transparent; border:1px solid #aaa; border-radius:0; transition:border-color .2s ease,box-shadow .2s ease; }
 input:focus,select:focus,textarea:focus { outline:0; border-color:var(--blue); box-shadow:0 0 0 2px color-mix(in srgb,var(--blue) 18%,transparent); }
 textarea { resize:vertical; }
@@ -424,7 +424,7 @@ footer { padding:4rem 4vw 1rem; background:var(--ink); color:var(--cream); }
 }
 
 @media (max-width: 760px) {
-  body { font-size:14px; }
+  @layer base { body { font-size:16px; } }
   .header { height:64px; padding:0 20px; }
   main { padding-top:64px; }
   .menu { display:block; }
@@ -540,3 +540,55 @@ main:focus,h1[tabindex="-1"]:focus { outline:none; }
 .gallery-page-title p { margin-top:1.5rem; font-size:.8rem; color:#62635e; }
 .gallery-section { padding-top:1rem; }
 .story-hero img[data-original-src$="larry-new.webp"] { object-position:center 18%; }
+
+/* A consistent reading scale for every phone layout. */
+@media (max-width:760px) {
+  @layer base {
+    body { font-size:16px; line-height:1.65; }
+    h1 { font-size:clamp(2rem,8.5vw,2.5rem); line-height:1.08; letter-spacing:-.04em; overflow-wrap:break-word; }
+    h2 { font-size:clamp(1.6rem,6.5vw,2rem); line-height:1.15; letter-spacing:-.035em; overflow-wrap:break-word; }
+    h3 { font-size:clamp(1.2rem,5vw,1.4rem); line-height:1.25; letter-spacing:-.025em; overflow-wrap:break-word; }
+    p { line-height:1.7; }
+    small { font-size:.875rem; line-height:1.65; }
+    label { font-size:.875rem; line-height:1.5; }
+    input,select,textarea { font-size:1rem; line-height:1.5; }
+  }
+  .hero-grid h1,.about-hero h1,.page-hero h1,.page-title h1,.page-hero.stories-hero h1,.story-hero h1,.feature-intro h1,.artist-overview .feature-intro h1 {
+    font-size:clamp(2rem,8.5vw,2.5rem);
+    line-height:1.08;
+    letter-spacing:-.04em;
+    overflow-wrap:break-word;
+  }
+  .site-faq h2,.site-process h2,.enquiry-guide h2,.artist-genres h2,.artist-archive h2,.feature-story h2,.feature-follow h2,.story-chapter h2,.story-releases h2,.gallery-story-link h2,.feature-credits h2 {
+    font-size:clamp(1.6rem,6.5vw,2rem);
+    line-height:1.15;
+    letter-spacing:-.035em;
+    overflow-wrap:break-word;
+  }
+  .opportunity h3,.story-card h3,.feature-tracks h3,.feature-credits h3,.site-process h3,.enquiry-guide h3 {
+    font-size:clamp(1.2rem,5vw,1.4rem);
+    line-height:1.25;
+    letter-spacing:-.025em;
+    overflow-wrap:break-word;
+  }
+  .story-card > p:not(.eyebrow),.story-chapter > p:last-child { line-height:1.7; }
+  .lead,.story-hero .lead,.feature-deck,.about-hero p:last-child { font-size:1.0625rem; line-height:1.7; }
+  .story-chapter > p:last-child,.card p,.feature-story article p { font-size:1rem; }
+  .eyebrow,.pill,.gallery-tabs,.gallery-note b,.gallery-filters button,.feature-facts dt,.story-releases a > span:first-child,.feature-timeline a,.copyright { font-size:.75rem; line-height:1.5; }
+  .artist-tile p,.rules p,.mini-lineup p,.mini-lineup a,.fine,.gallery-note,.gallery-page-title p,.gallery-dialog figcaption,.feature-timeline p,.feature-track-year,.story-sources li,.feature-channels p,.feature-references p,.feature-references li,.artist-overview-contact p,.footer-top a,.footer-top p:last-child { font-size:.875rem; line-height:1.65; }
+  .text-link,.instagram,.button,.site-filters button,.story-filters button,.feature-tracks a,.feature-story nav a,.feature-channels > a,.story-contents a { font-size:.875rem; line-height:1.5; }
+  .button,.site-filters button,.story-filters button,.gallery-filters button { min-height:44px; }
+  .contact-fields { display:grid; gap:1.25rem; }
+  .site-filters button { white-space:normal; text-align:left; }
+  .feature-section-label { font-size:.875rem; line-height:1.5; letter-spacing:0; }
+  .feature-timeline h3 { font-size:1rem; line-height:1.4; }
+  .feature-portrait figcaption { font-size:.75rem; line-height:1.6; flex-wrap:wrap; }
+  .contact-email,.footer-top .footer-email { font-size:1.0625rem; line-height:1.5; letter-spacing:-.02em; }
+  .artist-overview-contact > a { font-size:1.25rem; line-height:1.5; }
+  .artist-overview-contact .artist-booking-email { font-size:1rem; }
+  .header .menu,.language-switch { font-size:.8125rem; }
+  .language-switch button { min-height:44px; }
+  .artist-tile,.section-head > *, .feature-intro { min-width:0; }
+  .artist-tile .text-link,.artist-tile h3,.legal-details dd { overflow-wrap:anywhere; }
+  .legal-details dt { font-size:.875rem; line-height:1.5; }
+}

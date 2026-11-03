@@ -83,7 +83,7 @@ export function GalleryViewer() {
           </button>
         ))}
       </div>
-      <p className="gallery-count" role="status">
+      <p className="sr-only" role="status">
         {visible.length} / {photos.length} {t("photos shown")}
       </p>
       <div className="gallery">
@@ -100,9 +100,7 @@ export function GalleryViewer() {
                 alt={t(photo.caption)}
                 loading="lazy"
               />
-              <span aria-hidden="true">↗</span>
             </button>
-            <figcaption>{t(photo.caption)}</figcaption>
           </figure>
         ))}
       </div>

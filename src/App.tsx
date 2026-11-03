@@ -13,10 +13,8 @@ import { ArtistPortfolio } from "./ArtistPortfolio"
 import { useSiteNavigation, NAVIGATION_EVENT } from "./useSiteNavigation"
 
 import {
-  DiscoverRoutes,
   FAQBlock,
   HowItWorks,
-  EnquiryGuide,
 } from "./PageSections"
 
 import { GalleryViewer } from "./GalleryViewer"
@@ -471,7 +469,6 @@ function Home() {
         </div>
       </section>
       <GalleryHighlights />
-      <DiscoverRoutes />
       <section className="split">
         <SiteImage
           className="dansa-people-photo"
@@ -492,27 +489,6 @@ function Home() {
           </p>
           <Link to="/about" className="text-link">
             {t("About DANSA ↗")}
-          </Link>
-        </div>
-      </section>
-      <section className="dark statement">
-        <p className="eyebrow">{t("Our principles")}</p>
-        <h2>{t("Our kind of good.")}</h2>
-        <div className="rules">
-          <Link to="/gallery">
-            <h3>{t("Open air")}</h3>
-            <p>{t("Outdoor concepts with space to connect.")}</p>
-            <span aria-hidden="true">↗</span>
-          </Link>
-          <Link to="/gallery">
-            <h3>{t("After dark")}</h3>
-            <p>{t("DJ-led ideas for a shared dancefloor.")}</p>
-            <span aria-hidden="true">↗</span>
-          </Link>
-          <Link to="/lineup">
-            <h3>{t("The team")}</h3>
-            <p>{t("Meet the organizers and creatives behind DANSA.")}</p>
-            <span aria-hidden="true">↗</span>
           </Link>
         </div>
       </section>
@@ -611,7 +587,7 @@ function Lineup() {
       <section className="lineup-directory">
         <div className="section-head">
           <h2>{t("People behind the rhythm.")}</h2>
-          <p role="status">
+          <p role="status" className="sr-only">
             {visible.length} / {artists.length} {t("team members shown")}
           </p>
         </div>
@@ -1034,61 +1010,12 @@ function Gallery() {
 
   return (
     <Shell>
-      <PageHero
-        eyebrow={t("The feeling in pictures")}
-        title={
-          <>
-            {t("Crowds.")}
-            <br />
-            {t("City nights.")}
-            <br />
-            {t("Real energy.")}
-          </>
-        }
-        text={t(
-          "From the street to the dancefloor. A visual mood of the people, details and after-hours feeling that inspire DANSA.",
-        )}
-      />
+      <section className="page-hero gallery-page-title">
+        <h1>{t("Gallery")}</h1>
+        <p>{t("Mood photography. Not documentation of DANSA events.")}</p>
+      </section>
       <section className="gallery-section">
-        <div className="gallery-note">
-          <b>{t("Mood gallery — actual DANSA recaps coming soon")}</b>
-          <span>
-            {t(
-              "These images set the mood. They are not documentation of past DANSA events.",
-            )}
-          </span>
-        </div>
         <GalleryViewer />
-      </section>
-      <section className="dark gallery-film">
-        <div>
-          <p className="eyebrow">{t("The moving picture")}</p>
-          <h2>{t("Some nights stay with you.")}</h2>
-          <p>
-            {t(
-              "Our actual films and event recaps will live here. Nothing has been released yet.",
-            )}
-          </p>
-        </div>
-        <div className="gallery-story-link">
-          <p className="eyebrow">{t("Beyond the frame.")}</p>
-          <h2>{t("Read the stories behind the team.")}</h2>
-          <Link to="/stories" className="text-link light-link">
-            {t("Read artist stories")} ↗
-          </Link>
-        </div>
-      </section>
-      <section className="gallery-cta">
-        <p className="eyebrow">{t("Don’t just look. Come through.")}</p>
-        <h2>{t("Be in the next moment.")}</h2>
-        <p>
-          {t(
-            "Meet the people and creative minds behind DANSA.",
-          )}
-        </p>
-        <Link to="/gallery" className="button light">
-          {t("Explore the gallery ↗")}
-        </Link>
       </section>
     </Shell>
   )
@@ -1470,7 +1397,6 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
           </div>
         </section>
       )}
-      <EnquiryGuide />
       <section className="form-wrap" id="inquiry">
         <div>
           <p className="eyebrow blue">
@@ -1570,15 +1496,9 @@ function Cta() {
   return (
     <section className="cta">
       <div>
-        <p className="eyebrow">{t("The next idea takes shape")}</p>
         <h2>{t("Good people. Shared energy.")}</h2>
       </div>
       <div>
-        <p>
-          {t(
-            "Step into the visual world of DANSA. Music, movement and the people who bring it to life.",
-          )}
-        </p>
         <Link to="/gallery" className="button light">
           {t("Explore the gallery ↗")}
         </Link>

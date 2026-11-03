@@ -15,18 +15,10 @@ export function GalleryHighlights() {
     >
       <div className="section-head">
         <div>
-          <p className="eyebrow blue">
-            {de ? "Galerie / Highlights" : "Gallery / Highlights"}
-          </p>
           <h2 id="gallery-highlights-title">
             {de ? "Spür die Energie." : "Feel the energy."}
           </h2>
         </div>
-        <p className="highlight-intro">
-          {de
-            ? "Menschen, Bewegung und Nächte voller Gefühl. Ein Einblick in die visuelle Welt von DANSA."
-            : "People, movement and nights full of feeling. A glimpse into the visual world of DANSA."}
-        </p>
       </div>
       <div className="highlight-grid">
         {highlights.map((photo, index) => (
@@ -41,18 +33,10 @@ export function GalleryHighlights() {
               alt={photo.caption}
               sizes="(max-width: 600px) 50vw, (max-width: 900px) 50vw, 33vw"
             />
-            <span className="highlight-photo-index" aria-hidden="true">
-                0{index + 1} / IN FRAME
-            </span>
           </a>
         ))}
       </div>
       <div className="highlight-bottom">
-        <p>
-          {de
-            ? "Unsere Mood-Auswahl: Bilder, die uns inspirieren."
-            : "Our mood selection: images that inspire us."}
-        </p>
         <a href="/gallery" className="button blue-button">
           {de ? "Mehr Bilder" : "More photos"} <span aria-hidden="true">↗</span>
         </a>

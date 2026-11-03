@@ -48,7 +48,7 @@ const artists: Artist[] = [
 
     name: "Larry",
 
-    role: "DJ",
+    role: "Event Organizer & Technical Production Lead",
 
     handle: "@larriloca",
 
@@ -62,7 +62,7 @@ const artists: Artist[] = [
 
     name: "Julius",
 
-    role: "DJ",
+    role: "Event Organizer & Technical Production Lead",
 
     handle: "@julius_marcele",
 
@@ -76,7 +76,7 @@ const artists: Artist[] = [
 
     name: "DJ Eddy",
 
-    role: "DJ & Dancer",
+    role: "Tech Development",
 
     handle: "@eddy.the.deejay",
 
@@ -92,7 +92,7 @@ const artists: Artist[] = [
 
     name: "Ice Boy",
 
-    role: "Music Artist / Performer",
+    role: "Creative Direction",
 
     handle: "@iceboyafrica",
 
@@ -106,7 +106,7 @@ const artists: Artist[] = [
 
     name: "D Ukingo",
 
-    role: "Musician & Dancer",
+    role: "Community & Culture",
 
     handle: "@d_ukingo",
 
@@ -228,7 +228,7 @@ function Header() {
   const nav = [
     [t("Home"), "/"],
     ["Events", "/events"],
-    [t("The Lineup"), "/lineup"],
+    [t("The Team"), "/lineup"],
     [t("Gallery"), "/gallery"],
     [t("Stories"), "/stories"],
     [t("About"), "/about"],
@@ -327,7 +327,7 @@ function Footer() {
         <div>
           <p className="eyebrow">{t("Explore")}</p>
           <Link to="/events">Events</Link>
-          <Link to="/lineup">{t("The Lineup")}</Link>
+          <Link to="/lineup">{t("The Team")}</Link>
           <Link to="/gallery">{t("Gallery")}</Link>
           <Link to="/stories">{t("Stories")}</Link>
         </div>
@@ -485,8 +485,8 @@ function Home() {
             <span aria-hidden="true">↗</span>
           </Link>
           <Link to="/lineup">
-            <h3>{t("The lineup")}</h3>
-            <p>{t("Meet the DJs, musicians and dancers.")}</p>
+            <h3>{t("The team")}</h3>
+            <p>{t("Meet the organizers and creatives behind DANSA.")}</p>
             <span aria-hidden="true">↗</span>
           </Link>
         </div>
@@ -729,45 +729,45 @@ function ArtistTile({ artist }: { artist: Artist }) {
 function Lineup() {
   const t = useTranslation()
   const [filter, setFilter] = usePageFilter(
-    ["all", "dj", "movement"] as const,
+    ["all", "production", "creative"] as const,
     "all",
   )
   const visible = artists.filter(
     (artist) =>
       filter === "all" ||
-      (filter === "dj"
-        ? artist.role.startsWith("DJ")
-        : /Dancer|Performer|Musician/.test(artist.role)),
+      (filter === "production"
+        ? ["larry", "julius", "dj-eddy"].includes(artist.slug)
+        : ["ice-boy", "d-ukingo"].includes(artist.slug)),
   )
   usePageMetadata(
-    t("The lineup") + " | DANSA",
-    t("Follow the people shaping the sound."),
+    t("The team") + " | DANSA",
+    t("Meet the people building DANSA and bringing each event to life."),
   )
   return (
     <Shell>
       <PageHero
         eyebrow={t("The people behind the energy")}
-        title={t("The lineup")}
+        title={t("The team")}
         text={t(
-          "DJs. Performing artists. One independent spirit. Meet the five people in the DANSA lineup.",
+          "Organizers, sound and lighting specialists, and creative minds. Meet the team bringing DANSA together.",
         )}
       />
       <section className="lineup-directory">
         <div className="section-head">
           <h2>{t("People behind the rhythm.")}</h2>
           <p role="status">
-            {visible.length} / {artists.length} {t("artists shown")}
+            {visible.length} / {artists.length} {t("team members shown")}
           </p>
         </div>
         <div
           className="site-filters"
           role="group"
-          aria-label={t("Filter the line-up")}
+          aria-label={t("Filter the team")}
         >
           {[
             ["all", "Everyone"],
-            ["dj", "DJs"],
-            ["movement", "Movement & live"],
+            ["production", "Organization & Production"],
+            ["creative", "Creative & Community"],
           ].map(([value, label]) => (
             <button
               type="button"
@@ -1272,8 +1272,8 @@ function About() {
         <div className="organizer-copy">
           <p className="lead">
             {language === "de"
-              ? "DANSA wird von den fünf DJs, Performern und Organisatoren im Line-up gestaltet. Sie entwickeln gemeinsam die Musik, die Atmosphäre und die Veranstaltungen."
-              : "DANSA is shaped by the five DJs, performers and organizers in the lineup. Together, they develop the music, atmosphere and events."}
+              ? "DANSA wird von seinem Organisations-, Technik- und Kreativteam gestaltet. Gemeinsam entwickeln sie Musik, Atmosphäre und Veranstaltungen."
+              : "DANSA is shaped by its organizers, technical specialists and creative team. Together, they develop the music, atmosphere and events."}
           </p>
           <p>
             {language === "de"
@@ -1375,7 +1375,7 @@ function About() {
         <p className="eyebrow blue">
           {t("Five people. One independent spirit.")}
         </p>
-        <h2>{t("Meet the lineup.")}</h2>
+        <h2>{t("Meet the team.")}</h2>
         {artists.map((a) => (
           <Link to={"/artists/" + a.slug} className="about-person" key={a.slug}>
             <SiteImage src={A + a.image} alt="" />
@@ -1387,7 +1387,7 @@ function About() {
           </Link>
         ))}
         <Link to="/lineup" className="text-link">
-          {t("View the full lineup ↗")}
+          {t("Meet the full team ↗")}
         </Link>
       </section>
       <HowItWorks />
@@ -1793,7 +1793,7 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
               )}
             </p>
             <Link to="/lineup" className="text-link light-link">
-              {t("Meet the lineup ↗")}
+              {t("Meet the team ↗")}
             </Link>
           </div>
           <div>

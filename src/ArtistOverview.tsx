@@ -36,7 +36,7 @@ export function ArtistOverview({
       <section className="feature-hero artist-overview">
         <div className="feature-intro">
           <a href="/lineup" className="eyebrow blue">
-            {t("← Back to the lineup")}
+            {t("← Back to the team")}
           </a>
           <h1>{artist.name}</h1>
           <p className="feature-subtitle">{t(artist.role)}</p>
@@ -102,7 +102,7 @@ export function ArtistOverview({
           <h2>
             {story?.kind === "artist-site"
               ? story.title[language]
-              : t("From the line-up to the story.")}
+              : t("From the team to the story.")}
           </h2>
         </div>
         <div>

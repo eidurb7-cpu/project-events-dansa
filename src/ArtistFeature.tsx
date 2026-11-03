@@ -162,8 +162,8 @@ export function ArtistFeature({
           <dd>{t("Vocals & songwriting")}</dd>
         </div>
         <div>
-          <dt>{t("In the line-up")}</dt>
-          <dd>{t("Music Artist / Performer")}</dd>
+          <dt>{t("In the team")}</dt>
+          <dd>{t(artist.role)}</dd>
         </div>
       </dl>
 

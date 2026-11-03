@@ -12,7 +12,7 @@ export function DiscoverRoutes() {
     [
       "/lineup",
       "Meet the people",
-      "Five profiles. Different disciplines. One shared line-up.",
+      "Meet the organizers, technical specialists and creatives behind DANSA.",
     ],
     [
       "/gallery",

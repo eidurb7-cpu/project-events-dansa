@@ -774,7 +774,7 @@ function Stories() {
         eyebrow={t("From the DANSA journal")}
         title={t("Different roles. Shared rhythm.")}
         text={t(
-          "Meet the creative disciplines behind the line-up: selecting records, live performance and movement. These editorial introductions explore the roles that bring DANSA together.",
+          "Music, craft and the people behind DANSA.",
         )}
       />
       <section>
@@ -841,12 +841,7 @@ function StoryPage({ story }: { story: ArtistStory }) {
         <aside>
           <p className="eyebrow blue">{t("Artist stories")}</p>
           <p>
-            {story.sourceNote?.[language] ??
-              t(
-                story.kind === "biography"
-                  ? "A career story drawn from published artist profiles and music release records. Sources are linked below."
-                  : "An editorial introduction based on this artist’s role in the DANSA line-up.",
-              )}
+            {story.sourceNote?.[language] ?? t(artist.teamRole)}
           </p>
           <Link to={`/artists/${artist.slug}`} className="text-link">
             {t("Artist profile")} ↗

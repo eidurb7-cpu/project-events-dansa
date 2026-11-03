@@ -43,11 +43,7 @@ export function ArtistOverview({
           <p className="feature-subtitle">{t(artist.role)}</p>
           <p className="eyebrow blue">{t(artist.teamRole)}</p>
           <p className="feature-deck">
-            {story?.kind === "artist-site"
-              ? story.intro[language]
-              : story
-                ? story.title[language]
-                : t("People behind the rhythm.")}
+            {story?.intro[language] ?? t("People behind the rhythm.")}
           </p>
           <div className="feature-actions">
             <a
@@ -102,15 +98,12 @@ export function ArtistOverview({
             {t(story?.kind ? "Artist history" : "Explore the role")}
           </p>
           <h2>
-            {story?.kind === "artist-site"
-              ? story.title[language]
-              : t("From the team to the story.")}
+            {story?.title[language] ?? t("People behind the rhythm.")}
           </h2>
         </div>
         <div>
           {story && (
             <>
-              <p className="lead">{story.intro[language]}</p>
               <p>{story.sections[0].text[language]}</p>
               <a href={`/stories/${artist.slug}`} className="text-link">
                 {t("Read the full artist story")} ↗

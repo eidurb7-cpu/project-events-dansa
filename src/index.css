@@ -539,3 +539,4 @@ main:focus,h1[tabindex="-1"]:focus { outline:none; }
 .gallery-page-title { min-height:260px; padding-bottom:2rem; }
 .gallery-page-title p { margin-top:1.5rem; font-size:.8rem; color:#62635e; }
 .gallery-section { padding-top:1rem; }
+.story-hero img[data-original-src$="larry-new.webp"] { object-position:center 18%; }

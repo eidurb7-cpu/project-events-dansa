@@ -8,12 +8,12 @@ export const djEddyStory: ArtistStory = {
   category: "dj",
   kind: "artist-site",
   title: {
-    en: "DJ Eddy: open format, from Bavaria to the dancefloor.",
-    de: "DJ Eddy: Open Format, von Bayern auf die Tanzfläche.",
+    "en": "DJ Eddy: open format, on the decks and online.",
+    "de": "DJ Eddy: Open Format, an den Decks und digital."
   },
   intro: {
-    en: "Based in Bavaria, Germany, DJ Eddy plays open format across Afrobeats, Amapiano, Hip-Hop, R&B, Latin and Dancehall. His artist-site portfolio spans club nights, boat parties and private events, with music chosen to suit the room.",
-    de: "DJ Eddy ist in Bayern zu Hause und spielt Open Format mit Afrobeats, Amapiano, Hip-Hop, R&B, Latin und Dancehall. Sein Künstlerportfolio umfasst Clubnächte, Bootspartys und private Events – mit einer Musikauswahl, die sich am jeweiligen Raum orientiert.",
+    "en": "Based in Bavaria, DJ Eddy moves between Afrobeats, Amapiano, Hip-Hop, R&B, Latin and Dancehall. He brings that open-format identity to DANSA as a DJ and dancer, alongside his responsibility for Tech Development.",
+    "de": "DJ Eddy ist in Bayern zu Hause und verbindet Afrobeats, Amapiano, Hip-Hop, R&B, Latin und Dancehall. Bei DANSA bleibt er DJ und Tänzer und übernimmt zugleich die technische Entwicklung."
   },
   sourceNote: {
     en: "Based on DJ Eddy’s artist profile, music selections and event archive, supplied by the DANSA team.",
@@ -23,45 +23,45 @@ export const djEddyStory: ArtistStory = {
   musicHeading: { en: "Selected mixes", de: "Ausgewählte Mixes" },
   sections: [
     {
-      title: {
-        en: "Bavaria as a base. The room as a starting point.",
-        de: "Bayern als Basis. Der Raum als Ausgangspunkt.",
+      "title": {
+        "en": "Different sounds. One dancefloor.",
+        "de": "Verschiedene Sounds. Eine Tanzfläche."
       },
-      text: {
-        en: "DJ Eddy’s own artist profile places him in Bavaria and describes a range that includes club nights, private celebrations and campus events. His approach centres on clean transitions and sets shaped around the audience, whether the slot is a warmup, a support appearance or a full night. That gives his work a practical focus: connect the music to the people in front of the decks.",
-        de: "DJ Eddys eigenes Künstlerprofil nennt Bayern als Standort und beschreibt ein Spektrum aus Clubnächten, privaten Feiern und Campus-Events. Im Mittelpunkt stehen saubere Übergänge und Sets, die sich am Publikum orientieren – ob beim Warmup, als Support oder über eine ganze Nacht. Die Musik soll eine Verbindung zu den Menschen vor den Decks schaffen.",
-      },
+      "text": {
+        "en": "Open format gives Eddy room to move across styles. Afrobeats and Amapiano sit alongside Hip-Hop, R&B, Latin and Dancehall, with the selection shaped around the audience. His work spans club nights, boat parties and private events, with clean transitions connecting the changes in sound.",
+        "de": "Open Format gibt Eddy Raum für unterschiedliche Stile. Afrobeats und Amapiano treffen auf Hip-Hop, R&B, Latin und Dancehall. Die Auswahl orientiert sich am Publikum. Seine Arbeit umfasst Clubnächte, Bootspartys und private Events, mit sauberen Übergängen zwischen den Sounds."
+      }
     },
     {
-      title: {
-        en: "Moving between styles without losing the thread.",
-        de: "Zwischen Stilen wechseln, ohne den Faden zu verlieren.",
+      "title": {
+        "en": "The music has its own record.",
+        "de": "Die Musik zum Kennenlernen."
       },
-      text: {
-        en: "His music-style selection brings together Latin, Hip-Hop, R&B, Afrobeats, Dancehall and Amapiano. Rather than treating them as isolated playlists, the artist-site copy presents them as different ways to build movement and atmosphere. Latin adds rhythmic momentum, R&B offers a smoother mood, and Afro-led selections connect percussion, groove and dancefloor energy.",
-        de: "Seine Stilauswahl verbindet Latin, Hip-Hop, R&B, Afrobeats, Dancehall und Amapiano. Das Künstlerprojekt beschreibt diese Richtungen als verschiedene Zugänge zu Bewegung und Atmosphäre. Latin bringt rhythmischen Schwung, R&B eine ruhigere Stimmung und Afro-geprägte Selektionen verbinden Percussion, Groove und Energie auf der Tanzfläche.",
-      },
+      "text": {
+        "en": "Afro Pulse Vol. 1 and Afro x Amapiano offer a first listen to Eddy’s selections. His event archive includes Mirage Lounge, FLEX Samstag in Frankfurt and appearances at Mississippi Queen in Nuremberg. The mixes and original flyers below show that side of his work.",
+        "de": "Afro Pulse Vol. 1 und Afro x Amapiano geben einen ersten Einblick in Eddys Musikauswahl. Sein Eventarchiv umfasst Mirage Lounge, FLEX Samstag in Frankfurt und Auftritte auf der Mississippi Queen in Nürnberg. Die Mixes und Originalflyer unten zeigen diese Seite seiner Arbeit."
+      }
     },
     {
-      title: {
-        en: "An event-archive story: FLEX Samstag in Frankfurt.",
-        de: "Eine Geschichte aus dem Eventarchiv: FLEX Samstag in Frankfurt.",
+      "title": {
+        "en": "A digital role within DANSA.",
+        "de": "Eine digitale Aufgabe bei DANSA."
       },
-      text: {
-        en: "The supplied event archive features FLEX Samstag at Main Suites Hotel in Frankfurt am Main, listed for 4 July 2026. The original flyer names Eddy the DJ alongside DJ Swiper. It is a specific reference within his own portfolio, separate from DANSA’s event concepts. The wider artist-site references also include Nuremberg, Würzburg, Bamberg, Stuttgart, Augsburg, Mainz, Heidelberg and Schweinfurt.",
-        de: "Das bereitgestellte Eventarchiv zeigt FLEX Samstag im Main Suites Hotel in Frankfurt am Main, gelistet für den 4. Juli 2026. Der Originalflyer nennt Eddy the DJ gemeinsam mit DJ Swiper. Diese Referenz gehört zu seinem eigenen Portfolio und ist von den DANSA-Eventkonzepten getrennt. Weitere Ortsreferenzen des Künstlerprojekts sind Nürnberg, Würzburg, Bamberg, Stuttgart, Augsburg, Mainz, Heidelberg und Schweinfurt.",
-      },
+      "text": {
+        "en": "Eddy’s place in DANSA goes beyond performing. His Tech Development role brings the project’s digital side into his work with the team, while his DJ and dancer titles remain part of his identity. The music and the website belong to the same shared project.",
+        "de": "Eddys Rolle bei DANSA geht über Auftritte hinaus. Mit der technischen Entwicklung übernimmt er auch die digitale Seite des gemeinsamen Projekts. Seine Identität als DJ und Tänzer bleibt dabei erhalten. Musik und Website gehören für ihn zum selben Projekt."
+      }
     },
     {
-      title: {
-        en: "Hear the selection before the booking.",
-        de: "Die Musikauswahl vor dem Booking kennenlernen.",
+      "title": {
+        "en": "Start with a listen. Then get in touch.",
+        "de": "Erst reinhören. Dann Kontakt aufnehmen."
       },
-      text: {
-        en: "His mix section features Afro Pulse Vol. 1 and Afro x Amapiano as listening selections. They offer a way to explore the musical range described in his profile before starting a booking conversation. For availability, formats and practical arrangements, the supplied artist site lists djeddybookings@gmail.com as his direct booking address and @eddy.the.deejay as his Instagram.",
-        de: "Seine Mix-Sektion stellt Afro Pulse Vol. 1 und Afro x Amapiano als Hörbeispiele vor. Sie geben einen Zugang zum musikalischen Spektrum seines Profils, bevor eine Buchungsanfrage entsteht. Für Verfügbarkeit, Formate und organisatorische Fragen nennt das bereitgestellte Künstlerprojekt djeddybookings@gmail.com als direkte Booking-Adresse und @eddy.the.deejay als Instagram-Profil.",
-      },
-    },
+      "text": {
+        "en": "For Eddy’s own bookings, use djeddybookings@gmail.com or @eddy.the.deejay. For DANSA collaborations, contact the team at dansamusicworldwide@gmail.com. The two routes keep artist enquiries and conversations about the wider project easy to direct.",
+        "de": "Für Eddys eigene Bookings stehen djeddybookings@gmail.com und @eddy.the.deejay zur Verfügung. Für Kooperationen mit DANSA erreichst du das Team unter dansamusicworldwide@gmail.com. So finden Anfragen zum Artist und zum gemeinsamen Projekt den passenden Kontakt."
+      }
+    }
   ],
   appearances: [
     {

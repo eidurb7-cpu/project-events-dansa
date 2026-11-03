@@ -9,6 +9,7 @@ type Artist = {
   slug: string
   name: string
   role: string
+  teamRole: string
   instagram: string
   handle: string
   image: string
@@ -40,6 +41,7 @@ export function ArtistOverview({
           </a>
           <h1>{artist.name}</h1>
           <p className="feature-subtitle">{t(artist.role)}</p>
+          <p className="eyebrow blue">{t(artist.teamRole)}</p>
           <p className="feature-deck">
             {story?.kind === "artist-site"
               ? story.intro[language]
@@ -89,7 +91,7 @@ export function ArtistOverview({
           />
           <figcaption>
             {artist.name}
-            <span>/ {t(artist.role)}</span>
+            <span>/ {t(artist.role)} / {t(artist.teamRole)}</span>
           </figcaption>
         </figure>
       </section>

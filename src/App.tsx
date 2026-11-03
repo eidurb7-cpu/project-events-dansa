@@ -32,6 +32,7 @@ type Artist = {
   name: string
 
   role: string
+  teamRole: string
 
   handle: string
 
@@ -48,7 +49,8 @@ const artists: Artist[] = [
 
     name: "Larry",
 
-    role: "Event Organizer & Technical Production Lead",
+    role: "DJ",
+    teamRole: "Event Organizer & Technical Production Lead",
 
     handle: "@larriloca",
 
@@ -62,7 +64,8 @@ const artists: Artist[] = [
 
     name: "Julius",
 
-    role: "Event Organizer & Technical Production Lead",
+    role: "DJ",
+    teamRole: "Event Organizer & Technical Production Lead",
 
     handle: "@julius_marcele",
 
@@ -76,7 +79,8 @@ const artists: Artist[] = [
 
     name: "DJ Eddy",
 
-    role: "Tech Development",
+    role: "DJ & Dancer",
+    teamRole: "Tech Development",
 
     handle: "@eddy.the.deejay",
 
@@ -92,7 +96,8 @@ const artists: Artist[] = [
 
     name: "Ice Boy",
 
-    role: "Creative Direction",
+    role: "Music Artist / Performer",
+    teamRole: "Creative Direction",
 
     handle: "@iceboyafrica",
 
@@ -106,7 +111,8 @@ const artists: Artist[] = [
 
     name: "D Ukingo",
 
-    role: "Community & Culture",
+    role: "Musician & Dancer",
+    teamRole: "Community & Culture",
 
     handle: "@d_ukingo",
 
@@ -711,6 +717,7 @@ function ArtistTile({ artist }: { artist: Artist }) {
       </Link>
       <h3>{artist.name}</h3>
       <p>{t(artist.role)}</p>
+      <p className="blue">{t(artist.teamRole)}</p>
       <a
         href={artist.instagram}
         target="_blank"
@@ -1381,7 +1388,7 @@ function About() {
             <SiteImage src={A + a.image} alt="" />
             <span>
               <b>{a.name}</b>
-              <small>{t(a.role)}</small>
+              <small>{t(a.role)}<br />{t(a.teamRole)}</small>
             </span>
             <i>↗</i>
           </Link>

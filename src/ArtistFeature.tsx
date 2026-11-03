@@ -4,6 +4,8 @@ import type { ArtistStory } from "./stories"
 import { usePageMetadata } from "./usePageMetadata"
 
 type FeaturedArtist = {
+  role: string
+  teamRole: string
   name: string
   slug: string
   image: string
@@ -126,6 +128,7 @@ export function ArtistFeature({
             Africa
           </h1>
           <p className="feature-subtitle">{t("Singer. Rapper. Songwriter.")}</p>
+          <p className="eyebrow blue">{t(artist.teamRole)}</p>
           <p className="feature-deck">
             {t(
               "Meet the Tanzanian artist behind Paradise City, Kilimanjaro and Thamani. Explore his music, collaborators and the story so far.",
@@ -163,7 +166,7 @@ export function ArtistFeature({
         </div>
         <div>
           <dt>{t("In the team")}</dt>
-          <dd>{t(artist.role)}</dd>
+          <dd>{t(artist.teamRole)}</dd>
         </div>
       </dl>
 

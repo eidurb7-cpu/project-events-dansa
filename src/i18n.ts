@@ -5,11 +5,11 @@ export type Language = "en" | "de"
 export const LanguageContext = createContext<{
   language: Language
   setLanguage: (language: Language) => void
-}>({ language: "en", setLanguage: () => undefined })
+}>({ language: "de", setLanguage: () => undefined })
 
 const german: Record<string, string> = {
   ...pageTranslations,
-  "Event Organizer / Head of Tech & Sound": "Eventorganisation / Leitung Technik & Sound",
+  "Event Organizer / Lead in Tech & Sound": "Eventorganisation / Lead in Tech & Sound",
   "Event Organizer / Creative Direction": "Eventorganisation / Kreative Leitung",
   "Event Organizer / Community & Culture": "Eventorganisation / Community & Kultur",
   "Music, craft and the people behind DANSA.": "Musik, Handwerk und die Menschen hinter DANSA.",

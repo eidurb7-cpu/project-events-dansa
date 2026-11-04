@@ -99,7 +99,7 @@ const artists: Artist[] = [
 
     role: "DJ & Dancer",
 
-    teamRole: "Event Organizer / Head of Tech & Sound",
+    teamRole: "Event Organizer / Lead in Tech & Sound",
 
     handle: "@eddy.the.deejay",
 
@@ -1532,15 +1532,16 @@ export default function App() {
 
   const [language, setLanguage] = useState<Language>(() => {
     try {
-      return localStorage.getItem("dansa-language") === "de" ? "de" : "en"
+      // Reset the old auto-saved English default while remembering new language choices.
+      return localStorage.getItem("dansa-language-v2") === "en" ? "en" : "de"
     } catch {
-      return "en"
+      return "de"
     }
   })
 
   useEffect(() => {
     try {
-      localStorage.setItem("dansa-language", language)
+      localStorage.setItem("dansa-language-v2", language)
     } catch {
       /* Storage may be disabled. */
     }

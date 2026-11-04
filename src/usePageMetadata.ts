@@ -5,9 +5,9 @@ import { getPageSeo, SITE_NAME, SITE_URL, SOCIAL_IMAGE } from "./seo"
 export function usePageMetadata(title: string, description: string) {
   const { language } = useContext(LanguageContext)
   useEffect(() => {
-    const seo = getPageSeo(location.pathname)
-    const pageTitle = language === "de" ? title : seo.title
-    const pageDescription = language === "de" ? description : seo.description
+    const seo = getPageSeo(location.pathname, language)
+    const pageTitle = seo.title
+    const pageDescription = seo.description
     const previousTitle = document.title
     const restore: (() => void)[] = []
     const setMeta = (key: string, value: string, property = false) => {
@@ -40,7 +40,7 @@ export function usePageMetadata(title: string, description: string) {
     schema.id = "site-structured-data"
     schema.setAttribute("type", "application/ld+json")
     schema.textContent = JSON.stringify(seo.path === "/"
-      ? { "@context": "https://schema.org", "@type": "WebSite", name: SITE_NAME, alternateName: "DANSA City", url: `${SITE_URL}/` }
+      ? { "@context": "https://schema.org", "@type": "WebSite", name: SITE_NAME, alternateName: "DANSA City", url: `${SITE_URL}/`, inLanguage: language }
       : { "@context": "https://schema.org", "@type": "WebPage", name: pageTitle, description: pageDescription, url: seo.canonical, inLanguage: language, isPartOf: { "@type": "WebSite", name: SITE_NAME, url: `${SITE_URL}/` } })
     if (!existingSchema) document.head.append(schema)
     restore.push(() => { if (existingSchema) schema.textContent = previousSchema; else schema.remove() })

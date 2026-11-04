@@ -1,5 +1,5 @@
 {
-  "description": "Discover DANSA: music, culture and togetherness. Meet the team, explore the gallery and get in touch about creative collaborations.",
+  "description": "DANSA verbindet Musik, Kultur und Menschen. Lerne unser Team kennen, entdecke die Galerie und sprich mit uns über kreative Kooperationen.",
   "robots": {
     "index": true
   },
@@ -7,8 +7,8 @@
     "addBypassLinks": false,
     "ignoreReducedMotion": false
   },
-  "title": "DANSA | Music, Culture & Events in Berlin",
-  "language": "en",
+  "title": "DANSA | Musik, Kultur & Events in Berlin",
+  "language": "de",
   "icons": {
     "icon": "/favicon-96.png"
   },

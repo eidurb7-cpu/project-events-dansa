@@ -101,9 +101,9 @@ const artists: Artist[] = [
 
     teamRole: "Event Organizer / Lead in Tech & Sound",
 
-    handle: "@eddy.the.deejay",
+    handle: "@eddythedeejay",
 
-    instagram: "https://www.instagram.com/eddy.the.deejay/",
+    instagram: "https://www.instagram.com/eddythedeejay/",
 
     bookingEmail: "djeddybookings@gmail.com",
 

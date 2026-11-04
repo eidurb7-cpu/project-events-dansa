@@ -58,8 +58,8 @@ export const djEddyStory: ArtistStory = {
         "de": "Erst reinhören. Dann Kontakt aufnehmen."
       },
       "text": {
-        "en": "For Eddy’s own bookings, use djeddybookings@gmail.com or @eddy.the.deejay. For DANSA collaborations, contact the team at dansamusicworldwide@gmail.com. The two routes keep artist enquiries and conversations about the wider project easy to direct.",
-        "de": "Für Eddys eigene Bookings stehen djeddybookings@gmail.com und @eddy.the.deejay zur Verfügung. Für Kooperationen mit DANSA erreichst du das Team unter dansamusicworldwide@gmail.com. So finden Anfragen zum Artist und zum gemeinsamen Projekt den passenden Kontakt."
+        "en": "For Eddy’s own bookings, use djeddybookings@gmail.com or @eddythedeejay. For DANSA collaborations, contact the team at dansamusicworldwide@gmail.com. The two routes keep artist enquiries and conversations about the wider project easy to direct.",
+        "de": "Für Eddys eigene Bookings stehen djeddybookings@gmail.com und @eddythedeejay zur Verfügung. Für Kooperationen mit DANSA erreichst du das Team unter dansamusicworldwide@gmail.com. So finden Anfragen zum Artist und zum gemeinsamen Projekt den passenden Kontakt."
       }
     }
   ],
@@ -151,7 +151,7 @@ export const djEddyStory: ArtistStory = {
     },
     {
       label: "DJ Eddy — Instagram",
-      href: "https://www.instagram.com/eddy.the.deejay/",
+      href: "https://www.instagram.com/eddythedeejay/",
     },
     {
       label: "DJ Eddy — SoundCloud profile",

@@ -17,7 +17,7 @@ function meta(html, key, value, property = false) {
 }
 
 globalThis.history = { state: null }
-globalThis.localStorage = { getItem: () => "de" }
+globalThis.localStorage = { getItem: () => "en" }
 
 for (const page of sitePages) {
   globalThis.location = new URL(page.path, SITE_URL)
@@ -29,8 +29,8 @@ for (const page of sitePages) {
   for (const [key, value] of [["og:title", seo.title], ["og:description", seo.description], ["og:url", seo.canonical]]) html = meta(html, key, value, true)
   for (const [key, value] of [["twitter:title", seo.title], ["twitter:description", seo.description]]) html = meta(html, key, value)
   const schema = page.path === "/"
-    ? { "@context": "https://schema.org", "@type": "WebSite", name: "DANSA", alternateName: "DANSA City", url: `${SITE_URL}/`, inLanguage: "de" }
-    : { "@context": "https://schema.org", "@type": "WebPage", name: seo.title, description: seo.description, url: seo.canonical, inLanguage: "de", isPartOf: { "@type": "WebSite", name: "DANSA", url: `${SITE_URL}/` } }
+    ? { "@context": "https://schema.org", "@type": "WebSite", name: "DANSA", alternateName: "DANSA City", url: `${SITE_URL}/`, inLanguage: "en" }
+    : { "@context": "https://schema.org", "@type": "WebPage", name: seo.title, description: seo.description, url: seo.canonical, inLanguage: "en", isPartOf: { "@type": "WebSite", name: "DANSA", url: `${SITE_URL}/` } }
   html = html.replace("</head>", `    <script id="site-structured-data" type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>\n  </head>`)
   html = html.replace('<div id="root"></div>', `<div id="root">${renderToString(React.createElement(App))}</div>`)
   const output = page.path === "/" ? path.join(dist, "index.html") : path.join(dist, page.path.slice(1), "index.html")

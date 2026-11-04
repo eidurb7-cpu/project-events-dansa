@@ -43,7 +43,7 @@ const germanPages: Record<string, { title: string; description: string }> = {
   ...Object.fromEntries(artistStories.map(story => [`/stories/${story.artist}`, { title: `${story.title.de.replace(/\.$/, "")} | DANSA`, description: story.intro.de }])),
 }
 
-export function getPageSeo(pathname: string, language: "en" | "de" = "de") {
+export function getPageSeo(pathname: string, language: "en" | "de" = "en") {
   const path = pathname.replace(/\/+$/, "") || "/"
   const canonicalPath = path === "/events" || path.startsWith("/events/") ? "/gallery" : path
   const page = sitePages.find(page => page.path === canonicalPath)

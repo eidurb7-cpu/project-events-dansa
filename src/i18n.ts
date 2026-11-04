@@ -5,7 +5,7 @@ export type Language = "en" | "de"
 export const LanguageContext = createContext<{
   language: Language
   setLanguage: (language: Language) => void
-}>({ language: "de", setLanguage: () => undefined })
+}>({ language: "en", setLanguage: () => undefined })
 
 const german: Record<string, string> = {
   ...pageTranslations,

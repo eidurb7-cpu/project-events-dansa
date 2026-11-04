@@ -1532,16 +1532,16 @@ export default function App() {
 
   const [language, setLanguage] = useState<Language>(() => {
     try {
-      // Reset the old auto-saved English default while remembering new language choices.
-      return localStorage.getItem("dansa-language-v2") === "en" ? "en" : "de"
+      // Use the English default while remembering subsequent language choices.
+      return localStorage.getItem("dansa-language-v3") === "de" ? "de" : "en"
     } catch {
-      return "de"
+      return "en"
     }
   })
 
   useEffect(() => {
     try {
-      localStorage.setItem("dansa-language-v2", language)
+      localStorage.setItem("dansa-language-v3", language)
     } catch {
       /* Storage may be disabled. */
     }

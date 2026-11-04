@@ -2,7 +2,7 @@ import { ContactForm } from "./ContactForm"
 import { CONTACT_EMAIL } from "./contactDetails"
 import { GalleryHighlights } from "./GalleryHighlights"
 
-import { CompanyOverview, Impressum } from "./CompanyInformation"
+import { CompanyOverview } from "./CompanyInformation"
 
 import { usePageFilter } from "./usePageFilter"
 
@@ -393,7 +393,6 @@ function Footer() {
           <Link to="/about">{t("About DANSA")}</Link>
           <Link to="/work-with-us">{t("Work With Us")}</Link>
           <Link to="/contact">{t("Contact")}</Link>
-          <Link to="/impressum">Impressum</Link>
         </div>
       </div>
       <Link to="/" className="footer-logo">
@@ -401,7 +400,6 @@ function Footer() {
       </Link>
       <div className="copyright">
         <span>© 2026 DANSA</span>
-        <Link to="/impressum">Impressum / {language === "de" ? "Anbieterinformationen" : "Legal notice"}</Link>
         <span>{t("MUSIC. CULTURE. TOGETHERNESS.")}</span>
       </div>
     </footer>
@@ -1278,7 +1276,6 @@ function ContactPage({ collaborate = false }: { collaborate?: boolean }) {
       </section>
       <section className="contact-direct" aria-label={t("Contact")}>
         <div><p className="eyebrow blue">{t("Email DANSA")}</p><a className="contact-email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
-        <Link to="/impressum" className="text-link">Impressum / {t("Legal notice")} <span aria-hidden="true">↗</span></Link>
       </section>
       {collaborate ? (
         <>
@@ -1563,12 +1560,6 @@ export default function App() {
   else if (path === "/lineup") page = <Lineup />
   else if (path === "/gallery") page = <Gallery />
   else if (path === "/about") page = <About />
-  else if (path === "/impressum")
-    page = (
-      <Shell>
-        <Impressum />
-      </Shell>
-    )
   else if (path === "/work-with-us") page = <ContactPage collaborate />
   else if (path === "/contact") page = <ContactPage />
   else page = <NotFound />

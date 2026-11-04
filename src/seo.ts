@@ -13,7 +13,7 @@ const people = [
   { slug: "d-ukingo", name: "D Ukingo", description: "Musician, dancer and DANSA event organizer contributing to community and culture. Meet D Ukingo and discover the connection between music and movement." },
 ]
 
-export const sitePages = [
+export const sitePages: { path: string; title: string; description: string; noindex?: boolean }[] = [
   { path: "/", title: "DANSA | Music, Culture & Events in Berlin", description: SITE_DESCRIPTION },
   { path: "/lineup", title: "The Team | DANSA DJs, Artists & Event Organizers", description: "Meet the DANSA team: Larry, Julius, DJ Eddy, Ice Boy Africa and D Ukingo. DJs, artists and event organizers bringing music, culture and people together." },
   { path: "/gallery", title: "Gallery | DANSA Music & Nightlife Inspiration", description: "Explore DANSA's visual mood gallery: dancefloors, people, music and shared energy. A selection of nightlife photography that inspires the collective." },
@@ -23,7 +23,6 @@ export const sitePages = [
   { path: "/work-with-us", title: "Work With DANSA | Venue, Artist & Brand Collaborations", description: "Have an idea for DANSA? Get in touch about venue, promoter, artist and brand collaborations. Start a conversation with the team at dansa.city." },
   ...people.map(person => ({ path: `/artists/${person.slug}`, title: `${person.name} | Artist & Event Organizer at DANSA`, description: person.description })),
   ...artistStories.map(story => ({ path: `/stories/${story.artist}`, title: `${story.title.en.replace(/\.$/, "")} | DANSA`, description: story.intro.en })),
-  { path: "/impressum", title: "Impressum | DANSA Provider Information", description: "DANSA provider information and business email contact. Legal operator details are being completed.", noindex: true },
 ]
 
 const germanPages: Record<string, { title: string; description: string }> = {
@@ -34,7 +33,6 @@ const germanPages: Record<string, { title: string; description: string }> = {
   "/about": { title: "Über DANSA | Unabhängiges Musik- & Eventkollektiv", description: "Lerne DANSA kennen: ein unabhängiges Musik- und Eventkollektiv mit Berlin als kreativem Ausgangspunkt. Unser Team, unsere Idee und unsere Kultur." },
   "/contact": { title: "Kontakt | DANSA Musik, Booking & Anfragen", description: "Kontaktiere DANSA unter dansamusicworldwide@gmail.com. Für Musik, Booking und allgemeine Fragen erreichst du unser Team auch über das Kontaktformular." },
   "/work-with-us": { title: "Mit DANSA zusammenarbeiten | Artists, Venues & Marken", description: "Eine Idee für DANSA? Sprich mit uns über Kooperationen mit Veranstaltungsorten, Promotern, Artists und Marken. Starte das Gespräch auf dansa.city." },
-  "/impressum": { title: "Impressum | DANSA Anbieterinformationen", description: "Anbieterinformationen und geschäftlicher E-Mail-Kontakt zu DANSA. Die rechtlichen Betreiberangaben werden noch vervollständigt." },
   "/artists/larry": { title: "Larry | DJ & Eventorganisator bei DANSA", description: "Larry ist DJ, Eventorganisator und technischer Produktionsleiter bei DANSA. Entdecke seine Aufgaben rund um Musik, Veranstaltungsorganisation, Ton und Licht." },
   "/artists/julius": { title: "Julius | DJ & Eventorganisator bei DANSA", description: "Julius ist DJ, Eventorganisator und technischer Produktionsleiter bei DANSA. Lerne seine Arbeit rund um Musik, Ton, Licht und Veranstaltungsorganisation kennen." },
   "/artists/dj-eddy": { title: "DJ Eddy | DJ, Eventorganisation & Lead in Tech & Sound", description: "DJ Eddy ist Open-Format-DJ aus Bayern, Tänzer, Eventorganisator und Lead in Tech & Sound bei DANSA. Entdecke seine Mixes, sein Eventarchiv und Booking-Kontakte." },

@@ -118,8 +118,8 @@ export const artistStories: ArtistStory[] = [
       "de": "Ice Boy Africa: Stimme, Songs und kreative Richtung."
     },
     "intro": {
-      "en": "Ice Boy Africa is a Tanzanian singer, rapper and content creator. From Paradise City to collaborations with Baraka Da Prince and Bill nass, his music sits alongside his role in DANSA’s Creative Direction.",
-      "de": "Ice Boy Africa ist ein tansanischer Sänger, Rapper und Content Creator. Von Paradise City bis zu Songs mit Baraka Da Prince und Bill nass steht seine Musik neben seiner Rolle in der kreativen Leitung von DANSA."
+      "en": "Ice Boy Africa is a Tanzanian singer, rapper and content creator. From Paradise City to collaborations with Baraka Da Prince and Bill nass, his music sits alongside his roles in event organization and Creative Direction at DANSA.",
+      "de": "Ice Boy Africa ist ein tansanischer Sänger, Rapper und Content Creator. Von Paradise City bis zu Songs mit Baraka Da Prince und Bill nass steht seine Musik neben seinen Aufgaben in der Eventorganisation und kreativen Leitung von DANSA."
     },
     "sections": [
       {
@@ -220,8 +220,8 @@ export const artistStories: ArtistStory[] = [
       "de": "D Ukingo: wo Musik zu Bewegung wird."
     },
     "intro": {
-      "en": "D Ukingo brings music and dance to DANSA, alongside a team role in Community & Culture. His profile connects artistic expression with the people who make a shared musical experience possible.",
-      "de": "D Ukingo verbindet bei DANSA Musik und Tanz mit seiner Aufgabe im Bereich Community & Kultur. Sein Profil bringt künstlerischen Ausdruck und die Menschen hinter einem gemeinsamen Musikerlebnis zusammen."
+      "en": "D Ukingo brings music and dance to DANSA, alongside event organization and his team role in Community & Culture. His profile connects artistic expression with the people who make a shared musical experience possible.",
+      "de": "D Ukingo verbindet bei DANSA Musik und Tanz mit seinen Aufgaben in der Eventorganisation und im Bereich Community & Kultur. Sein Profil bringt künstlerischen Ausdruck und die Menschen hinter einem gemeinsamen Musikerlebnis zusammen."
     },
     "sections": [
       {

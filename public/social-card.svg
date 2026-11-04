@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#1646f5"/>
+  <text x="76" y="288" fill="#f4f0e5" font-family="Arial, sans-serif" font-weight="900" font-size="194" letter-spacing="-10">DANSA</text>
+  <g fill="#f4f0e5">
+    <rect x="865" y="185" width="25" height="85"/>
+    <rect x="908" y="133" width="25" height="137"/>
+    <rect x="951" y="164" width="25" height="106"/>
+    <rect x="994" y="111" width="25" height="159"/>
+    <rect x="1037" y="197" width="25" height="73"/>
+  </g>
+  <text x="88" y="392" fill="#f4f0e5" font-family="Arial, sans-serif" font-size="35" font-weight="700" letter-spacing="4">MUSIC. CULTURE. TOGETHERNESS.</text>
+  <path d="M88 470h1024" stroke="#f4f0e5" stroke-opacity=".4"/>
+  <text x="88" y="543" fill="#f4f0e5" font-family="Arial, sans-serif" font-size="29">dansa.city</text>
+</svg>

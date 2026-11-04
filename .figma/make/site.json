@@ -1,12 +1,18 @@
 {
   "description": "Discover DANSA: music, culture and togetherness. Meet the team, explore the gallery and get in touch about creative collaborations.",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,
     "ignoreReducedMotion": false
   },
-  "title": "DANSA | Music, Culture & Togetherness",
-  "language": "en"
+  "title": "DANSA | Music, Culture & Events in Berlin",
+  "language": "en",
+  "icons": {
+    "icon": "/favicon-96.png"
+  },
+  "openGraph": {
+    "image": "https://dansa.city/social-card.png"
+  }
 }

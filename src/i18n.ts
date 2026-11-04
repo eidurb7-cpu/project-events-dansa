@@ -9,6 +9,9 @@ export const LanguageContext = createContext<{
 
 const german: Record<string, string> = {
   ...pageTranslations,
+  "Event Organizer / Tech Development": "Eventorganisation / Technische Entwicklung",
+  "Event Organizer / Creative Direction": "Eventorganisation / Kreative Leitung",
+  "Event Organizer / Community & Culture": "Eventorganisation / Community & Kultur",
   "Music, craft and the people behind DANSA.": "Musik, Handwerk und die Menschen hinter DANSA.",
   "Mood photography. Not documentation of DANSA events.": "Mood-Fotografie. Keine Dokumentation von DANSA-Veranstaltungen.",
   "Email DANSA": "DANSA per E-Mail kontaktieren",

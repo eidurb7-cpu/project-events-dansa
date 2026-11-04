@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/optimize-images.mjs && vite",
-    "build": "node scripts/optimize-images.mjs && vite build",
+    "build": "node scripts/generate-brand-assets.mjs && node scripts/optimize-images.mjs && vite build && vite build --ssr src/prerender.tsx --outDir .tmp-seo && node scripts/prerender.mjs",
     "preview": "vite preview",
     "format": "oxfmt",
-    "optimize:images": "node scripts/optimize-images.mjs"
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "generate:branding": "node scripts/generate-brand-assets.mjs"
   },
   "dependencies": {
     "react": "^19.0.0",

@@ -99,7 +99,7 @@ const artists: Artist[] = [
 
     role: "DJ & Dancer",
 
-    teamRole: "Tech Development",
+    teamRole: "Event Organizer / Tech Development",
 
     handle: "@eddy.the.deejay",
 
@@ -119,7 +119,7 @@ const artists: Artist[] = [
 
     role: "Music Artist / Performer",
 
-    teamRole: "Creative Direction",
+    teamRole: "Event Organizer / Creative Direction",
 
     handle: "@iceboyafrica",
 
@@ -135,7 +135,7 @@ const artists: Artist[] = [
 
     role: "Musician & Dancer",
 
-    teamRole: "Community & Culture",
+    teamRole: "Event Organizer / Community & Culture",
 
     handle: "@d_ukingo",
 

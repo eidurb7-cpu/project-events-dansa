@@ -12,8 +12,8 @@ export const djEddyStory: ArtistStory = {
     "de": "DJ Eddy: Open Format, an den Decks und digital."
   },
   intro: {
-    "en": "Based in Bavaria, DJ Eddy moves between Afrobeats, Amapiano, Hip-Hop, R&B, Latin and Dancehall. He brings that open-format identity to DANSA as a DJ and dancer, alongside his responsibility for Tech Development.",
-    "de": "DJ Eddy ist in Bayern zu Hause und verbindet Afrobeats, Amapiano, Hip-Hop, R&B, Latin und Dancehall. Bei DANSA bleibt er DJ und Tänzer und übernimmt zugleich die technische Entwicklung."
+    "en": "Based in Bavaria, DJ Eddy moves between Afrobeats, Amapiano, Hip-Hop, R&B, Latin and Dancehall. He brings that open-format identity to DANSA as a DJ, dancer and event organizer, alongside his responsibility for Tech Development.",
+    "de": "DJ Eddy ist in Bayern zu Hause und verbindet Afrobeats, Amapiano, Hip-Hop, R&B, Latin und Dancehall. Bei DANSA ist er DJ, Tänzer und Eventorganisator und übernimmt zugleich die technische Entwicklung."
   },
   sourceNote: {
     en: "Based on DJ Eddy’s artist profile, music selections and event archive, supplied by the DANSA team.",

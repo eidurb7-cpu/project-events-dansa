@@ -99,7 +99,7 @@ const artists: Artist[] = [
 
     role: "DJ & Dancer",
 
-    teamRole: "Event Organizer / Tech Development",
+    teamRole: "Event Organizer / Head of Tech & Sound",
 
     handle: "@eddy.the.deejay",
 

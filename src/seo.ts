@@ -8,7 +8,7 @@ export const SITE_DESCRIPTION = "DANSA is an independent music and event collect
 const people = [
   { slug: "larry", name: "Larry", description: "DJ, event organizer and technical production lead at DANSA. Discover Larry's role in music, event organization, sound and lighting." },
   { slug: "julius", name: "Julius", description: "DJ, event organizer and technical production lead at DANSA. Meet Julius and explore his work across music, sound, lighting and event organization." },
-  { slug: "dj-eddy", name: "DJ Eddy", description: "Bavaria-based open-format DJ, dancer and DANSA event organizer responsible for tech development. Explore DJ Eddy's mixes, event archive and booking contacts." },
+  { slug: "dj-eddy", name: "DJ Eddy", description: "Bavaria-based open-format DJ, dancer, event organizer and DANSA's Head of Tech & Sound. Explore DJ Eddy's mixes, event archive and booking contacts." },
   { slug: "ice-boy", name: "Ice Boy Africa", description: "Tanzanian singer, rapper and DANSA event organizer contributing to creative direction. Discover Ice Boy Africa's music, collaborations and artist story." },
   { slug: "d-ukingo", name: "D Ukingo", description: "Musician, dancer and DANSA event organizer contributing to community and culture. Meet D Ukingo and discover the connection between music and movement." },
 ]

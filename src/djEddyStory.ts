@@ -12,8 +12,8 @@ export const djEddyStory: ArtistStory = {
     "de": "DJ Eddy: Open Format, an den Decks und digital."
   },
   intro: {
-    "en": "Based in Bavaria, DJ Eddy moves between Afrobeats, Amapiano, Hip-Hop, R&B, Latin and Dancehall. He brings that open-format identity to DANSA as a DJ, dancer and event organizer, alongside his responsibility for Tech Development.",
-    "de": "DJ Eddy ist in Bayern zu Hause und verbindet Afrobeats, Amapiano, Hip-Hop, R&B, Latin und Dancehall. Bei DANSA ist er DJ, Tänzer und Eventorganisator und übernimmt zugleich die technische Entwicklung."
+    "en": "Based in Bavaria, DJ Eddy moves between Afrobeats, Amapiano, Hip-Hop, R&B, Latin and Dancehall. At DANSA, he brings that open-format identity to his work as a DJ, dancer, event organizer and Head of Tech & Sound.",
+    "de": "DJ Eddy ist in Bayern zu Hause und verbindet Afrobeats, Amapiano, Hip-Hop, R&B, Latin und Dancehall. Bei DANSA ist er DJ, Tänzer und Eventorganisator und leitet den Bereich Technik & Sound."
   },
   sourceNote: {
     en: "Based on DJ Eddy’s artist profile, music selections and event archive, supplied by the DANSA team.",
@@ -44,12 +44,12 @@ export const djEddyStory: ArtistStory = {
     },
     {
       "title": {
-        "en": "A digital role within DANSA.",
-        "de": "Eine digitale Aufgabe bei DANSA."
+        "en": "Leading tech and sound at DANSA.",
+        "de": "Technik und Sound bei DANSA leiten."
       },
       "text": {
-        "en": "Eddy’s place in DANSA goes beyond performing. His Tech Development role brings the project’s digital side into his work with the team, while his DJ and dancer titles remain part of his identity. The music and the website belong to the same shared project.",
-        "de": "Eddys Rolle bei DANSA geht über Auftritte hinaus. Mit der technischen Entwicklung übernimmt er auch die digitale Seite des gemeinsamen Projekts. Seine Identität als DJ und Tänzer bleibt dabei erhalten. Musik und Website gehören für ihn zum selben Projekt."
+        "en": "As DANSA’s Head of Tech & Sound, Eddy leads the team’s technology and sound responsibilities, including its digital development. He also shares in event organization while keeping his identity as a DJ and dancer. His role connects the music, the technical production and the website.",
+        "de": "Als Leiter des Bereichs Technik & Sound verantwortet Eddy die Technologie und den Sound von DANSA, einschließlich der digitalen Entwicklung. Er übernimmt auch Aufgaben in der Eventorganisation und bleibt zugleich DJ und Tänzer. Seine Rolle verbindet Musik, technische Produktion und Website."
       }
     },
     {

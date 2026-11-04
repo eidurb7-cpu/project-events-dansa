@@ -1,6 +1,6 @@
 import { artistStories } from "./stories"
 
-export const SITE_URL = "https://dansa.city"
+export const SITE_URL = "https://www.dansa.city"
 export const SITE_NAME = "DANSA"
 export const SOCIAL_IMAGE = `${SITE_URL}/social-card.png`
 export const SITE_DESCRIPTION = "DANSA is an independent music and event collective based in Berlin. Meet the DJs, artists and organizers, explore the gallery and connect with the team."

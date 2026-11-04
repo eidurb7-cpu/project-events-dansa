@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dansa.city/sitemap.xml
+Sitemap: https://www.dansa.city/sitemap.xml

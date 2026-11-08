@@ -57,6 +57,8 @@ type Artist = {
   bookingEmail?: string
 
   soundcloud?: string
+
+  spotifyAlbumId?: string
 }
 
 const artists: Artist[] = [
@@ -130,6 +132,8 @@ const artists: Artist[] = [
 
   {
     slug: "d-ukingo",
+
+    spotifyAlbumId: "7rp4NUSWUrTrJFUnO6V2hW",
 
     name: "D Ukingo",
 
@@ -624,6 +628,8 @@ function Lineup() {
 }
 
 function ArtistPage({ artist }: { artist: Artist }) {
+  const t = useTranslation()
+
   const story = artistStories.find((item) => item.artist === artist.slug)
 
   return (
@@ -632,6 +638,31 @@ function ArtistPage({ artist }: { artist: Artist }) {
         <ArtistFeature artist={artist} story={story} />
       ) : (
         <ArtistOverview artist={artist} story={story} />
+      )}
+      {artist.spotifyAlbumId && (
+        <section aria-labelledby="artist-music-title">
+          <div className="section-head">
+            <h2 id="artist-music-title">{t("Listen to the music")}</h2>
+            <a
+              href={`https://open.spotify.com/album/${artist.spotifyAlbumId}`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-link"
+            >
+              {t("Listen on")} Spotify ↗
+            </a>
+          </div>
+          <iframe
+            title={`${artist.name} — Spotify album`}
+            src={`https://open.spotify.com/embed/album/${artist.spotifyAlbumId}`}
+            width="100%"
+            height="352"
+            style={{ border: 0, borderRadius: 12 }}
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+          />
+        </section>
       )}
       <StoriesPreview exclude={artist.slug} />
     </Shell>

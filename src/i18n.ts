@@ -410,6 +410,12 @@ const german: Record<string, string> = {
   "With Baraka Da Prince": "Mit Baraka Da Prince",
   "With Bill nass": "Mit Bill nass",
   "Listen on": "Anhören auf",
+  "Music collaborator": "Musikalische Zusammenarbeit",
+  "AmaBenz Stuttgart is credited alongside D Ukingo, Tony Slay, Ice Boy and IKEN on Alive.":
+    "AmaBenz Stuttgart wird bei Alive gemeinsam mit D Ukingo, Tony Slay, Ice Boy und IKEN genannt.",
+  "Based in Stuttgart, AmaBenz brings people together through Amapiano music, dance and African culture, with community events and dance classes.":
+    "AmaBenz aus Stuttgart verbindet Menschen durch Amapiano-Musik, Tanz und afrikanische Kultur sowie durch Community-Events und Tanzkurse.",
+  "Visit AmaBenz website": "Zur AmaBenz-Website",
   "A brief history": "Ein kurzer Rückblick",
   "Audiomack profile": "Audiomack-Profil",
   "A public profile since January 2019.":

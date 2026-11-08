@@ -662,6 +662,36 @@ function ArtistPage({ artist }: { artist: Artist }) {
             allowFullScreen
             loading="lazy"
           />
+          {artist.slug === "d-ukingo" && (
+            <article className="mt-8 max-w-3xl">
+              <p className="eyebrow blue">{t("Music collaborator")}</p>
+              <h3>AmaBenz Stuttgart</h3>
+              <p className="mt-4">
+                {t("AmaBenz Stuttgart is credited alongside D Ukingo, Tony Slay, Ice Boy and IKEN on Alive.")}
+              </p>
+              <p className="mt-4">
+                {t("Based in Stuttgart, AmaBenz brings people together through Amapiano music, dance and African culture, with community events and dance classes.")}
+              </p>
+              <div className="button-row mt-6">
+                <a
+                  href="https://www.amabenzstuttgart.de/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-link"
+                >
+                  {t("Visit AmaBenz website")} ↗
+                </a>
+                <a
+                  href="https://www.instagram.com/amabenz_stuttgart/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-link"
+                >
+                  @amabenz_stuttgart ↗
+                </a>
+              </div>
+            </article>
+          )}
         </section>
       )}
       <StoriesPreview exclude={artist.slug} />
